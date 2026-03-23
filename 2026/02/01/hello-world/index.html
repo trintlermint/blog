@@ -201,8 +201,8 @@ Generate static files1$ hexo generate">
 <script src="/js/md5.min.js"></script> 
 <div id="gitalk-container"></div>
 <script>
-var gitalkConfig = {"enable":true,"github_id":"trintlermint","repo":"blog","client_id":"Ov23lipca9qEBRbrfaIM","client_secret":"538ed50aa55d97c822baec68ef5d62cad22e8742","admin_user":"trintlermint","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","issue_term":"pathname","language":"en"}
-gitalkConfig.id=md5()
+var gitalkConfig = {"enable":true,"github_id":null,"repo":"blog","client_id":null,"client_secret":null,"admin_user":null,"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","issue_term":"pathname","language":null,"clientID":"Ov23lipca9qEBRbrfaIM","clientSecret":"538ed50aa55d97c822baec68ef5d62cad22e8742","owner":"trintlermint","admin":[""],"id":"location.pathname","distractionFreeMode":true}
+gitalkConfig.id=md5(location.pathname)
 var gitalk = new Gitalk(gitalkConfig)
   
   gitalk.render('gitalk-container')
