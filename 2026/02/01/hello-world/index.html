@@ -293,12 +293,11 @@ Generate static files1$ hexo generate">
           const toggleBtn = document.getElementById('toggle_btn');
           if (!toc || !article) return;
           if (window.innerWidth < 1024 && article.firstElementChild !== toc) {
-            console.log('small screen!!')
+            console.log('small screen!!');
             
-            article.insertBefore(toc, article.firstChild);//移动节点，而非复制
+            article.insertBefore(toc, article.firstChild);
             
             toggleBtn.style.display = 'none';
-            // 替换样式：取消 fixed，设置适合正文的样式
             toc.style.position = 'relative';
             toc.style.top = '';
             toc.style.left = '';
@@ -309,6 +308,7 @@ Generate static files1$ hexo generate">
             toc.style.overflowX = 'visible';
             toc.style.padding = '1em';
             toc.style.borderLeft = 'none';
+            toc.style.borderRight = 'none';
             toc.style.borderBottom = '1px solid #333';
             toc.style.background = '#101010';
             toc.style.opacity = '0.98';
@@ -330,7 +330,7 @@ Generate static files1$ hexo generate">
       width: 10rem;
       max-height: 80vh;
       overflow-y: auto;
-      overflow-x: auto;
+      overflow-x: hidden;
       padding: 10px;
       border-left: 2px solid #333;
       font-size: 14px;
@@ -341,13 +341,16 @@ Generate static files1$ hexo generate">
       box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.3),
         0 8px 16px rgba(0, 0, 0, 0.4);
+      flex-shrink: 0;
     ">
-      <strong style="color: #2bbc8a;">Contents</strong>
+      <strong style="color: #2bbc8a; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Contents</strong>
       <div id="toggle_btn" style="
       position: absolute;
       right: 1rem;
+      top: 0.5rem;
       display: inline-block;
       width: 2rem;
+      height: 2rem;
       text-align: center;
       border: 1px solid #2bbc8a;
       color: #2bbc8a;
@@ -355,43 +358,70 @@ Generate static files1$ hexo generate">
       background-color: #101010;
       border-radius: 3px;
       transition: all 0.2s ease;
+      line-height: 2rem;
       "><</div>
-      <ul id="fixed-toc-list" style="list-style: none; padding-left: 10px; margin-top: 10px;"></ul>
+      <ul id="fixed-toc-list" style="
+        list-style: none; 
+        padding-left: 10px; 
+        margin-top: 10px;
+        margin: 0;
+        padding: 0;
+        margin-left: 0;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+      "></ul>
     </div>
 
     <script>
+      // Store the collapsed state in localStorage
+      const tocStateKey = 'toc_collapsed_state';
+      
       document.addEventListener('DOMContentLoaded', function () {
         const nav = document.querySelector('nav');
-        if (nav) {
-          const navBottom = nav.getBoundingClientRect().bottom;//浏览器JS API
+        const toc = document.querySelector('#fixed-toc-container');
+        const myDiv = document.getElementById('toggle_btn');
+        const tocList = document.getElementById('fixed-toc-list');
+        
+        if (nav && toc) {
+          const navBottom = nav.getBoundingClientRect().bottom;
           console.log('nav bottom:', navBottom);
-          // 设置toc元素 top = nav bottom
-          const toc = document.querySelector('#fixed-toc-container');
-          if (toc) {
-            toc.style.top = navBottom + 'px';
-            toc.style.maxHeight = window.innerHeight - navBottom;
-          }
+          toc.style.top = navBottom + 'px';
+          toc.style.maxHeight = (window.innerHeight - navBottom) + 'px';
+        }
+        
+        // Restore previous collapsed state
+        const wasCollapsed = localStorage.getItem(tocStateKey) === 'true';
+        if (wasCollapsed) {
+          tocList.style.display = 'none';
+          myDiv.textContent = '>';
+          toc.style.width = '10rem';
         }
       });
 
       const myDiv = document.getElementById('toggle_btn');
-      var tocList = document.getElementById("fixed-toc-list");
-      var tocContainer = document.getElementById("fixed-toc-container");
+      const tocList = document.getElementById('fixed-toc-list');
+      const tocContainer = document.getElementById('fixed-toc-container');
       
       function handleClickBtn() {
-        console.log('Div 被点击了！');
+        console.log('TOC toggle clicked');
         if(myDiv.textContent === '<'){
-          myDiv.textContent = '>'
-          tocList.style.display = 'none'
-          tocContainer.style.width = '11rem'
+          // Collapse
+          myDiv.textContent = '>';
+          tocList.style.display = 'none';
+          tocContainer.style.width = '10rem';
+          localStorage.setItem(tocStateKey, 'true');
         } else {
-          myDiv.textContent = '<'
-          tocList.style.display = 'block'
-          tocContainer.style.width = '15rem'
+          // Expand
+          myDiv.textContent = '<';
+          tocList.style.display = 'block';
+          tocContainer.style.width = '10rem';
+          localStorage.setItem(tocStateKey, 'false');
         }
       }
 
-      myDiv.addEventListener('click', handleClickBtn);// 绑定点击事件
+      myDiv.addEventListener('click', handleClickBtn);
       myDiv.addEventListener('mouseover', function() {
         myDiv.style.backgroundColor = '#1a1a1a';
       });
@@ -400,76 +430,85 @@ Generate static files1$ hexo generate">
       });
 
       (function() {
-      const Patternstr = "/*\\d{4}/\\d{2}/\\d{2}/.*";
-      const dataPattern = new RegExp(Patternstr);
-      const path = window.location.pathname;
-      console.log(dataPattern.toString(), path, dataPattern.test(path));
-      
-      if (!dataPattern.test(path) && (path === '/' || path === 'index.html')) {
-        console.log('no toc')
-        let toc = document.getElementById('fixed-toc-container');
-        if (toc) toc.style.display = 'none';
-        return;
-      }
-      
-      var content = document.querySelector('body');
-      console.log('content', content)
-      if (!content || !tocList) {
-        document.getElementById('fixed-toc-container').style.display = 'none';
-        return;
-      }
-      
-      var headings = content.querySelectorAll('h1, h2, h3, h4');
-      console.log('headings', headings)
-      
-      if(headings){
-        const h1Element = headings[0];
-        const rect = h1Element.getBoundingClientRect();
-        if(rect.left < 150){
-          tocContainer.style.right = '0px';
-          tocContainer.style.left = 'auto';
-          console.log('to right')
-        }
-        console.log(rect.left, '150')
-      }
-      
-      if (headings.length === 0) {
-        document.getElementById('fixed-toc-container').style.display = 'none';
-        return;
-      }
-      
-      headings.forEach(function(heading, i) {
-        if (!heading.id) {
-          heading.id = 'heading-' + i;
-        }
-      });
-      
-      headings.forEach(function(heading) {
-        var level = parseInt(heading.tagName.substring(1));
-        var li = document.createElement('li');
-        li.style.marginLeft = (level - 1) * 15 + 'px';
-        li.style.marginBottom = '5px';
+        const Patternstr = "/*\\d{4}/\\d{2}/\\d{2}/.*";
+        const dataPattern = new RegExp(Patternstr);
+        const path = window.location.pathname;
+        console.log(dataPattern.toString(), path, dataPattern.test(path));
         
-        var a = document.createElement('a');
-        a.href = '#' + heading.id;
-        a.textContent = heading.textContent;
-        a.style.color = '#2bbc8a';
-        a.style.textDecoration = 'none';
-        a.style.fontSize = '0.95em';
-        a.style.transition = 'all 0.2s ease';
+        if (!dataPattern.test(path) && (path === '/' || path === 'index.html')) {
+          console.log('no toc');
+          let toc = document.getElementById('fixed-toc-container');
+          if (toc) toc.style.display = 'none';
+          return;
+        }
         
-        a.onmouseover = function() { 
-          a.style.textDecoration = 'underline';
-          a.style.color = '#2ecc71';
-        };
-        a.onmouseout = function() { 
-          a.style.textDecoration = 'none';
+        var content = document.querySelector('body');
+        console.log('content', content);
+        
+        if (!content || !tocList) {
+          document.getElementById('fixed-toc-container').style.display = 'none';
+          return;
+        }
+        
+        var headings = content.querySelectorAll('h1, h2, h3, h4');
+        console.log('headings', headings);
+        
+        // Position TOC on right if headings are too close to left
+        if(headings && headings.length > 0){
+          const h1Element = headings[0];
+          const rect = h1Element.getBoundingClientRect();
+          if(rect.left < 170){
+            tocContainer.style.right = '0px';
+            tocContainer.style.left = 'auto';
+            tocContainer.style.borderLeft = 'none';
+            tocContainer.style.borderRight = '2px solid #333';
+            console.log('TOC positioned right');
+          }
+        }
+        
+        if (headings.length === 0) {
+          document.getElementById('fixed-toc-container').style.display = 'none';
+          return;
+        }
+        
+        headings.forEach(function(heading, i) {
+          if (!heading.id) {
+            heading.id = 'heading-' + i;
+          }
+        });
+        
+        headings.forEach(function(heading) {
+          var level = parseInt(heading.tagName.substring(1));
+          var li = document.createElement('li');
+          li.style.marginLeft = (level - 1) * 12 + 'px';
+          li.style.marginBottom = '5px';
+          li.style.wordWrap = 'break-word';
+          li.style.wordBreak = 'break-word';
+          
+          var a = document.createElement('a');
+          a.href = '#' + heading.id;
+          a.textContent = heading.textContent;
           a.style.color = '#2bbc8a';
-        };
-        
-        li.appendChild(a);
-        tocList.appendChild(li);
-      });
+          a.style.textDecoration = 'none';
+          a.style.fontSize = '0.9em';
+          a.style.transition = 'all 0.2s ease';
+          a.style.display = 'block';
+          a.style.wordWrap = 'break-word';
+          a.style.wordBreak = 'break-word';
+          a.style.overflowWrap = 'break-word';
+          
+          a.onmouseover = function() { 
+            a.style.textDecoration = 'underline';
+            a.style.color = '#2ecc71';
+          };
+          a.onmouseout = function() { 
+            a.style.textDecoration = 'none';
+            a.style.color = '#2bbc8a';
+          };
+          
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
       })();
     </script>
   </body>
