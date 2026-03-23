@@ -303,8 +303,6 @@ Generate static files1$ hexo generate">
             toc.style.left = '';
             toc.style.right = '';
             toc.style.width = '100%';
-            toc.style.maxWidth = 'none';
-            toc.style.minWidth = 'none';
             toc.style.maxHeight = 'none';
             toc.style.overflowY = 'visible';
             toc.style.overflowX = 'visible';
@@ -330,8 +328,6 @@ Generate static files1$ hexo generate">
       top: 0vh;
       left: 0px;
       width: 10rem;
-      max-width: 10rem;
-      min-width: 10rem;
       max-height: 80vh;
       overflow-y: auto;
       overflow-x: hidden;
@@ -363,13 +359,14 @@ Generate static files1$ hexo generate">
       border-radius: 3px;
       transition: all 0.2s ease;
       line-height: 2rem;
-      flex-shrink: 0;
       "><</div>
       <ul id="fixed-toc-list" style="
         list-style: none; 
-        padding: 0;
-        margin: 0;
+        padding-left: 10px; 
         margin-top: 10px;
+        margin: 0;
+        padding: 0;
+        margin-left: 0;
         word-wrap: break-word;
         word-break: break-word;
         overflow-wrap: break-word;
@@ -380,18 +377,12 @@ Generate static files1$ hexo generate">
     <script>
       // Store the collapsed state in localStorage
       const tocStateKey = 'toc_collapsed_state';
-      const TOC_WIDTH = '10rem'; // Single source of truth for width
       
       document.addEventListener('DOMContentLoaded', function () {
         const nav = document.querySelector('nav');
         const toc = document.querySelector('#fixed-toc-container');
         const myDiv = document.getElementById('toggle_btn');
         const tocList = document.getElementById('fixed-toc-list');
-        
-        // Ensure width is always set to TOC_WIDTH
-        toc.style.width = TOC_WIDTH;
-        toc.style.maxWidth = TOC_WIDTH;
-        toc.style.minWidth = TOC_WIDTH;
         
         if (nav && toc) {
           const navBottom = nav.getBoundingClientRect().bottom;
@@ -405,16 +396,13 @@ Generate static files1$ hexo generate">
         if (wasCollapsed) {
           tocList.style.display = 'none';
           myDiv.textContent = '>';
-        } else {
-          tocList.style.display = 'block';
-          myDiv.textContent = '<';
+          toc.style.width = '10rem';
         }
       });
 
       const myDiv = document.getElementById('toggle_btn');
       const tocList = document.getElementById('fixed-toc-list');
       const tocContainer = document.getElementById('fixed-toc-container');
-      const TOC_WIDTH = '10rem';
       
       function handleClickBtn() {
         console.log('TOC toggle clicked');
@@ -422,18 +410,15 @@ Generate static files1$ hexo generate">
           // Collapse
           myDiv.textContent = '>';
           tocList.style.display = 'none';
+          tocContainer.style.width = '10rem';
           localStorage.setItem(tocStateKey, 'true');
         } else {
           // Expand
           myDiv.textContent = '<';
           tocList.style.display = 'block';
+          tocContainer.style.width = '10rem';
           localStorage.setItem(tocStateKey, 'false');
         }
-        
-        // ALWAYS maintain width at TOC_WIDTH
-        tocContainer.style.width = TOC_WIDTH;
-        tocContainer.style.maxWidth = TOC_WIDTH;
-        tocContainer.style.minWidth = TOC_WIDTH;
       }
 
       myDiv.addEventListener('click', handleClickBtn);
