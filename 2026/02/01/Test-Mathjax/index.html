@@ -381,5 +381,171 @@ mjx-container[display="true"] + br {
    </script>
 
 
-</body>
+<!-- hexo injector body_end start -->
+    <script>
+      (function() {
+        function moveElementIfSmallScreen() {
+          const toc = document.getElementById('fixed-toc-container');
+          const article = document.querySelector("article");
+          const toggleBtn = document.getElementById('toggle_btn');
+          if (!toc || !article) return;
+          if (window.innerWidth < 1024 && article.firstElementChild !== toc) {
+            console.log('small screen!!')
+            
+            article.insertBefore(toc, article.firstChild);//移动节点，而非复制
+            
+            toggleBtn.style.display='none';
+            // 替换样式：取消 fixed，设置适合正文的样式
+            toc.style.position = 'relative';
+            toc.style.top = '';
+            toc.style.left = '';
+            toc.style.width = '100%';
+            toc.style.maxHeight = 'none';
+            toc.style.overflowY = 'visible';
+            toc.style.overflowX = 'visible';
+            toc.style.padding = '1em';
+            toc.style.borderLeft = 'none';
+            toc.style.borderBottom = '1px solid #ddd';
+            toc.style.background = '#f9f9f9';
+            toc.style.opacity = '1';
+            toc.style.zIndex = '9999';
+            toc.style.boxShadow = 'none';
+            toc.style.margin = '1rem';
+            toc.style.paddingTop= '2rem';
+          }
+        }
+        window.addEventListener("DOMContentLoaded", moveElementIfSmallScreen);
+        window.addEventListener("resize", moveElementIfSmallScreen);
+      })();
+    </script>
+  <!-- hexo injector body_end end -->
+    <div id="fixed-toc-container" style="
+      position: fixed;
+      top: 0vh;
+      left: 0px;
+      width: 15rem;
+      max-height: 80vh;
+      overflow-y: auto;
+      overflow-x: auto;
+      padding: 10px;
+      border-left: 2px solid #ccc;
+      font-size: 14px;
+      line-height: 1.5;
+      background: #fff;
+      opacity:0.8;
+      z-index: 9999;
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.05),  /* 第一层：近处柔和 */
+        0 8px 16px rgba(0, 0, 0, 0.08); /* 第二层：远处扩散 */
+    ">
+      <strong>Contents</strong>
+      <div id="toggle_btn" style="
+      position:absolute;
+      right:1rem;
+      display:inline-block;
+      width:2rem;
+      text-align:center;
+      border:1px solid #ccc;
+      "><</div>
+      <ul id="fixed-toc-list" style="list-style: none; padding-left: 10px;"></ul>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const nav = document.querySelector('nav');
+        if (nav) {
+          const navBottom = nav.getBoundingClientRect().bottom;//浏览器JS API
+          console.log('nav bottom:', navBottom);
+          // 设置toc元素 top = nav bottom
+          const toc = document.querySelector('#fixed-toc-container');
+          if (toc) {
+            toc.style.top = navBottom + 'px';
+            toc.style.maxHeight=window.innerHeight - navBottom.getBoundingClientRect().bottom;
+          }
+        }
+      });
+
+      const myDiv = document.getElementById('toggle_btn');
+      var tocList=document.getElementById("fixed-toc-list");
+      var tocContainer=document.getElementById("fixed-toc-container");
+      function handleClickBtn() {
+        console.log('Div 被点击了！');
+        if(myDiv.textContent==='<'){
+          myDiv.textContent ='>'
+          tocList.style.display='none'
+          tocContainer.style.width='11rem'
+        }else{
+          myDiv.textContent ='<'
+          tocList.style.display='block'
+          tocContainer.style.width='15rem'
+        }
+          
+      }
+
+
+      myDiv.addEventListener('click', handleClickBtn);// 绑定点击事件
+
+
+      (function() {
+      const Patternstr = "/*\\d{4}/\\d{2}/\\d{2}/.*"; //本身是字符串插入，所以对符号要转义
+      //"^//*"->"/"
+      //"/.*"->".*"
+      //JS引擎中""转义
+      //正则表达式引擎也是""转义
+      const dataPattern = new RegExp(Patternstr);
+      const path = window.location.pathname;
+      console.log(dataPattern.toString(),path,dataPattern.test(path));//控制台在渲染时省略了反斜杠的可视表示。
+      if (!dataPattern.test(path)&&(path==='/'||path==='index.html')) {
+        console.log('no toc')
+        let toc = document.getElementById('fixed-toc-container');
+        if (toc) toc.style.display = 'none';
+        return;
+      }
+        var content = document.querySelector('body');
+        console.log('content',content)
+        //var tocList = document.getElementById('fixed-toc-list');
+        if (!content || !tocList) {
+          document.getElementById('fixed-toc-container').style.display = 'none';
+          return;
+        }
+        var headings = content.querySelectorAll('h1, h2, h3, h4');
+        console.log('headings',headings)
+        if(headings){
+          const h1Element=headings[0];
+          const rect = h1Element.getBoundingClientRect();
+          if(rect.left<150){
+           tocContainer.style.right='0px';
+           tocContainer.style.left = 'auto'; // 移除内联的 left 样式
+            //不是设置right:0 就替换left:0 需要移除
+            console.log('to right')
+          }
+          console.log(rect.left,'150')
+        }
+        
+        if (headings.length === 0) {
+          document.getElementById('fixed-toc-container').style.display = 'none';
+          return;
+        }
+        headings.forEach(function(heading, i) {
+          if (!heading.id) {
+            heading.id = 'heading-' + i;
+          }
+        });
+        headings.forEach(function(heading) {
+          var level = parseInt(heading.tagName.substring(1));
+          var li = document.createElement('li');
+          li.style.marginLeft = (level - 1) * 15 + 'px';
+          var a = document.createElement('a');
+          a.href = '#' + heading.id;
+          a.textContent = heading.textContent;
+          a.style.color = '#555';
+          a.style.textDecoration = 'none';
+          a.onmouseover = function() { a.style.textDecoration = 'underline'; };
+          a.onmouseout = function() { a.style.textDecoration = 'none'; };
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
+      })();
+    </script>
+  </body>
    </html>
