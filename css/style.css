@@ -448,27 +448,8 @@ em{
 .toc {
     font-size: 10pt;
     width: auto;
-    min-width: 250px;      /* Prevents it from getting too skinny */
-    max-width: 300px;
     padding: 10px;
     background: #000;
-    
-    /* Make it float to the right side of the text */
-    float: right;
-    margin: 0 0 20px 20px;
-    
-    /* Sticky positioning */
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 60px !important;           /* Leaves room for the navbar */
-    max-height: calc(100vh - 80px); /* Prevents it from going off-screen */
-    overflow-y: auto;               /* Adds a scrollbar to the TOC if it gets too long */
-    z-index: 1000;                  /* Keeps it above other elements */
-}
-
-/* CRITICAL: Parents cannot have overflow hidden/auto, or sticky will fail */
-.content, .page, .entry, .row, .col-md-9 {
-    overflow: visible !important;
 }
 
 .toc .toc-title {
@@ -495,18 +476,6 @@ em{
 .toc-article ol ol {
     list-style: circle;
     padding: 5px 10px
-}
-
-/* On mobile screens, disable sticky and float so it doesn't break the layout */
-@media (max-width: 900px) {
-    .toc {
-        position: relative !important;
-        float: none;
-        width: 100%;
-        max-width: 100%;
-        margin: 0 0 20px 0;
-        top: 0 !important;
-    }
 }
 
 .line {
