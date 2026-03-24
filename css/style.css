@@ -449,7 +449,14 @@ em{
     font-size: 10pt;
     width: auto;
     padding: 10px;
-    background: #000
+    background: #000;
+    
+    /* Add these lines to make it sticky */
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 60px !important; /* Leaves room for the navbar */
+    max-height: calc(100vh - 80px); /* Prevents it from going off-screen */
+    overflow-y: auto; /* Adds a scrollbar to the TOC if it gets too long */
 }
 
 .toc .toc-title {
