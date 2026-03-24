@@ -97,7 +97,7 @@ li i {
 }
 
 .meta-widget a {
-    color: #aaaaaa
+    color: #c08179
 }
 
 .tag_box {
@@ -120,11 +120,11 @@ li i {
 .tag_box a {
     padding: 2px 6px;
     margin: 2px;
-    background: #e5e5e5;
-    color: #555;
+    background: #352b42;
+    color: #c08179;
     border-radius: 3px;
     text-decoration: none;
-    border: 1px dashed #bbb
+    border: 1px dashed #924a41
 }
 
 .tag_box a span {
@@ -133,20 +133,20 @@ li i {
 }
 
 .tag_box a:hover {
-    background-color: #397bdd;
-    color: #FFF
+    background-color: #924a41;
+    color: #c08179
 }
 
 .tag_box a.active {
-    background: #57a957;
-    border: 1px solid #4c964d;
+    background: #84c5cd;
+    border: 1px solid #84c5cd;
     color: #FFF
 }
 
 .widget {
     padding-top: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0
+    border-bottom: 1px solid #e5ceb4
 }
 
 #local-search-input {
@@ -176,7 +176,7 @@ p.search-result {
 }
 
 em.search-keyword {
-    border-bottom: 1px dashed #4088b8;
+    border-bottom: 1px dashed #867ade;
     font-weight: bold
 }
 
@@ -185,22 +185,22 @@ em.search-keyword {
 }
 
 a {
-    color: #2bbc8a
+    color: #493aa5
 }
 
 a:focus {
-    color: #fefe54;
-    background: #a50
+    color: #867ade;
+    background: #493aa5
 }
 
 a:hover {
-    color: #000000;
-    background: rgb(153, 153, 153)
+    color: #FFFFFF;
+    background: #867ade
 }
 
 a:active {
-    color: #fefe54;
-    background: #a50
+    color: #867ade;
+    background: #352b42 
 }
 
 a.label-anchor {
@@ -277,7 +277,7 @@ video {
 
 .slogan {
     font-size: 1.2em;
-    color: #fff;
+    color: #867ade;
     display: block;
     margin-bottom: 1.2em
 }
@@ -326,11 +326,12 @@ video {
 
 #gotop span {
     display: block;
-    color: #fff
+    color: #493aa5
 }
 
 #gotop span:hover {
-    color: #aaa
+    color: #FFFFFF;
+    background: #867ade 
 }
 
 #gotop span {
@@ -380,7 +381,7 @@ h6 {
 }
 
 h2 {
-    color: #fff;
+    color: #c08179;
     padding-top: 40px;
     margin: -25px 0 .83em
 }
@@ -535,14 +536,16 @@ hr {
 }
 
 .logo {
-    background: url("../favicon.png") no-repeat left top;
-    background-size: 5em
+    background: url("../favicon.gif") no-repeat left top;
+    background-size: 9em; /* 1. INCREASE THIS: Make the image bigger (was 5em) */
+    min-height: 7.5em;    /* 2. ADD THIS: Prevents the bottom of the bigger image from being cut off */
 }
 
-.logo>h1 {
-    padding-left: 3em;
+.logo > h1 {
+    padding-left: 4.5em;  /* 3. INCREASE THIS: Pushes the title text to the right so it doesn't overlap the bigger logo (was 3em) */
+    padding-top: 1.4em;   /* 4. ADD THIS: Pushes the text down a bit so it's centered next to the big logo */
     font-size: 1.5em;
-    line-height: 2.0em
+    line-height: 2.0em;
 }
 
 .fa-heart:before {
@@ -572,7 +575,8 @@ figure {
 }
 
 .alert-success {
-    color: #fefe54
+    color: #867ade;
+    background: #352b42 !important
 }
 
 .thumbnail {
@@ -605,14 +609,14 @@ code {
  .article-footer-copyright {
     margin: 1.5em 0 0;
     padding: 0em 1em;
-    border-left: 3px solid #ff1700;
-    background-color: #272727;
+    border-left: 3px solid #924a41;
+    background-color: #212123;
     list-style: none;
     font-size: 14px;
 }
 
 
-/*valine 评论系统样式*/
+/*valine*/
 
 
   
@@ -734,7 +738,7 @@ border: 2px solid rgb(255, 255, 255) !important;
 
 .gt-container .gt-btn {
 
-    background-color: #2bbc8a!important;
+    background-color: #493aa5!important;
     color: #000 !important;
     border: 1px solid #000000 !important;
     font-size: 0.8em !important;
@@ -742,11 +746,11 @@ border: 2px solid rgb(255, 255, 255) !important;
 
 .gt-container .gt-header-controls-tip {
 
-    color: #2bbc8a!important;
+    color: #493aa5!important;
 }
 .gt-container a {
 
-    color: #2bbc8a !important;
+    color: #493aa5 !important;
 }
 .gt-container .gt-comment-content {
     background-color: #101010 !important;
