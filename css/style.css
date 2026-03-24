@@ -445,31 +445,30 @@ em{
     opacity: 1
 }
 
-#toc {
+.toc {
+    font-size: 10pt;
+    width: auto;
+    min-width: 250px;      /* Prevents it from getting too skinny */
+    max-width: 300px;
+    padding: 10px;
+    background: #000;
+    
+    /* Make it float to the right side of the text */
+    float: right;
+    margin: 0 0 20px 20px;
+    
+    /* Sticky positioning */
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 60px !important;  /* Distance from top of screen */
-    float: right;          /* Moves it to the right side of your post */
-    width: 280px;          /* Width of the TOC box */
-    margin: 0 0 20px 20px; /* Spacing so text doesn't touch it */
-    background: #000;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #333;
-    z-index: 1000;
-    max-height: calc(100vh - 80px);
-    overflow-y: auto;      /* Allows scrolling inside the TOC if it gets too long */
+    top: 60px !important;           /* Leaves room for the navbar */
+    max-height: calc(100vh - 80px); /* Prevents it from going off-screen */
+    overflow-y: auto;               /* Adds a scrollbar to the TOC if it gets too long */
+    z-index: 1000;                  /* Keeps it above other elements */
 }
 
-/* On mobile/smaller screens, turn off sticky so it doesn't break the layout */
-@media (max-width: 900px) {
-    #toc {
-        position: relative !important;
-        float: none;
-        width: 100%;
-        margin-left: 0;
-        top: 0 !important;
-    }
+/* CRITICAL: Parents cannot have overflow hidden/auto, or sticky will fail */
+.content, .page, .entry, .row, .col-md-9 {
+    overflow: visible !important;
 }
 
 .toc .toc-title {
@@ -496,6 +495,18 @@ em{
 .toc-article ol ol {
     list-style: circle;
     padding: 5px 10px
+}
+
+/* On mobile screens, disable sticky and float so it doesn't break the layout */
+@media (max-width: 900px) {
+    .toc {
+        position: relative !important;
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 20px 0;
+        top: 0 !important;
+    }
 }
 
 .line {
@@ -780,19 +791,4 @@ border: 2px solid rgb(255, 255, 255) !important;
     width: 100%;
     height: 100%;
     fill: #ffffff !important;
-}
-
-/* Sticky Table of Contents Container */
-.toc-article, #toc {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 60px !important;  
-    max-height: calc(100vh - 80px);
-    overflow-y: auto;      
-    z-index: 999;
-}
-
-/* Ensure parents don't break sticky positioning */
-.col-md-9, .entry {
-    overflow: visible !important;
 }
