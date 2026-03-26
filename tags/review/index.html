@@ -165,7 +165,7 @@
     class="newsletter__form"
     id="newsletterHakanai"
     action="https://broadcast.hakanai.io/api/campaign/5ecc7dd3-0d00-426f-9699-6d850fb7c928/subscribe"
-    method="post"
+    method="get"
     novalidate
   >
     <input
@@ -177,7 +177,6 @@
       required
     />
     <button class="newsletter__btn" type="submit">Subscribe</button>
-
     <div class="newsletter__msg" id="newsletterMsg" role="status" aria-live="polite"></div>
   </form>
 </div>
@@ -204,34 +203,29 @@
 
     setMsg('... sending', 'pending');
 
-    // POST form-encoded
-    var body = new URLSearchParams();
-    body.set('email', email);
+    // Hakanai API (per docs): GET with ?email=
+    var url = form.action + '?email=' + encodeURIComponent(email);
 
-    fetch(form.action, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-      body: body.toString()
-    })
-    .then(function (res) {
-      var ct = res.headers.get('content-type') || '';
-      if (ct.includes('application/json')) {
-        return res.json().then(function (j) { return { ok: res.ok, json: j }; });
-      }
-      return res.text().then(function (t) { return { ok: res.ok, text: t }; });
-    })
-    .then(function (out) {
-      if (!out.ok) {
-        setMsg('ERR: subscription failed', 'error');
-        return;
-      }
-      setMsg('OK: subscribed. Check your inbox.', 'success');
-      form.reset();
-    })
-    .catch(function (err) {
-      setMsg('ERR: network/CORS error', 'error');
-      console.error(err);
-    });
+    fetch(url, { method: 'GET' })
+      .then(function (res) {
+        var ct = res.headers.get('content-type') || '';
+        if (ct.includes('application/json')) {
+          return res.json().then(function (j) { return { ok: res.ok, json: j }; });
+        }
+        return res.text().then(function (t) { return { ok: res.ok, text: t }; });
+      })
+      .then(function (out) {
+        if (!out.ok) {
+          setMsg('ERR: subscription failed', 'error');
+          return;
+        }
+        setMsg('OK: subscribed. Check your inbox.', 'success');
+        form.reset();
+      })
+      .catch(function (err) {
+        setMsg('ERR: network/CORS error', 'error');
+        console.error(err);
+      });
   });
 })();
 </script>
@@ -297,27 +291,27 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/project/">project<span>1</span></a></li>
+		
 			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
-		
-			<li><a href="/tags/review/">review<span>1</span></a></li>
-		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
 		
 			<li><a href="/tags/joss/">joss<span>1</span></a></li>
 		
 			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
 		
-			<li><a href="/tags/project/">project<span>1</span></a></li>
+			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
+		
+			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
 		
 			<li><a href="/tags/cpp/">cpp<span>1</span></a></li>
 		
 			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
 		
-			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
-		
-			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
 		
 			<li><a href="/tags/oss/">oss<span>2</span></a></li>
+		
+			<li><a href="/tags/review/">review<span>1</span></a></li>
 		
 		 
 		</ul>
