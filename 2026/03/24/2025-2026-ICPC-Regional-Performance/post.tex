@@ -1,0 +1,163 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{\texorpdfstring{\hyperref[Intro]{}Intro}{Intro}}\label{Intro}
+
+\subsection{\texorpdfstring{\hyperref[ICPC]{}ICPC}{ICPC}}\label{ICPC}
+
+The International Collegiate Programming Contest is an incredibly renowned competitive programming competition with various stages, in this document I walk through my experience this 2026 ICPC in my three regional contests.
+
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/icpc-balloons.png}}
+
+\subsection{\texorpdfstring{\hyperref[Team-Found]{}Team Found}{Team Found}}\label{Team-Found}
+
+\textbf{Valyn}, \textbf{Anton} and \textbf{I} formed the sudden team \textbf{``(() =\textgreater{} \{\})();''} -- which indeed is meant to represent the no-ops lambda function in javascript or ``arrow-function'' -- thought of by our one and only Valyn on the first day (the initial orchestrator.)
+
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/team_encoded.png}}\\
+van://-
+
+\phantomsection\label{more}{}
+
+\section{\texorpdfstring{\hyperref[Contests]{}Contests}{Contests}}\label{Contests}
+
+\subsection{\texorpdfstring{\hyperref[TAPC-UTwente-Enschede-NL]{}TAPC, UTwente, Enschede, NL}{TAPC, UTwente, Enschede, NL}}\label{TAPC-UTwente-Enschede-NL}
+
+Initially, we participated in the \textbf{\href{https://tapc.ia.utwente.nl}{Twents Algorithms Programming Contest (TAPC)}} at my university: \emph{\href{https://utwente.nl}{University of Twente}} where we had a lot of fun, with a lax competition unexpectant of the continutation of this.\\
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/tapc-encode.png}}
+
+---://-
+
+\subsection{\texorpdfstring{\hyperref[BAPC-TUD-Delft-NL]{}BAPC, TUD, Delft, NL}{BAPC, TUD, Delft, NL}}\label{BAPC-TUD-Delft-NL}
+
+\subsubsection{\texorpdfstring{\hyperref[Intro-1]{}Intro}{Intro}}\label{Intro-1}
+
+Subsequently, the next month as time passed by almost immediately, we qualified for the
+
+\href{https://2025.bapc.eu/}{Benelux Algorithms Programming Contest (BAPC)} being held at
+
+\href{https://tudelft.nl}{Technical University Delft}. This was our first ever competition which was at such a scale and our nerves were racked to the computers (though there was only one.) Without a coach, this all was extremely difficult; however we persisted, formed a more unified Team Reference Document (TCR) which was made in the times when my proficiency with LaTeX wasn't present (seen by the un-printed \{\} in the team name\textsuperscript{\hyperref[fn:1]{{{[}1{]}}}}), and nor was my knowledge in this field worth much (also, I bought a \textbf{HUGE} QWERTY-US keyboard shown below to practice with (I usually use QWERTZ, but everyone else uses QWERTY-US.)). As you can imagine, our priorities were more present in complaining about our short stay in Rijswijk instead of Delft to cut costs (there was a beautiful arabic restaurant, though) (we almost slept with a 40-year-old in the same dorm as-well =)).
+
+The aforementioned ``HUGE'' Keyboard:\\
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/big_keyboard_encoded.png}}
+
+\subsubsection{\texorpdfstring{\hyperref[Result]{}Result}{Result}}\label{Result}
+
+After the contest, our resolutions were moderate, wishing we could have performed better. However, we all saw we did quite a lot so far and were satisfied with the performance amidst the competiton with good solutions and program code.
+
+---://a
+
+\subsection{\texorpdfstring{\hyperref[NWERC-KIT-Karlsruhe-Germany]{}NWERC, KIT, Karlsruhe, Germany}{NWERC, KIT, Karlsruhe, Germany}}\label{NWERC-KIT-Karlsruhe-Germany}
+
+\subsubsection{\texorpdfstring{\hyperref[Intro-2]{}Intro}{Intro}}\label{Intro-2}
+
+To plan for future competitions far ahead, we decided to string along a Year 2 senior, \textbf{Adrian} in our University to be our coach for the duration of the semester. Although, as it were looking like there was nothing more till next year: We get accepted to \textbf{\href{https://2025.nwerc.eu}{Northwestern Europe Regional Contest (NWERC)}!} This was exciting, finally we get to make another chance.
+
+\subsubsection{\texorpdfstring{\hyperref[Concerns]{}Concerns}{Concerns}}\label{Concerns}
+
+There were a few admistrative, and logistical costs to take us in the Dutch university to \emph{\href{https://kit.edu}{Karlsruhe Institute of Technology (KIT)}}; incuring MIN ca. €250 / person, and for this reason we have started works of our own study association described further. Leaving this aside, the trip to germany was fun, tiring and exhausting, sure, but fun.I think that was one of the most enjoyable FlixBus rides I have ever had since we were more focused on flipping a Swapfiets bicycle upside down (contemporary Dutch culture which might be illegal and hence filtered (see below)), speaking till 4:// am when there was work to do the next day and coding our beautiful team website \textbf{\href{https://arrowfunc.now}{arrowfunc.now}} made by Valyn on that very day. We then register at the new accomodation, sleep in, and get ready for the next day, where we mostly just take EVERY goodie IMAGINABLE from the sponsors. I think there is a very really stress-release behind this. I recommend everyone to take as many goodies as they can from an event, and goodness did we score, I believe the valuation of the goods were approximately €150. I think that is apt reimbursement. Don't believe me? Check the picture\textsuperscript{\hyperref[fn:2]{{{[}2{]}}}}. Those little jetbrains pins alone on the bottom right cost \textasciitilde€4 each (see under reference) (and these were what I got, my teammates got similar returns.)
+
+The aforementioned upside down bike,\\
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/swap_feat.gif}}
+
+\subsubsection{\texorpdfstring{\hyperref[Result-1]{}Result}{Result}}\label{Result-1}
+
+After thinking of who to gift these goodies to (families and friends) it quickly took time to do the real contest, we improved the TCR which helped, it was fun, exciting, and most of all tough. We hadn't solved as many problems as we'd hoped due to ill health. However, we still put in the effort, Anton did an extremely impressive job, we all came up with interesting solutions and above all it was a lovely experience -- and I would always do it again. I now do competitive programming problems for fun, and in my spare time, and I recommend you too! to me, it feels like playing chess. I love this stuff. The train back to Enschede while being in Dortmund Station at midnight sucked, but that's how life is sometimes.
+
+This is us in the hall:\\
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/in_hall.png}}
+
+---://-
+
+\section{\texorpdfstring{\hyperref[Conclusion]{}Conclusion}{Conclusion}}\label{Conclusion}
+
+I am incredibly grateful to my \emph{team, coach and university}, since without them I wouldnt have done nearly as much, and overall this was one of the most thrilling experiences I have had, along with now fostering the ideas of creating my own study assocation for the betterment of the competitive programming in my university and financial/mental compensation, and for the creation of the social groups for it.
+
+I have also in addition am grateful to have visited the beautiful cities Delft and Karlsruhe from these events, and the people I have met here.
+
+A small landscape gallery:\\
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/karlsruhe-ferris.jpeg}}\\
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/christmas-encode.png}}\\
+\pandocbounded{\includegraphics[keepaspectratio]{/2026/03/24/2025-2026-ICPC-Regional-Performance/embelic.png}}
+
+000://0
+
+\phantomsection\label{footnotes}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\phantomsection\label{footnotelist}
+\begin{enumerate}
+\tightlist
+\item
+  \phantomsection\label{fn:1}{{1.}{\pandocbounded{\includegraphics[keepaspectratio]{no-arrowfunc.png}} \hyperref[fnref:1]{↩}}}
+\item
+  \phantomsection\label{fn:2}{{2.}{\pandocbounded{\includegraphics[keepaspectratio]{things-gotten.jpeg}} \hyperref[fnref:2]{↩}}}
+\item
+  \phantomsection\label{fn:3}{{3.}{View the \href{https://www.jetbrainsmerchandise.com/accessories.html?ba_product_type=56}{Disatrous prices of Jetbrains Pins}, the price as of 11/2025: \pandocbounded{\includegraphics[keepaspectratio]{pin_price.png}} \hyperref[fnref:3]{↩}}}
+\end{enumerate}
+
+\end{document}
