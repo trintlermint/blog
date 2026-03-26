@@ -765,3 +765,90 @@ border: 2px solid rgb(255, 255, 255) !important;
     height: 100%;
     fill: #ffffff !important;
 }
+
+.widget.newsletter .newsletter__title{
+  margin-bottom: 8px;
+  font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  line-height: 1.2em;
+}
+
+.widget.newsletter .newsletter__hint{
+  color: #bbb;
+}
+
+.widget.newsletter .newsletter__form{
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.widget.newsletter .newsletter__input{
+  flex: 1 1 180px;
+  min-width: 180px;
+  padding: 6px 8px;
+
+  background-color: #000;
+  color: #bbb;
+  -webkit-text-fill-color: #bbb;
+
+  border: 1px solid #8b8b8b;
+  border-radius: 3px;
+
+  font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+}
+
+.widget.newsletter .newsletter__input:focus{
+  border-color: #fff;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  outline: none;
+}
+
+/* Button: mimic .tag_box a */
+.widget.newsletter .newsletter__btn{
+  padding: 6px 10px;
+  margin: 2px;
+
+  background: #352b42;
+  color: #c08179;
+
+  border-radius: 3px;
+  text-decoration: none;
+
+  border: 1px dashed #924a41;
+
+  font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  line-height: 1.2em;
+  cursor: pointer;
+}
+
+.widget.newsletter .newsletter__btn:hover{
+  background-color: #924a41;
+  color: #c08179;
+}
+
+.widget.newsletter .newsletter__btn:focus{
+  outline: none;
+}
+
+.widget.newsletter .newsletter__btn:active{
+  background: #352b42;
+  color: #c08179;
+}
+
+/* Status */
+.widget.newsletter .newsletter__msg{
+  width: 100%;
+  margin-top: 6px;
+
+  font-size: 12px;
+  color: #bbb;
+
+  font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+}
+
+.widget.newsletter .newsletter__msg--success{ color: #fff; }
+.widget.newsletter .newsletter__msg--pending{ color: #867ade; }
+.widget.newsletter .newsletter__msg--error{ color: #b94a48; }
