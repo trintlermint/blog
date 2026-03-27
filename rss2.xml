@@ -22,9 +22,9 @@
       </description>
       <author>Niladri Adhikary</author>
       <category domain="http://blog.trintler.me/categories/Review/">Review</category>
+      <category domain="http://blog.trintler.me/tags/oss/">oss</category>
       <category domain="http://blog.trintler.me/tags/joss/">joss</category>
       <category domain="http://blog.trintler.me/tags/review/">review</category>
-      <category domain="http://blog.trintler.me/tags/oss/">oss</category>
       <category domain="http://blog.trintler.me/tags/open-sci/">open-sci</category>
       <pubDate>Tue, 24 Mar 2026 18:29:20 GMT</pubDate>
       <content:encoded>
@@ -35,12 +35,12 @@
       <title>Quizzer: CLI Tool for quizzes</title>
       <link>http://blog.trintler.me/2026/03/24/Quizzer-CLI-Tool-for-quizzes/</link>
       <description>
-        <![CDATA[This software is open (in terms of freedom), available for use <a href="https://github.com/trintlermint/quizzer">on Github</a>.]]>
+        <![CDATA[This software is open (in terms of freedom), available for use <a href="https://github.com/trintlermint/certamen">on Github</a> REMARK, this software has undergone major improvement, find it as certamen on github.com/trintlermint.]]>
       </description>
       <author>Niladri Adhikary</author>
       <category domain="http://blog.trintler.me/categories/Software/">Software</category>
-      <category domain="http://blog.trintler.me/tags/oss/">oss</category>
       <category domain="http://blog.trintler.me/tags/cpp/">cpp</category>
+      <category domain="http://blog.trintler.me/tags/oss/">oss</category>
       <category domain="http://blog.trintler.me/tags/project/">project</category>
       <pubDate>Tue, 24 Mar 2026 18:04:55 GMT</pubDate>
       <content:encoded>
