@@ -146,46 +146,17 @@
   <div class="row">
 	
 	
-		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div align="center">
+		<div align="center">
   
-<h1 id="CERTAMEN"><a href="#CERTAMEN" class="headerlink" title="CERTAMEN"></a>CERTAMEN</h1>  <p>
-  <img src="1.png" width="32%" alt="Demo 1">
-  <img src="2.png" width="32%" alt="Demo 2">
-  <img src="3.png" width="32%" alt="Demo 3">
-  </p>
-  
-<p>  A <em>Terminal User Interface</em> <strong>Quiz Game Engine</strong> written entirely in C++.</p>
-<p>  Made with love by <a href="#credits">trintlermint</a>.</p>
+<h1 id="CERTAMEN"><a href="#CERTAMEN" class="headerlink" title="CERTAMEN"></a>CERTAMEN</h1><p>  A <em>Terminal User Interface</em> <strong>Quiz Game Engine</strong> written entirely in C++. (the sequel of Quizzer)</p>
 <h2 id="Author-Quizzes-and-seamlessly-“test”-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play"><a href="#Author-Quizzes-and-seamlessly-“test”-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play" class="headerlink" title="Author Quizzes and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!"></a>Author <em>Quizzes</em> and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!</h2><blockquote>
 <p>This way, you get to make fun of their… incredibly (lacking) <em>haskell</em> knowledge for example!</p>
 </blockquote>
-<h3 id="Releases"><a href="#Releases" class="headerlink" title="Releases"></a>Releases</h3><p>  <a target="_blank" rel="noopener" href="https://github.com/trintlermint/certamen/releases/latest"><img src="https://img.shields.io/github/v/release/trintlermint/certamen?label=linux%20compatible&color=success" alt="Release"></a><br>  <a target="_blank" rel="noopener" href="https://github.com/trintlermint/certamen/releases/latest"><img src="https://img.shields.io/github/v/release/trintlermint/certamen?label=macOS%20compatible&color=success" alt="Release"></a><br>  <a target="_blank" rel="noopener" href="https://github.com/trintlermint/certamen/actions"><img src="https://img.shields.io/badge/windows-CI%20failing%20(incompatible)-red" alt="Windows CI"></a></p>
-<h3 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h3><p>  <a href="#credits"><img src="https://img.shields.io/badge/dependencies-FTXUI%20%7C%20yaml--cpp%20%7C%20libssh-informational" alt="Dependencies"></a><br>  <a href="#ssh-server-mode"><img src="https://img.shields.io/badge/SSH-compatible-brightgreen" alt="SSH Compatible"></a><br>  <a target="_blank" rel="noopener" href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT"></a></p>
-<h3 id="One-might-ask-I’m-passing-everything-why-do-I-need-this"><a href="#One-might-ask-I’m-passing-everything-why-do-I-need-this" class="headerlink" title="One might ask: I’m passing everything, why do I need this?"></a>One might ask: I’m passing everything, why do I need this?</h3><h2 id="Charlie-Brown-aces-his-tests-with-this"><a href="#Charlie-Brown-aces-his-tests-with-this" class="headerlink" title="Charlie Brown aces his tests with this!"></a>Charlie Brown aces his tests with this!</h2>  <img src="./assets/peanuts-quiz.png" alt="certamen-banner">
-  <br>
+<h3 id="One-might-ask-I’m-passing-everything-why-do-I-need-this"><a href="#One-might-ask-I’m-passing-everything-why-do-I-need-this" class="headerlink" title="One might ask: I’m passing everything, why do I need this?"></a>One might ask: I’m passing everything, why do I need this?</h3><h2 id="Charlie-Brown-aces-his-tests-with-this"><a href="#Charlie-Brown-aces-his-tests-with-this" class="headerlink" title="Charlie Brown aces his tests with this!"></a>Charlie Brown aces his tests with this!</h2><p>  <img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/peanuts-quiz.png" alt="Charlie brown actively using Certamen pre-dev."><br>  <br /></p>
 </div>
+---
 
-<h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h2><ul>
-<li><a href="#building">Building</a><ul>
-<li><a href="#dependencies">Dependencies</a></li>
-<li><a href="#cmake">CMake</a></li>
-<li><a href="#manual-compilation-cli">Manual compilation</a></li>
-<li><a href="#macos-and-windows">macOS and Windows</a></li>
-</ul>
-</li>
-<li><a href="#usage">Usage</a><ul>
-<li><a href="#offline-user-mode">Offline user mode</a></li>
-<li><a href="#ssh-server-mode">SSH server mode</a></li>
-</ul>
-</li>
-<li><a href="#quiz-format">Quiz format</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-<li><a href="#credits">Credits</a></li>
-<li><a href="#license">License</a></li>
-</ul>
-<hr>
-<h2 id="Building"><a href="#Building" class="headerlink" title="Building"></a>Building</h2><h3 id="Releases-1"><a href="#Releases-1" class="headerlink" title="Releases"></a>Releases</h3><p>I have now setup Github Releases through Actions, if you want to skip the headache of building the program, feel free to head over to <a target="_blank" rel="noopener" href="https://github.com/trintlermint/certamen/releases/latest"><strong>releases</strong></a>.</p>
-<h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>Certamen uses these predominant three libraries:</p>
+<h2 id="Building"><a href="#Building" class="headerlink" title="Building"></a>Building</h2><h3 id="Releases"><a href="#Releases" class="headerlink" title="Releases"></a>Releases</h3><p>I have now setup Github Releases through Actions, if you want to skip the headache of building the program, feel free to head over to <a target="_blank" rel="noopener" href="https://github.com/trintlermint/certamen/releases/latest"><strong>releases</strong></a>.</p>
 	
 	</div>
   <a type="button" href="/2026/03/28/Certamen-the-TUI-Quizzing-App/#more" class="btn btn-default more">Read More</a>
@@ -217,50 +188,6 @@
 	
 	</div>
   <a type="button" href="/2026/03/24/JOSS-Reviewed-solve-nivp/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2026/03/24/Quizzer-CLI-Tool-for-quizzes/" title="This software is open (in terms of freedom), available for use &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;on Github&lt;/a&gt; REMARK, this software has undergone major improvement, find it as certamen on github.com/trintlermint.">Quizzer: CLI Tool for quizzes</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2026-03-24  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="Quizzer-…"><a href="#Quizzer-…" class="headerlink" title="Quizzer …"></a>Quizzer …</h1><p>… is a CLI App for <strong>Quizzes</strong>. It gives you the ability to create, edit and share your own quizzes and practice with them using .YAML.</p>
-<table>
-<thead>
-<tr>
-<th>Source code</th>
-<th>Platform</th>
-<th>Dependency</th>
-<th>License</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/17"><img src="https://img.shields.io/badge/C%2B%2B-17-blue.svg" alt="C++17"></a></td>
-<td><a target="_blank" rel="noopener" href="https://www.linux.org/"><img src="https://img.shields.io/badge/Platform-Linux-lightgrey.svg" alt="Platform: Linux"></a></td>
-<td><a target="_blank" rel="noopener" href="https://github.com/jbeder/yaml-cpp"><img src="https://img.shields.io/badge/yaml--cpp-0.7.0-orange.svg" alt="Dependency: yaml-cpp"></a></td>
-<td><a target="_blank" rel="noopener" href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></td>
-</tr>
-</tbody></table>
-<p>Charlie Brown aces his tests with this!<br><img src="/2026/03/24/Quizzer-CLI-Tool-for-quizzes/charlie-brown.png" alt="Charlie brown actively using Quizzer pre-dev."></p>
-	
-	</div>
-  <a type="button" href="/2026/03/24/Quizzer-CLI-Tool-for-quizzes/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -437,10 +364,6 @@
       </li>
     
       <li>
-        <a href="/2026/03/24/Quizzer-CLI-Tool-for-quizzes/"  title="This software is open (in terms of freedom), available for use &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;on Github&lt;/a&gt; REMARK, this software has undergone major improvement, find it as certamen on github.com/trintlermint." ><i class="fa fa-file-o"></i>Quizzer: CLI Tool for quizzes</a>
-      </li>
-    
-      <li>
         <a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/"  title="ABSTRACT; Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;" ><i class="fa fa-file-o"></i>2025/2026 ICPC Regional Per...</a>
       </li>
     
@@ -457,8 +380,6 @@
 		
 			<li><a href="/categories/Review/">Review<span>1</span></a></li>
 		
-			<li><a href="/categories/Software/">Software<span>1</span></a></li>
-		
 		</ul>
 	</div>
 
@@ -468,29 +389,25 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/oss-certamen-project/">oss, certamen, project<span>1</span></a></li>
-		
-			<li><a href="/tags/cpp/">cpp<span>1</span></a></li>
-		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
-		
-			<li><a href="/tags/review/">review<span>1</span></a></li>
+			<li><a href="/tags/joss/">joss<span>1</span></a></li>
 		
 			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
 		
-			<li><a href="/tags/project/">project<span>1</span></a></li>
-		
-			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
-		
-			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
-		
-			<li><a href="/tags/oss/">oss<span>2</span></a></li>
+			<li><a href="/tags/oss/">oss<span>1</span></a></li>
 		
 			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
 		
+			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
+		
+			<li><a href="/tags/review/">review<span>1</span></a></li>
+		
+			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
+		
 			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
 		
-			<li><a href="/tags/joss/">joss<span>1</span></a></li>
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+		
+			<li><a href="/tags/oss-certamen-project/">oss, certamen, project<span>1</span></a></li>
 		
 		 
 		</ul>
