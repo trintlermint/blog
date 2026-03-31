@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-1C9I3Au7T8f4fvDr1OQN4.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+
+
+  <title>trintler&#39;s weblog</title>
+  <meta name="author" content="Niladri Adhikary">
+  
+  <meta name="description" content="weblog of trintlermint">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="trintler&#39;s weblog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="trintler&#39;s weblog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">trintler&#39;s weblog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> </h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>[h]Ever wanted to make your own aquarium, online?[&#x2F;h]</p>
+<p>I enjoy using textmode.js, an online js framework for rendering “Textmode” (essentially, textual characters and art). I wanted to show everyone the type of fun and mesmerising stuff that can be done with it!</p>
+<p>I will be walking through a bit of the explanation, thinking and creation process that went behind [b]my current website aquarium[&#x2F;b]: [url]<a href="https://trintler.me[/url]">https://trintler.me[/url]</a> (it’s not very good on mobile, currently.) (I will make a blog about it going into more detail later). This place is where I render multiple (sea) creatures, swimming around against a mix of sine and cosine curves (see: [url&#x3D;<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lissajous_curve]Lissajous">https://en.wikipedia.org/wiki/Lissajous_curve]Lissajous</a> Curve[&#x2F;url].) on a canvas built using textmode.umd.js.</p>
+<p>Initially, what I wanted to make was the standard apple fetching snake, you know, you make an apple somewhere generated on a grid, and make the snake go fetch it, which was fun, but something broke. It didnt look good, felt kinda boring, and then I thought I want the snake to move quicker, have some [em]speeeeed[&#x2F;em]. Well, I got a speedy snake in the end, but it felt too static.</p>
+<p>I dont know if you ever feel it at times, it feels rather sad when you take a creature which is living, put it on display, and it follows monotony. Okay I said too much there, but you get my point I guess. I wanted it to be more fun, so I thought it would be a “water snake!!!!!” so what I did was I generated some waves from the [b]head[&#x2F;b] of the cute little snake. This was great, until I realised, the snake looks kinda funky, it’s too long, and I want to have more snakes, since just 1 would be a bit lonely. However, if you think about it, doing all that the hardcoded way is boring, not fun, nor exciting!</p>
+<p>Then I found Lissajous curves as mentioned before, in my University lecture the next day (I study Signals and Transforms in Applied Mathematics). Anyways, the cool part about this curve is, for any given <code>n</code> every generated path (signal) will be unique, and they wont follow the same path. This was perfect!! Since now, I could add as MANY snakes as I wanted. I was so happy. After changing the signals a bit by amplitude, intensity, etc. I could also add more creatures! and thus the other creatures were born.</p>
+<p>[img&#x3D;Whales Swimming][&#x2F;img]<br>Currently, I have Whales, Fishes and Turtles swimming around online (the fishes can sometime overlap and one goes below the other through dissolution!), and I think that fully cured my depression. Be that an overestimate as it may, I love that I now have fishes swimming around online, swimming around in ASCII water waves which are experiencing my trivial physics, which an LLM has (somewhat) of a harder time catching through OCR! I believe a fundamental thing I wanted in my main webpage was that LLMs will have a (bit) of a tougher time than usual to scrape off my stuff (though it probably still does with my static JS, CSS, … however, believing nice things make me feel good.)</p>
+<p>[em]OK[&#x2F;em], I talked enough I think, [b]why dont you try it yourself?[&#x2F;b] There’s a CodePen instance: <a target="_blank" rel="noopener" href="https://codesandbox.io/p/sandbox/vc95vn">https://codesandbox.io/p/sandbox/vc95vn</a>. You can directly use to edit your whale! You can make it a horse, seaweed, whatever man go crazy! I just want you to have fun; if you make something feel free to share it with everyone! I want to see less vibe coded-slop out there!</p>
+<p>I am currently fixing a few things (like the turtle getting [em]wayy[&#x2F;em] too compressed, however I still love him, no matter how squished he gets.)</p>
+<p>[quote]Currently, textmode.js (and relevant ecosystem) is hosted on [url&#x3D;<a target="_blank" rel="noopener" href="https://github.com/humanbydefinition/textmode.js]GitHub[/url]">https://github.com/humanbydefinition/textmode.js]GitHub[/url]</a> along with a live-coding env at [url]synth.textmode.art[&#x2F;url] with documentation site: [b][url]<a href="https://code.textmode.art[/url]">https://code.textmode.art[/url]</a> made by [url&#x3D;<a target="_blank" rel="noopener" href="https://github.com/humanbydefinition]@humanbydefinition[/url][/b].[/quote]">https://github.com/humanbydefinition]@humanbydefinition[/url][/b].[/quote]</a></p>
+<p>Along with this, I wrote my [url&#x3D;blog.trintler.me]blog[&#x2F;url], using [url]textmode.art[&#x2F;url]’s textmode tools! try them out!</p>
+<p>[color&#x3D;#FF0000]The Textmode community isn’t particularly big, and thus this niche repository ecosystem is rather unseen, however seeing that the maintainer is hosting so many different sites and maintaining these repos out of their own volition, I thought to show some works I am proud of, made using this very library. I hope seeing as we are all big OSS nerds here, textmode.js can receive some support![&#x2F;color]</p>
+
+	  <div class="article-footer-copyright">
+    This blog is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)</a>.
+</div>
+
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+		<section id="comments" class="comments">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script> 
+<div id="gitalk-container"></div>
+<script>
+var gitalkConfig = {"enable":true,"clientID":"Ov23lipca9qEBRbrfaIM","clientSecret":"d50a5a558037f2ef20eacba3a9986e343d76e9ee","repo":"blog","owner":"trintlermint","admin":["trintlermint"],"id":"location.pathname","distractionFreeMode":true}
+gitalkConfig.id=md5(location.pathname)
+var gitalk = new Gitalk(gitalkConfig)
+  
+  gitalk.render('gitalk-container')
+
+  </script>
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2026-03-31 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2026 Niladri Adhikary's Blog
+  
+    | Content Licensed <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY 4.0</a>. 
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+</body>
+   </html>
