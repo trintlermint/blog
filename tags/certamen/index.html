@@ -22,11 +22,27 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="http://blog.trintler.me/tags/certamen/" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="http://blog.trintler.me/tags/certamen/"/>
   
   <meta property="og:site_name" content="trintler&#39;s weblog"/>
-
+  
+  <meta property="og:description" content="weblog of trintlermint"/>
+  
   
     <meta property="og:image" content=""/>
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  
+  
+  <meta name="twitter:description" content="weblog of trintlermint"/>
+  
   
 
   
@@ -51,9 +67,83 @@
   
 
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start -->
+<style>
+  /* Black overlay covers canvas during textmode.js loading phase */
+  body {
+    background: #000 !important;
+  }
+  #whale-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  #whale-cover.fade-out {
+    opacity: 0;
+  }
+  /* Page content sits above the cover, cover sits above the canvas */
+  #container, #wrap, .container, .container-narrow, footer {
+    position: relative;
+    z-index: 1;
+  }
+  /* Navbar must keep position:fixed from Bootstrap, just raise z-index */
+  .navbar-fixed-top {
+    z-index: 1030 !important;
+  }
+  .content {
+    background: transparent !important;
+  }
+  .container {
+    background: transparent !important;
+  }
+  .container-narrow {
+    background: transparent !important;
+  }
+  .post, .page {
+    background: transparent !important;
+  }
+  .mypage {
+    background: transparent !important;
+  }
+  #post_meta {
+    background: transparent !important;
+  }
+  #sidebar {
+    background: transparent !important;
+  }
+  .meta-widget {
+    background: transparent !important;
+  }
+  .widget {
+    background: transparent !important;
+  }
+  footer {
+    background: transparent !important;
+  }
+  .entry {
+    background: transparent !important;
+  }
+  /* Keep these opaque for readability */
+  .navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+  }
+  /* SAM reader keeps its own background */
+  .sam-reader-widget {
+    background: #000 !important;
+  }
+  .toc {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+</style>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
- <body>  
+ <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -293,27 +383,27 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/oss/">oss<span>2</span></a></li>
+			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
 		
 			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
 		
+			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
+		
 			<li><a href="/tags/joss/">joss<span>1</span></a></li>
+		
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+		
+			<li><a href="/tags/project/">project<span>1</span></a></li>
+		
+			<li><a href="/tags/oss/">oss<span>2</span></a></li>
 		
 			<li><a href="/tags/review/">review<span>1</span></a></li>
 		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
 		
 			<li><a href="/tags/certamen/">certamen<span>1</span></a></li>
 		
 			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
-		
-			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
-		
-			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
-		
-			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
-		
-			<li><a href="/tags/project/">project<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -373,5 +463,6 @@
    </script>
 
 
-</body>
+<!-- hexo injector body_end start --><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+<script src="/js/whale-bg.js"></script><!-- hexo injector body_end end --></body>
    </html>

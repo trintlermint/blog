@@ -22,11 +22,27 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="http://blog.trintler.me/2026/03/28/Certamen-the-TUI-Quizzing-App/" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="http://blog.trintler.me/2026/03/28/Certamen-the-TUI-Quizzing-App/"/>
   <meta property="og:title" content="Certamen: the TUI Quizzing App"/>
   <meta property="og:site_name" content="trintler&#39;s weblog"/>
-
+  
+  <meta property="og:description" content="This software is open (in terms of freedom), available for use on Github"/>
+  
   
     <meta property="og:image" content=""/>
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Certamen: the TUI Quizzing App"/>
+  
+  <meta name="twitter:description" content="This software is open (in terms of freedom), available for use on Github"/>
+  
   
 
   
@@ -51,9 +67,83 @@
   
 
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start -->
+<style>
+  /* Black overlay covers canvas during textmode.js loading phase */
+  body {
+    background: #000 !important;
+  }
+  #whale-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  #whale-cover.fade-out {
+    opacity: 0;
+  }
+  /* Page content sits above the cover, cover sits above the canvas */
+  #container, #wrap, .container, .container-narrow, footer {
+    position: relative;
+    z-index: 1;
+  }
+  /* Navbar must keep position:fixed from Bootstrap, just raise z-index */
+  .navbar-fixed-top {
+    z-index: 1030 !important;
+  }
+  .content {
+    background: transparent !important;
+  }
+  .container {
+    background: transparent !important;
+  }
+  .container-narrow {
+    background: transparent !important;
+  }
+  .post, .page {
+    background: transparent !important;
+  }
+  .mypage {
+    background: transparent !important;
+  }
+  #post_meta {
+    background: transparent !important;
+  }
+  #sidebar {
+    background: transparent !important;
+  }
+  .meta-widget {
+    background: transparent !important;
+  }
+  .widget {
+    background: transparent !important;
+  }
+  footer {
+    background: transparent !important;
+  }
+  .entry {
+    background: transparent !important;
+  }
+  /* Keep these opaque for readability */
+  .navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+  }
+  /* SAM reader keeps its own background */
+  .sam-reader-widget {
+    background: #000 !important;
+  }
+  .toc {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+</style>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
- <body>  
+ <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -132,16 +222,14 @@
 
 	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div align="center">
 
-<h3 id="A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer"><a href="#A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer" class="headerlink" title="A Terminal User Interface Quiz Game Engine written entirely in C++. (the sequel of Quizzer)"></a>A <em>Terminal User Interface</em> <strong>Quiz Game Engine</strong> written entirely in C++. (the sequel of Quizzer)</h3><p>  <img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/serve-3.png" alt="Demo"></p>
+<h3 id="A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer"><a href="#A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer" class="headerlink" title="A Terminal User Interface Quiz Game Engine written entirely in C++. (the sequel of Quizzer)"></a>A <em>Terminal User Interface</em> <strong>Quiz Game Engine</strong> written entirely in C++. (the sequel of Quizzer)</h3><p><img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/serve-3.png" alt="Demo"></p>
 <h2 id="Author-Quizzes-and-seamlessly-“test”-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play"><a href="#Author-Quizzes-and-seamlessly-“test”-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play" class="headerlink" title="Author Quizzes and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!"></a>Author <em>Quizzes</em> and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!</h2><blockquote>
-<p>This way, you get to make fun of their… incredibly (lacking) <em>haskell</em> knowledge for example!<br>  One might ask: I’m passing everything, why do I need this?</p>
+<p>This way, you get to make fun of their… incredibly (lacking) <em>haskell</em> knowledge for example!<br>One might ask: I’m passing everything, why do I need this?</p>
 </blockquote>
-<h3 id="Charlie-Brown-aces-his-tests-with-this"><a href="#Charlie-Brown-aces-his-tests-with-this" class="headerlink" title="Charlie Brown aces his tests with this!"></a>Charlie Brown aces his tests with this!</h3><p>  <img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/peanuts-quiz.png" alt="Charlie brown actively using Certamen pre-dev."><br>  <br /></p>
+<h3 id="Charlie-Brown-aces-his-tests-with-this"><a href="#Charlie-Brown-aces-his-tests-with-this" class="headerlink" title="Charlie Brown aces his tests with this!"></a>Charlie Brown aces his tests with this!</h3><p><img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/peanuts-quiz.png" alt="Charlie brown actively using Certamen pre-dev."><br><br /></p>
 </div>
 
-<span id="more"></span>
-<hr>
-<h2 id="Building"><a href="#Building" class="headerlink" title="Building"></a>Building</h2><h3 id="Releases"><a href="#Releases" class="headerlink" title="Releases"></a>Releases</h3><p>I have now setup Github Releases through Actions, if you want to skip the headache of building the program, feel free to head over to <a target="_blank" rel="noopener" href="https://github.com/trintlermint/certamen/releases/latest"><strong>releases</strong></a>.</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><span id="more"></span></h2><h2 id="Building"><a href="#Building" class="headerlink" title="Building"></a>Building</h2><h3 id="Releases"><a href="#Releases" class="headerlink" title="Releases"></a>Releases</h3><p>I have now setup Github Releases through Actions, if you want to skip the headache of building the program, feel free to head over to <a target="_blank" rel="noopener" href="https://github.com/trintlermint/certamen/releases/latest"><strong>releases</strong></a>.</p>
 <h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>Certamen uses these predominant three libraries:</p>
 <table>
 <thead>
@@ -189,6 +277,7 @@
 <p>Without arguments it looks for <code>./quiz.yaml</code> in the current working directory being run from.</p>
 <h3 id="Manual-compilation-CLI"><a href="#Manual-compilation-CLI" class="headerlink" title="Manual compilation (CLI)"></a>Manual compilation (CLI)</h3><p>If yaml-cpp are installed system-wide and you want to skip CMake entirely, you can compile the CLI, the CLI is the previously, originally known “quizzer” app; faithfully renamed.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -std=c++17 -Wall -Wextra -Wpedantic -O2 main.cpp -lyaml-cpp -o certamen</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>[!NOTE]</p>
 <p>This builds a local-only binary without the TUI or SSH server. Use the CMake build for the included features.</p>
@@ -312,7 +401,7 @@ The file must be a YAML sequence of maps. Required keys per entry: <code>questio
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/ArthurSonzogni/FTXUI">FTXUI</a> by Arthur Sonzogni, terminal UI framework</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/jbeder/yaml-cpp">yaml-cpp</a> by Jesse Beder, YAML parser</li>
-<li><a target="_blank" rel="noopener" href="https://www.libssh.org/">libssh</a>,  SSH protocol implementation (THANK YOU DOCUMENTATION)</li>
+<li><a target="_blank" rel="noopener" href="https://www.libssh.org/">libssh</a>, SSH protocol implementation (THANK YOU DOCUMENTATION)</li>
 </ul>
 <p>A big thank you to all frameworks used, and my friends for emotional support and motivation, specifically <a target="_blank" rel="noopener" href="https://github.com/valyntyler">@valyntyler</a></p>
 <p>The name <strong>Certamen</strong> is Latin for “contest” so I thought “yeah! this works!” thank you <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Certamen">Wikipedia</a>.</p>
@@ -424,13 +513,567 @@ var gitalk = new Gitalk(gitalkConfig)
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer"><span class="toc-article-text">A Terminal User Interface Quiz Game Engine written entirely in C++. (the sequel of Quizzer)</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Author-Quizzes-and-seamlessly-%E2%80%9Ctest%E2%80%9D-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play"><span class="toc-article-text">Author Quizzes and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Charlie-Brown-aces-his-tests-with-this"><span class="toc-article-text">Charlie Brown aces his tests with this!</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Building"><span class="toc-article-text">Building</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Releases"><span class="toc-article-text">Releases</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Dependencies"><span class="toc-article-text">Dependencies</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#CMake"><span class="toc-article-text">CMake</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Manual-compilation-CLI"><span class="toc-article-text">Manual compilation (CLI)</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#macOS-and-Windows"><span class="toc-article-text">macOS and Windows</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Usage"><span class="toc-article-text">Usage</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Offline-User-Mode"><span class="toc-article-text">Offline User Mode</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#SSH-server-mode"><span class="toc-article-text">SSH server mode</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Quiz-format"><span class="toc-article-text">Quiz format</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Troubleshooting"><span class="toc-article-text">Troubleshooting</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Credits"><span class="toc-article-text">Credits</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#License"><span class="toc-article-text">License</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Development-Process"><span class="toc-article-text">Development Process</span></a></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer"><span class="toc-article-text">A Terminal User Interface Quiz Game Engine written entirely in C++. (the sequel of Quizzer)</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Author-Quizzes-and-seamlessly-%E2%80%9Ctest%E2%80%9D-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play"><span class="toc-article-text">Author Quizzes and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Charlie-Brown-aces-his-tests-with-this"><span class="toc-article-text">Charlie Brown aces his tests with this!</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link"><span class="toc-article-text"></span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Building"><span class="toc-article-text">Building</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Releases"><span class="toc-article-text">Releases</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Dependencies"><span class="toc-article-text">Dependencies</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#CMake"><span class="toc-article-text">CMake</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Manual-compilation-CLI"><span class="toc-article-text">Manual compilation (CLI)</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#macOS-and-Windows"><span class="toc-article-text">macOS and Windows</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Usage"><span class="toc-article-text">Usage</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Offline-User-Mode"><span class="toc-article-text">Offline User Mode</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#SSH-server-mode"><span class="toc-article-text">SSH server mode</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Quiz-format"><span class="toc-article-text">Quiz format</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Troubleshooting"><span class="toc-article-text">Troubleshooting</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Credits"><span class="toc-article-text">Credits</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#License"><span class="toc-article-text">License</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Development-Process"><span class="toc-article-text">Development Process</span></a></li></ol>
 		</div>
 	
 	</div>
+
+	<!-- sam reader (below toc) -->
 	
+<div class="meta-widget sam-reader-widget" id="sam-reader" data-post-title="Certamen: the TUI Quizzing App">
+  <style>
+    .sam-reader-widget {
+      margin: 10px 0;
+      padding: 10px 8px;
+      background: #000;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+      font-size: .9em;
+    }
+    .sam-reader-widget .sam-title {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-title i {
+      margin-right: 4px;
+    }
+    .sam-reader-widget .sam-controls {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .sam-reader-widget .sam-controls button {
+      flex: 1;
+      padding: 4px 0;
+      font-size: 11px;
+      font-family: inherit;
+      background: #352b42;
+      color: #c08179;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sam-reader-widget .sam-controls button:hover:not(:disabled) {
+      background: #924a41;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-controls button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .sam-reader-widget .sam-controls button.active {
+      background: #493aa5;
+      border-color: #867ade;
+      color: #fff;
+    }
+    .sam-reader-widget .sam-progress-wrap {
+      background: #252525;
+      border-radius: 3px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      border: 1px solid #3a3a3a;
+    }
+    .sam-reader-widget .sam-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #867ade;
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    .sam-reader-widget .sam-status {
+      font-size: 10px;
+      color: #bbb;
+      text-align: center;
+    }
+    .sam-reader-widget .sam-config {
+      margin-top: 8px;
+      border-top: 1px dashed #924a41;
+      padding-top: 8px;
+    }
+    .sam-reader-widget .sam-config summary {
+      font-size: 11px;
+      color: #867ade;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .sam-reader-widget .sam-config label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 4px;
+    }
+    .sam-reader-widget .sam-config input[type=range] {
+      width: 80px;
+      accent-color: #867ade;
+      background: transparent;
+    }
+  </style>
+
+  <div class="sam-title"><i class="fa fa-volume-up"></i> SAM Reader</div>
+  <div class="sam-controls">
+    <button id="sam-play" title="Play" disabled>&#9654; Play</button>
+    <button id="sam-pause" title="Pause" disabled>&#10074;&#10074;</button>
+    <button id="sam-stop" title="Stop" disabled>&#9632;</button>
+  </div>
+  <div class="sam-progress-wrap">
+    <div class="sam-progress-bar" id="sam-progress"></div>
+  </div>
+  <div class="sam-status" id="sam-status">Loading SAM...</div>
+
+  <div class="sam-config">
+    <details>
+      <summary>Voice settings</summary>
+      <label>Speed <input type="range" id="sam-speed" min="20" max="200" value="72"></label>
+      <label>Pitch <input type="range" id="sam-pitch" min="0" max="255" value="64"></label>
+      <label>Mouth <input type="range" id="sam-mouth" min="0" max="255" value="128"></label>
+      <label>Throat <input type="range" id="sam-throat" min="0" max="255" value="128"></label>
+    </details>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Pause is represented as a null entry in the chunks array.
+  // playChunk checks for null and inserts silence.
+  var PAUSE_MS = 400;
+
+  var script = document.createElement('script');
+  script.src = '/js/sam.js';
+  script.async = true;
+  script.onload = function() { initSamReader(); };
+  script.onerror = function() {
+    var s = document.getElementById('sam-status');
+    if (s) s.textContent = 'Failed to load SAM';
+  };
+  document.head.appendChild(script);
+
+  function initSamReader() {
+    if (typeof SamJs === 'undefined') return;
+
+    var btnPlay = document.getElementById('sam-play');
+    var btnPause = document.getElementById('sam-pause');
+    var btnStop = document.getElementById('sam-stop');
+    var progressBar = document.getElementById('sam-progress');
+    var statusEl = document.getElementById('sam-status');
+    var speedInput = document.getElementById('sam-speed');
+    var pitchInput = document.getElementById('sam-pitch');
+    var mouthInput = document.getElementById('sam-mouth');
+    var throatInput = document.getElementById('sam-throat');
+    var widget = document.getElementById('sam-reader');
+
+    btnPlay.disabled = false;
+    statusEl.textContent = 'Ready';
+
+    var chunks = [];    // array of strings (speakable) or null (pause)
+    var currentChunk = 0;
+    var playing = false;
+    var paused = false;
+    var stopped = false;
+    var audioCtx = null;
+    var currentSource = null;
+    var pauseTimer = null;
+
+    // ---- Text cleaning for SAM ----
+    function cleanForSam(text) {
+      // Remove URLs
+      text = text.replace(/https?:\/\/[^\s]+/g, '');
+      // Remove protocol-like patterns (van://-, ---://-, 000://0, etc.)
+      text = text.replace(/[a-zA-Z0-9_-]*:\/\/[^\s]*/g, '');
+      // Remove email addresses
+      text = text.replace(/[\w.-]+@[\w.-]+/g, '');
+      // Remove code-like patterns: arrow functions, braces, brackets
+      text = text.replace(/\([^)]*=>\s*\{[^}]*\}[^)]*\)/g, '');
+
+      // Comparison operators (BEFORE stripping angle brackets)
+      text = text.replace(/>=/g, ' greater than or equal to ');
+      text = text.replace(/<=/g, ' less than or equal to ');
+      text = text.replace(/!=/g, ' not equal to ');
+      text = text.replace(/===/g, ' strictly equals ');
+      text = text.replace(/==/g, ' equals ');
+      text = text.replace(/(?<![<>])>(?![<>])/g, ' greater than ');
+      text = text.replace(/(?<![<>])<(?![<>])/g, ' less than ');
+
+      // Slash handling: " / " (spaced) becomes OR, "/" becomes slash
+      text = text.replace(/ \/ /g, ' OR ');
+      text = text.replace(/\//g, ' slash ');
+
+      text = text.replace(/[{}()\[\]<>]/g, ' ');
+      // Remove markdown-like artifacts
+      text = text.replace(/[*_~#]+/g, '');
+      text = text.replace(new RegExp(String.fromCharCode(96) + '+', 'g'), '');
+      // Remove footnote markers like [^1]
+      text = text.replace(/\[\^\w+\]/g, '');
+
+      // Common abbreviations
+      text = text.replace(/\bNL\b/g, 'Netherlands');
+      text = text.replace(/\bKIT\b/g, 'K I T');
+      text = text.replace(/\bTUD\b/g, 'T U D');
+      text = text.replace(/\bICPC\b/g, 'I C P C');
+      text = text.replace(/\bTAPC\b/g, 'T A P C');
+      text = text.replace(/\bBAPC\b/g, 'B A P C');
+      text = text.replace(/\bNWERC\b/g, 'N W E R C');
+      text = text.replace(/\bTCR\b/g, 'T C R');
+      text = text.replace(/\bOSS\b/g, 'O S S');
+      text = text.replace(/\bTUI\b/g, 'T U I');
+      text = text.replace(/\bSSH\b/g, 'S S H');
+      text = text.replace(/\bJOSS\b/g, 'J O S S');
+      text = text.replace(/\bCLI\b/g, 'C L I');
+      text = text.replace(/\bAPI\b/g, 'A P I');
+      text = text.replace(/\bCSS\b/g, 'C S S');
+      text = text.replace(/\bHTML\b/g, 'H T M L');
+      text = text.replace(/\bLaTeX\b/gi, 'lay-tech');
+      text = text.replace(/\bQWERTY\b/g, 'KWERTY');
+      text = text.replace(/\bQWERTZ\b/g, 'KWERTZ');
+      text = text.replace(/\bCMake\b/gi, 'see-make');
+      text = text.replace(/\blibssh\b/g, 'lib S S H');
+      text = text.replace(/\byaml-cpp\b/gi, 'yaml cpp');
+      text = text.replace(/\bFTXUI\b/g, 'F T X U I');
+      text = text.replace(/\bca\./g, 'circa ');
+      text = text.replace(/\be\.g\./g, 'for example');
+      text = text.replace(/\bi\.e\./g, 'that is');
+
+      // Remove special chars SAM can't handle
+      text = text.replace(/[\x80-\xFF]/g, ' ');
+      text = text.replace(/[\u0100-\uFFFF]/g, ' ');
+      text = text.replace(/[\xA0-\xFF]/g, ' ');
+      text = text.replace(/[€£¥©®™°±×÷=+|\\^~&]/g, ' ');
+      // Remove remaining non-printable-ASCII
+      text = text.replace(/[^\x20-\x7E]/g, ' ');
+
+      // Collapse spaces
+      text = text.replace(/\s+/g, ' ');
+      return text.trim();
+    }
+
+    // ---- Table reading ----
+    function readTable(table) {
+      var headers = [];
+      var ths = table.querySelectorAll('thead th, thead td, tr:first-child th');
+      for (var i = 0; i < ths.length; i++) {
+        headers.push(ths[i].textContent.trim());
+      }
+      if (headers.length === 0) {
+        var firstRow = table.querySelector('tr');
+        if (firstRow) {
+          var cells = firstRow.querySelectorAll('th, td');
+          for (var j = 0; j < cells.length; j++) {
+            headers.push(cells[j].textContent.trim());
+          }
+        }
+      }
+      var rows = table.querySelectorAll('tbody tr, tr');
+      var text = '';
+      for (var r = 0; r < rows.length; r++) {
+        var cells = rows[r].querySelectorAll('td');
+        if (cells.length === 0) continue; // skip header row
+        var rowParts = [];
+        for (var c = 0; c < cells.length; c++) {
+          var label = (c < headers.length) ? headers[c] : '';
+          var val = cells[c].textContent.trim();
+          if (label && val) {
+            rowParts.push(label + ' ' + val);
+          } else if (val) {
+            rowParts.push(val);
+          }
+        }
+        if (rowParts.length > 0) {
+          text += rowParts.join(', ') + '. ';
+        }
+      }
+      return text;
+    }
+
+    // ---- Text extraction ----
+    // Returns an array of segments: strings (text) and nulls (pauses).
+    // cleanForSam is applied only to text segments, never to pause markers.
+    function getPostSegments() {
+      var segments = []; // array of string | null
+
+      // Start with the post title
+      var postTitle = widget.getAttribute('data-post-title') || '';
+      if (postTitle) {
+        segments.push(cleanForSam(postTitle) + '.');
+        segments.push(null); // pause after title
+      }
+
+      var el = document.querySelector('.mypage');
+      if (!el) return segments;
+      var clone = el.cloneNode(true);
+
+      // Remove non-readable elements (but NOT tables)
+      var remove = clone.querySelectorAll(
+        'pre, code, script, style, .highlight, img, svg, ' +
+        '.sam-reader-widget, .alert, figure, .article-footer-copyright, ' +
+        'noscript, iframe, video, audio, canvas, .gist'
+      );
+      for (var i = 0; i < remove.length; i++) {
+        remove[i].parentNode.removeChild(remove[i]);
+      }
+
+      function walk(node) {
+        if (node.nodeType === 3) { // text node
+          var t = node.textContent;
+          if (t && t.trim()) {
+            segments.push(cleanForSam(t));
+          }
+          return;
+        }
+        if (node.nodeType !== 1) return;
+        var tag = node.tagName;
+
+        // Tables: read row-wise with headers
+        if (tag === 'TABLE') {
+          var tableText = readTable(node);
+          if (tableText) segments.push(cleanForSam(tableText));
+          return;
+        }
+
+        // Headers: pause, speak heading, pause
+        if (/^H[1-6]$/.test(tag)) {
+          segments.push(null); // pause before heading
+          var hText = node.textContent.trim();
+          if (hText) segments.push(cleanForSam(hText) + '.');
+          segments.push(null); // pause after heading
+          return;
+        }
+
+        // Recurse into children
+        var children = node.childNodes;
+        for (var c = 0; c < children.length; c++) {
+          walk(children[c]);
+        }
+
+        // Pause after block elements
+        if (/^(P|DIV|BLOCKQUOTE|LI|SECTION|ARTICLE|HR)$/.test(tag)) {
+          segments.push(null);
+        }
+      }
+
+      walk(clone);
+      return segments;
+    }
+
+    // ---- Chunking ----
+    // Converts segments into final chunks array: strings to speak, nulls for pauses.
+    function buildChunks(segments, maxLen) {
+      var result = [];
+      for (var s = 0; s < segments.length; s++) {
+        if (segments[s] === null) {
+          // Only add pause if last item isn't already a pause
+          if (result.length === 0 || result[result.length - 1] !== null) {
+            result.push(null);
+          }
+          continue;
+        }
+        var text = segments[s];
+        if (!text) continue;
+
+        // Split on sentence boundaries
+        var parts = text.split(/(?<=[.!?])\s+/);
+        var current = '';
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i].trim();
+          if (!p) continue;
+          if (current.length + p.length + 1 > maxLen && current.length > 0) {
+            result.push(current.trim());
+            current = p;
+          } else {
+            current += (current ? ' ' : '') + p;
+          }
+        }
+        if (current.trim()) result.push(current.trim());
+      }
+
+      // Split any remaining long chunks on commas
+      var final = [];
+      for (var j = 0; j < result.length; j++) {
+        if (result[j] === null) {
+          if (final.length === 0 || final[final.length - 1] !== null) {
+            final.push(null);
+          }
+          continue;
+        }
+        if (result[j].length <= maxLen) {
+          final.push(result[j]);
+        } else {
+          var subparts = result[j].split(/,\s*/);
+          var sub = '';
+          for (var k = 0; k < subparts.length; k++) {
+            if (sub.length + subparts[k].length + 2 > maxLen && sub.length > 0) {
+              final.push(sub.trim());
+              sub = subparts[k];
+            } else {
+              sub += (sub ? ', ' : '') + subparts[k];
+            }
+          }
+          if (sub.trim()) final.push(sub.trim());
+        }
+      }
+
+      // Strip leading/trailing pauses
+      while (final.length > 0 && final[0] === null) final.shift();
+      while (final.length > 0 && final[final.length - 1] === null) final.pop();
+
+      return final;
+    }
+
+    // ---- Progress (only count speakable chunks) ----
+    function countSpeakable() {
+      var n = 0;
+      for (var i = 0; i < chunks.length; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+    function countSpoken() {
+      var n = 0;
+      for (var i = 0; i < currentChunk; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+
+    function updateProgress() {
+      var total = countSpeakable();
+      var done = countSpoken();
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      statusEl.textContent = done + ' / ' + total;
+    }
+
+    function setButtons(state) {
+      btnPlay.disabled = (state === 'playing');
+      btnPause.disabled = (state !== 'playing');
+      btnStop.disabled = (state === 'ready');
+      btnPlay.classList.toggle('active', state === 'playing');
+      btnPause.classList.toggle('active', state === 'paused');
+    }
+
+    function stopAudio() {
+      if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; }
+      if (currentSource) {
+        try { currentSource.stop(); } catch(e) {}
+        currentSource = null;
+      }
+    }
+
+    function playChunk(index) {
+      if (stopped || index >= chunks.length) {
+        progressBar.style.width = stopped ? '0%' : '100%';
+        statusEl.textContent = stopped ? 'Stopped' : 'Done!';
+        setButtons('ready');
+        playing = false;
+        paused = false;
+        stopped = false;
+        currentChunk = 0;
+        return;
+      }
+      if (paused) return;
+
+      currentChunk = index;
+      updateProgress();
+
+      // null = silent pause
+      if (chunks[index] === null) {
+        pauseTimer = setTimeout(function() {
+          pauseTimer = null;
+          if (!stopped && !paused) playChunk(index + 1);
+        }, PAUSE_MS);
+        return;
+      }
+
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      var sam = new SamJs({
+        speed: parseInt(speedInput.value, 10),
+        pitch: parseInt(pitchInput.value, 10),
+        mouth: parseInt(mouthInput.value, 10),
+        throat: parseInt(throatInput.value, 10)
+      });
+
+      var buf32;
+      try {
+        buf32 = sam.buf32(chunks[index]);
+      } catch(e) {
+        playChunk(index + 1);
+        return;
+      }
+      if (!buf32 || buf32.length === 0) {
+        playChunk(index + 1);
+        return;
+      }
+
+      var audioBuffer = audioCtx.createBuffer(1, buf32.length, 22050);
+      audioBuffer.getChannelData(0).set(buf32);
+
+      var source = audioCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioCtx.destination);
+      currentSource = source;
+
+      source.onended = function() {
+        currentSource = null;
+        if (!stopped && !paused) {
+          playChunk(index + 1);
+        }
+      };
+      source.start();
+    }
+
+    btnPlay.addEventListener('click', function() {
+      if (paused) {
+        paused = false;
+        setButtons('playing');
+        playChunk(currentChunk);
+        return;
+      }
+      var segments = getPostSegments();
+      chunks = buildChunks(segments, 200);
+      if (countSpeakable() === 0) {
+        statusEl.textContent = 'No text found';
+        return;
+      }
+      stopped = false;
+      playing = true;
+      paused = false;
+      currentChunk = 0;
+      setButtons('playing');
+      playChunk(0);
+    });
+
+    btnPause.addEventListener('click', function() {
+      paused = true;
+      stopAudio();
+      setButtons('paused');
+      var total = countSpeakable();
+      var done = countSpoken();
+      statusEl.textContent = 'Paused ' + done + ' / ' + total;
+    });
+
+    btnStop.addEventListener('click', function() {
+      stopped = true;
+      paused = false;
+      playing = false;
+      stopAudio();
+      currentChunk = 0;
+      setButtons('ready');
+      progressBar.style.width = '0%';
+      statusEl.textContent = 'Ready';
+    });
+  }
+})();
+</script>
+
+
     <hr>
-	
+
 </div><!-- col-md-3 -->
 
 		
@@ -493,5 +1136,6 @@ var gitalk = new Gitalk(gitalkConfig)
    </script>
 
 
-</body>
+<!-- hexo injector body_end start --><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+<script src="/js/whale-bg.js"></script><!-- hexo injector body_end end --></body>
    </html>

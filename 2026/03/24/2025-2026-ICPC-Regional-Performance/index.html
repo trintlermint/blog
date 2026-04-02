@@ -22,11 +22,29 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="http://blog.trintler.me/2026/03/24/2025-2026-ICPC-Regional-Performance/" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="http://blog.trintler.me/2026/03/24/2025-2026-ICPC-Regional-Performance/"/>
   <meta property="og:title" content="2025/2026 ICPC Regional Performance"/>
   <meta property="og:site_name" content="trintler&#39;s weblog"/>
-
   
-    <meta property="og:image" content=""/>
+  <meta property="og:description" content="ABSTRACT; Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;"/>
+  
+  
+    <meta property="og:image" content="icpc-balloons.png" />
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="2025/2026 ICPC Regional Performance"/>
+  
+  <meta name="twitter:description" content="ABSTRACT; Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;"/>
+  
+  
+  <meta name="twitter:image" content="icpc-balloons.png"/>
   
 
   
@@ -51,9 +69,83 @@
   
 
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start -->
+<style>
+  /* Black overlay covers canvas during textmode.js loading phase */
+  body {
+    background: #000 !important;
+  }
+  #whale-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  #whale-cover.fade-out {
+    opacity: 0;
+  }
+  /* Page content sits above the cover, cover sits above the canvas */
+  #container, #wrap, .container, .container-narrow, footer {
+    position: relative;
+    z-index: 1;
+  }
+  /* Navbar must keep position:fixed from Bootstrap, just raise z-index */
+  .navbar-fixed-top {
+    z-index: 1030 !important;
+  }
+  .content {
+    background: transparent !important;
+  }
+  .container {
+    background: transparent !important;
+  }
+  .container-narrow {
+    background: transparent !important;
+  }
+  .post, .page {
+    background: transparent !important;
+  }
+  .mypage {
+    background: transparent !important;
+  }
+  #post_meta {
+    background: transparent !important;
+  }
+  #sidebar {
+    background: transparent !important;
+  }
+  .meta-widget {
+    background: transparent !important;
+  }
+  .widget {
+    background: transparent !important;
+  }
+  footer {
+    background: transparent !important;
+  }
+  .entry {
+    background: transparent !important;
+  }
+  /* Keep these opaque for readability */
+  .navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+  }
+  /* SAM reader keeps its own background */
+  .sam-reader-widget {
+    background: #000 !important;
+  }
+  .toc {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+</style>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
- <body>  
+ <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -131,20 +223,18 @@
 	  		
 
 	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><h2 id="ICPC"><a href="#ICPC" class="headerlink" title="ICPC"></a>ICPC</h2><p>The International Collegiate Programming Contest is an incredibly renowned competitive programming competition with various stages, in this document I walk through my experience this 2026 ICPC in my three regional contests.</p>
-<p><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/icpc-balloons.png" alt="ICPC Balloons signify the problems solved by a team"></p>
 <h2 id="Team-Found"><a href="#Team-Found" class="headerlink" title="Team Found"></a>Team Found</h2><p><strong>Valyn</strong>, <strong>Anton</strong> and <strong>I</strong> formed the sudden team <strong>“(() &#x3D;&gt; {})();”</strong> – which indeed is meant to represent the no-ops lambda function in javascript or “arrow-function” – thought of by our one and only Valyn on the first day (the initial orchestrator.)</p>
 <p><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/team_encoded.png" alt="TEAM"><br>van:&#x2F;&#x2F;-</p>
 <span id="more"></span>
+
 <h1 id="Contests"><a href="#Contests" class="headerlink" title="Contests"></a>Contests</h1><h2 id="TAPC-UTwente-Enschede-NL"><a href="#TAPC-UTwente-Enschede-NL" class="headerlink" title="TAPC, UTwente, Enschede, NL"></a>TAPC, UTwente, Enschede, NL</h2><p>Initially, we participated in the <strong><a target="_blank" rel="noopener" href="https://tapc.ia.utwente.nl">Twents Algorithms Programming Contest (TAPC)</a></strong> at my university: <em><a target="_blank" rel="noopener" href="https://utwente.nl">University of Twente</a></em> where we had a lot of fun, with a lax competition unexpectant of the continutation of this.<br><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/tapc-encode.png" alt="TAPC"></p>
 <p>—:&#x2F;&#x2F;-</p>
-<h2 id="BAPC-TUD-Delft-NL"><a href="#BAPC-TUD-Delft-NL" class="headerlink" title="BAPC, TUD, Delft, NL"></a>BAPC, TUD, Delft, NL</h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Subsequently, the next month as time passed by almost immediately, we qualified for the <strong><a target="_blank" rel="noopener" href="https://2025.bapc.eu/">Benelux Algorithms Programming Contest (BAPC)</strong></a> being held at <em><a target="_blank" rel="noopener" href="https://tudelft.nl">Technical University Delft</em></a>. This was our first ever competition which was at such a scale and our nerves were racked to the computers (though there was only one.) Without a coach, this all was extremely difficult; however we persisted, formed a more unified Team Reference Document (TCR) which was made in the times when my proficiency with LaTeX wasn’t present (seen by the un-printed {} in the team name<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="![Silly escape characters.](no-arrowfunc.png)
-">[1]</span></a></sup>), and nor was my knowledge in this field worth much (also, I bought a <strong>HUGE</strong> QWERTY-US keyboard shown below to practice with (I usually use QWERTZ, but everyone else uses QWERTY-US.)). As you can imagine, our priorities were more present in complaining about our short stay in Rijswijk instead of Delft to cut costs (there was a beautiful arabic restaurant, though) (we almost slept with a 40-year-old in the same dorm as-well &#x3D;)).</p>
+<h2 id="BAPC-TUD-Delft-NL"><a href="#BAPC-TUD-Delft-NL" class="headerlink" title="BAPC, TUD, Delft, NL"></a>BAPC, TUD, Delft, NL</h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Subsequently, the next month as time passed by almost immediately, we qualified for the <strong><a target="_blank" rel="noopener" href="https://2025.bapc.eu/">Benelux Algorithms Programming Contest (BAPC)</strong></a> being held at <em><a target="_blank" rel="noopener" href="https://tudelft.nl">Technical University Delft</em></a>. This was our first ever competition which was at such a scale and our nerves were racked to the computers (though there was only one.) Without a coach, this all was extremely difficult; however we persisted, formed a more unified Team Reference Document (TCR) which was made in the times when my proficiency with LaTeX wasn’t present (seen by the un-printed {} in the team name<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="![Silly escape characters.](no-arrowfunc.png)">[1]</span></a></sup>), and nor was my knowledge in this field worth much (also, I bought a <strong>HUGE</strong> QWERTY-US keyboard shown below to practice with (I usually use QWERTZ, but everyone else uses QWERTY-US.)). As you can imagine, our priorities were more present in complaining about our short stay in Rijswijk instead of Delft to cut costs (there was a beautiful arabic restaurant, though) (we almost slept with a 40-year-old in the same dorm as-well &#x3D;)).</p>
 <p>The aforementioned “HUGE” Keyboard:<br><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/big_keyboard_encoded.png" alt="The QWERTY-US kb of doom (why did i filter this?)"></p>
 <h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p>After the contest, our resolutions were moderate, wishing we could have performed better. However, we all saw we did quite a lot so far and were satisfied with the performance amidst the competiton with good solutions and program code.</p>
 <p>—:&#x2F;&#x2F;a</p>
 <h2 id="NWERC-KIT-Karlsruhe-Germany"><a href="#NWERC-KIT-Karlsruhe-Germany" class="headerlink" title="NWERC, KIT, Karlsruhe, Germany"></a>NWERC, KIT, Karlsruhe, Germany</h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>To plan for future competitions far ahead, we decided to string along a Year 2 senior, <strong>Adrian</strong> in our University to be our coach for the duration of the semester. Although, as it were looking like there was nothing more till next year: We get accepted to <strong><a target="_blank" rel="noopener" href="https://2025.nwerc.eu">Northwestern Europe Regional Contest (NWERC)</a>!</strong> This was exciting, finally we get to make another chance.</p>
-<h3 id="Concerns"><a href="#Concerns" class="headerlink" title="Concerns"></a>Concerns</h3><p>There were a few admistrative, and logistical costs to take us in the Dutch university to <em><a target="_blank" rel="noopener" href="https://kit.edu">Karlsruhe Institute of Technology (KIT)</a></em>; incuring MIN ca. €250 &#x2F; person, and for this reason we have started works of our own study association described further. Leaving this aside, the trip to germany was fun, tiring and exhausting, sure, but fun.I think that was one of the most enjoyable FlixBus rides I have ever had since we were more focused on flipping a Swapfiets bicycle upside down (contemporary Dutch culture which might be illegal and hence filtered (see below)), speaking till 4:&#x2F;&#x2F; am when there was work to do the next day and coding our beautiful team website <strong><a target="_blank" rel="noopener" href="https://arrowfunc.now">arrowfunc.now</a></strong> made by Valyn on that very day. We then register at the new accomodation, sleep in, and get ready for the next day, where we mostly just take EVERY goodie IMAGINABLE from the sponsors. I think there is a very really stress-release behind this. I recommend everyone to take as many goodies as they can from an event, and goodness did we score, I believe the valuation of the goods were approximately €150. I think that is apt reimbursement. Don’t believe me? Check the picture<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="![The forbidden stash.](things-gotten.jpeg)
-">[2]</span></a></sup>. Those little jetbrains pins alone on the bottom right cost ~€4 each (see under reference) (and these were what I got, my teammates got similar returns.)</p>
+<h3 id="Concerns"><a href="#Concerns" class="headerlink" title="Concerns"></a>Concerns</h3><p>There were a few admistrative, and logistical costs to take us in the Dutch university to <em><a target="_blank" rel="noopener" href="https://kit.edu">Karlsruhe Institute of Technology (KIT)</a></em>; incuring MIN ca. €250 &#x2F; person, and for this reason we have started works of our own study association described further. Leaving this aside, the trip to germany was fun, tiring and exhausting, sure, but fun.I think that was one of the most enjoyable FlixBus rides I have ever had since we were more focused on flipping a Swapfiets bicycle upside down (contemporary Dutch culture which might be illegal and hence filtered (see below)), speaking till 4:&#x2F;&#x2F; am when there was work to do the next day and coding our beautiful team website <strong><a target="_blank" rel="noopener" href="https://arrowfunc.now">arrowfunc.now</a></strong> made by Valyn on that very day. We then register at the new accomodation, sleep in, and get ready for the next day, where we mostly just take EVERY goodie IMAGINABLE from the sponsors. I think there is a very really stress-release behind this. I recommend everyone to take as many goodies as they can from an event, and goodness did we score, I believe the valuation of the goods were approximately €150. I think that is apt reimbursement. Don’t believe me? Check the picture<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="![The forbidden stash.](things-gotten.jpeg)">[2]</span></a></sup>. Those little jetbrains pins alone on the bottom right cost ~€4 each (see under reference) (and these were what I got, my teammates got similar returns.)</p>
 <p>The aforementioned upside down bike,<br><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/swap_feat.gif" alt="Upside down silly blubike"></p>
 <h3 id="Result-1"><a href="#Result-1" class="headerlink" title="Result"></a>Result</h3><p>After thinking of who to gift these goodies to (families and friends) it quickly took time to do the real contest, we improved the TCR which helped, it was fun, exciting, and most of all tough. We hadn’t solved as many problems as we’d hoped due to ill health. However, we still put in the effort, Anton did an extremely impressive job, we all came up with interesting solutions and above all it was a lovely experience – and I would always do it again. I now do competitive programming problems for fun, and in my spare time, and I recommend you too! to me, it feels like playing chess. I love this stuff. The train back to Enschede while being in Dortmund Station at midnight sucked, but that’s how life is sometimes.</p>
 <p>This is us in the hall:<br><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/in_hall.png" alt="Hall photo"></p>
@@ -263,9 +353,563 @@ var gitalk = new Gitalk(gitalkConfig)
 		</div>
 	
 	</div>
+
+	<!-- sam reader (below toc) -->
 	
+<div class="meta-widget sam-reader-widget" id="sam-reader" data-post-title="2025/2026 ICPC Regional Performance">
+  <style>
+    .sam-reader-widget {
+      margin: 10px 0;
+      padding: 10px 8px;
+      background: #000;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+      font-size: .9em;
+    }
+    .sam-reader-widget .sam-title {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-title i {
+      margin-right: 4px;
+    }
+    .sam-reader-widget .sam-controls {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .sam-reader-widget .sam-controls button {
+      flex: 1;
+      padding: 4px 0;
+      font-size: 11px;
+      font-family: inherit;
+      background: #352b42;
+      color: #c08179;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sam-reader-widget .sam-controls button:hover:not(:disabled) {
+      background: #924a41;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-controls button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .sam-reader-widget .sam-controls button.active {
+      background: #493aa5;
+      border-color: #867ade;
+      color: #fff;
+    }
+    .sam-reader-widget .sam-progress-wrap {
+      background: #252525;
+      border-radius: 3px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      border: 1px solid #3a3a3a;
+    }
+    .sam-reader-widget .sam-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #867ade;
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    .sam-reader-widget .sam-status {
+      font-size: 10px;
+      color: #bbb;
+      text-align: center;
+    }
+    .sam-reader-widget .sam-config {
+      margin-top: 8px;
+      border-top: 1px dashed #924a41;
+      padding-top: 8px;
+    }
+    .sam-reader-widget .sam-config summary {
+      font-size: 11px;
+      color: #867ade;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .sam-reader-widget .sam-config label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 4px;
+    }
+    .sam-reader-widget .sam-config input[type=range] {
+      width: 80px;
+      accent-color: #867ade;
+      background: transparent;
+    }
+  </style>
+
+  <div class="sam-title"><i class="fa fa-volume-up"></i> SAM Reader</div>
+  <div class="sam-controls">
+    <button id="sam-play" title="Play" disabled>&#9654; Play</button>
+    <button id="sam-pause" title="Pause" disabled>&#10074;&#10074;</button>
+    <button id="sam-stop" title="Stop" disabled>&#9632;</button>
+  </div>
+  <div class="sam-progress-wrap">
+    <div class="sam-progress-bar" id="sam-progress"></div>
+  </div>
+  <div class="sam-status" id="sam-status">Loading SAM...</div>
+
+  <div class="sam-config">
+    <details>
+      <summary>Voice settings</summary>
+      <label>Speed <input type="range" id="sam-speed" min="20" max="200" value="72"></label>
+      <label>Pitch <input type="range" id="sam-pitch" min="0" max="255" value="64"></label>
+      <label>Mouth <input type="range" id="sam-mouth" min="0" max="255" value="128"></label>
+      <label>Throat <input type="range" id="sam-throat" min="0" max="255" value="128"></label>
+    </details>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Pause is represented as a null entry in the chunks array.
+  // playChunk checks for null and inserts silence.
+  var PAUSE_MS = 400;
+
+  var script = document.createElement('script');
+  script.src = '/js/sam.js';
+  script.async = true;
+  script.onload = function() { initSamReader(); };
+  script.onerror = function() {
+    var s = document.getElementById('sam-status');
+    if (s) s.textContent = 'Failed to load SAM';
+  };
+  document.head.appendChild(script);
+
+  function initSamReader() {
+    if (typeof SamJs === 'undefined') return;
+
+    var btnPlay = document.getElementById('sam-play');
+    var btnPause = document.getElementById('sam-pause');
+    var btnStop = document.getElementById('sam-stop');
+    var progressBar = document.getElementById('sam-progress');
+    var statusEl = document.getElementById('sam-status');
+    var speedInput = document.getElementById('sam-speed');
+    var pitchInput = document.getElementById('sam-pitch');
+    var mouthInput = document.getElementById('sam-mouth');
+    var throatInput = document.getElementById('sam-throat');
+    var widget = document.getElementById('sam-reader');
+
+    btnPlay.disabled = false;
+    statusEl.textContent = 'Ready';
+
+    var chunks = [];    // array of strings (speakable) or null (pause)
+    var currentChunk = 0;
+    var playing = false;
+    var paused = false;
+    var stopped = false;
+    var audioCtx = null;
+    var currentSource = null;
+    var pauseTimer = null;
+
+    // ---- Text cleaning for SAM ----
+    function cleanForSam(text) {
+      // Remove URLs
+      text = text.replace(/https?:\/\/[^\s]+/g, '');
+      // Remove protocol-like patterns (van://-, ---://-, 000://0, etc.)
+      text = text.replace(/[a-zA-Z0-9_-]*:\/\/[^\s]*/g, '');
+      // Remove email addresses
+      text = text.replace(/[\w.-]+@[\w.-]+/g, '');
+      // Remove code-like patterns: arrow functions, braces, brackets
+      text = text.replace(/\([^)]*=>\s*\{[^}]*\}[^)]*\)/g, '');
+
+      // Comparison operators (BEFORE stripping angle brackets)
+      text = text.replace(/>=/g, ' greater than or equal to ');
+      text = text.replace(/<=/g, ' less than or equal to ');
+      text = text.replace(/!=/g, ' not equal to ');
+      text = text.replace(/===/g, ' strictly equals ');
+      text = text.replace(/==/g, ' equals ');
+      text = text.replace(/(?<![<>])>(?![<>])/g, ' greater than ');
+      text = text.replace(/(?<![<>])<(?![<>])/g, ' less than ');
+
+      // Slash handling: " / " (spaced) becomes OR, "/" becomes slash
+      text = text.replace(/ \/ /g, ' OR ');
+      text = text.replace(/\//g, ' slash ');
+
+      text = text.replace(/[{}()\[\]<>]/g, ' ');
+      // Remove markdown-like artifacts
+      text = text.replace(/[*_~#]+/g, '');
+      text = text.replace(new RegExp(String.fromCharCode(96) + '+', 'g'), '');
+      // Remove footnote markers like [^1]
+      text = text.replace(/\[\^\w+\]/g, '');
+
+      // Common abbreviations
+      text = text.replace(/\bNL\b/g, 'Netherlands');
+      text = text.replace(/\bKIT\b/g, 'K I T');
+      text = text.replace(/\bTUD\b/g, 'T U D');
+      text = text.replace(/\bICPC\b/g, 'I C P C');
+      text = text.replace(/\bTAPC\b/g, 'T A P C');
+      text = text.replace(/\bBAPC\b/g, 'B A P C');
+      text = text.replace(/\bNWERC\b/g, 'N W E R C');
+      text = text.replace(/\bTCR\b/g, 'T C R');
+      text = text.replace(/\bOSS\b/g, 'O S S');
+      text = text.replace(/\bTUI\b/g, 'T U I');
+      text = text.replace(/\bSSH\b/g, 'S S H');
+      text = text.replace(/\bJOSS\b/g, 'J O S S');
+      text = text.replace(/\bCLI\b/g, 'C L I');
+      text = text.replace(/\bAPI\b/g, 'A P I');
+      text = text.replace(/\bCSS\b/g, 'C S S');
+      text = text.replace(/\bHTML\b/g, 'H T M L');
+      text = text.replace(/\bLaTeX\b/gi, 'lay-tech');
+      text = text.replace(/\bQWERTY\b/g, 'KWERTY');
+      text = text.replace(/\bQWERTZ\b/g, 'KWERTZ');
+      text = text.replace(/\bCMake\b/gi, 'see-make');
+      text = text.replace(/\blibssh\b/g, 'lib S S H');
+      text = text.replace(/\byaml-cpp\b/gi, 'yaml cpp');
+      text = text.replace(/\bFTXUI\b/g, 'F T X U I');
+      text = text.replace(/\bca\./g, 'circa ');
+      text = text.replace(/\be\.g\./g, 'for example');
+      text = text.replace(/\bi\.e\./g, 'that is');
+
+      // Remove special chars SAM can't handle
+      text = text.replace(/[\x80-\xFF]/g, ' ');
+      text = text.replace(/[\u0100-\uFFFF]/g, ' ');
+      text = text.replace(/[\xA0-\xFF]/g, ' ');
+      text = text.replace(/[€£¥©®™°±×÷=+|\\^~&]/g, ' ');
+      // Remove remaining non-printable-ASCII
+      text = text.replace(/[^\x20-\x7E]/g, ' ');
+
+      // Collapse spaces
+      text = text.replace(/\s+/g, ' ');
+      return text.trim();
+    }
+
+    // ---- Table reading ----
+    function readTable(table) {
+      var headers = [];
+      var ths = table.querySelectorAll('thead th, thead td, tr:first-child th');
+      for (var i = 0; i < ths.length; i++) {
+        headers.push(ths[i].textContent.trim());
+      }
+      if (headers.length === 0) {
+        var firstRow = table.querySelector('tr');
+        if (firstRow) {
+          var cells = firstRow.querySelectorAll('th, td');
+          for (var j = 0; j < cells.length; j++) {
+            headers.push(cells[j].textContent.trim());
+          }
+        }
+      }
+      var rows = table.querySelectorAll('tbody tr, tr');
+      var text = '';
+      for (var r = 0; r < rows.length; r++) {
+        var cells = rows[r].querySelectorAll('td');
+        if (cells.length === 0) continue; // skip header row
+        var rowParts = [];
+        for (var c = 0; c < cells.length; c++) {
+          var label = (c < headers.length) ? headers[c] : '';
+          var val = cells[c].textContent.trim();
+          if (label && val) {
+            rowParts.push(label + ' ' + val);
+          } else if (val) {
+            rowParts.push(val);
+          }
+        }
+        if (rowParts.length > 0) {
+          text += rowParts.join(', ') + '. ';
+        }
+      }
+      return text;
+    }
+
+    // ---- Text extraction ----
+    // Returns an array of segments: strings (text) and nulls (pauses).
+    // cleanForSam is applied only to text segments, never to pause markers.
+    function getPostSegments() {
+      var segments = []; // array of string | null
+
+      // Start with the post title
+      var postTitle = widget.getAttribute('data-post-title') || '';
+      if (postTitle) {
+        segments.push(cleanForSam(postTitle) + '.');
+        segments.push(null); // pause after title
+      }
+
+      var el = document.querySelector('.mypage');
+      if (!el) return segments;
+      var clone = el.cloneNode(true);
+
+      // Remove non-readable elements (but NOT tables)
+      var remove = clone.querySelectorAll(
+        'pre, code, script, style, .highlight, img, svg, ' +
+        '.sam-reader-widget, .alert, figure, .article-footer-copyright, ' +
+        'noscript, iframe, video, audio, canvas, .gist'
+      );
+      for (var i = 0; i < remove.length; i++) {
+        remove[i].parentNode.removeChild(remove[i]);
+      }
+
+      function walk(node) {
+        if (node.nodeType === 3) { // text node
+          var t = node.textContent;
+          if (t && t.trim()) {
+            segments.push(cleanForSam(t));
+          }
+          return;
+        }
+        if (node.nodeType !== 1) return;
+        var tag = node.tagName;
+
+        // Tables: read row-wise with headers
+        if (tag === 'TABLE') {
+          var tableText = readTable(node);
+          if (tableText) segments.push(cleanForSam(tableText));
+          return;
+        }
+
+        // Headers: pause, speak heading, pause
+        if (/^H[1-6]$/.test(tag)) {
+          segments.push(null); // pause before heading
+          var hText = node.textContent.trim();
+          if (hText) segments.push(cleanForSam(hText) + '.');
+          segments.push(null); // pause after heading
+          return;
+        }
+
+        // Recurse into children
+        var children = node.childNodes;
+        for (var c = 0; c < children.length; c++) {
+          walk(children[c]);
+        }
+
+        // Pause after block elements
+        if (/^(P|DIV|BLOCKQUOTE|LI|SECTION|ARTICLE|HR)$/.test(tag)) {
+          segments.push(null);
+        }
+      }
+
+      walk(clone);
+      return segments;
+    }
+
+    // ---- Chunking ----
+    // Converts segments into final chunks array: strings to speak, nulls for pauses.
+    function buildChunks(segments, maxLen) {
+      var result = [];
+      for (var s = 0; s < segments.length; s++) {
+        if (segments[s] === null) {
+          // Only add pause if last item isn't already a pause
+          if (result.length === 0 || result[result.length - 1] !== null) {
+            result.push(null);
+          }
+          continue;
+        }
+        var text = segments[s];
+        if (!text) continue;
+
+        // Split on sentence boundaries
+        var parts = text.split(/(?<=[.!?])\s+/);
+        var current = '';
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i].trim();
+          if (!p) continue;
+          if (current.length + p.length + 1 > maxLen && current.length > 0) {
+            result.push(current.trim());
+            current = p;
+          } else {
+            current += (current ? ' ' : '') + p;
+          }
+        }
+        if (current.trim()) result.push(current.trim());
+      }
+
+      // Split any remaining long chunks on commas
+      var final = [];
+      for (var j = 0; j < result.length; j++) {
+        if (result[j] === null) {
+          if (final.length === 0 || final[final.length - 1] !== null) {
+            final.push(null);
+          }
+          continue;
+        }
+        if (result[j].length <= maxLen) {
+          final.push(result[j]);
+        } else {
+          var subparts = result[j].split(/,\s*/);
+          var sub = '';
+          for (var k = 0; k < subparts.length; k++) {
+            if (sub.length + subparts[k].length + 2 > maxLen && sub.length > 0) {
+              final.push(sub.trim());
+              sub = subparts[k];
+            } else {
+              sub += (sub ? ', ' : '') + subparts[k];
+            }
+          }
+          if (sub.trim()) final.push(sub.trim());
+        }
+      }
+
+      // Strip leading/trailing pauses
+      while (final.length > 0 && final[0] === null) final.shift();
+      while (final.length > 0 && final[final.length - 1] === null) final.pop();
+
+      return final;
+    }
+
+    // ---- Progress (only count speakable chunks) ----
+    function countSpeakable() {
+      var n = 0;
+      for (var i = 0; i < chunks.length; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+    function countSpoken() {
+      var n = 0;
+      for (var i = 0; i < currentChunk; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+
+    function updateProgress() {
+      var total = countSpeakable();
+      var done = countSpoken();
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      statusEl.textContent = done + ' / ' + total;
+    }
+
+    function setButtons(state) {
+      btnPlay.disabled = (state === 'playing');
+      btnPause.disabled = (state !== 'playing');
+      btnStop.disabled = (state === 'ready');
+      btnPlay.classList.toggle('active', state === 'playing');
+      btnPause.classList.toggle('active', state === 'paused');
+    }
+
+    function stopAudio() {
+      if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; }
+      if (currentSource) {
+        try { currentSource.stop(); } catch(e) {}
+        currentSource = null;
+      }
+    }
+
+    function playChunk(index) {
+      if (stopped || index >= chunks.length) {
+        progressBar.style.width = stopped ? '0%' : '100%';
+        statusEl.textContent = stopped ? 'Stopped' : 'Done!';
+        setButtons('ready');
+        playing = false;
+        paused = false;
+        stopped = false;
+        currentChunk = 0;
+        return;
+      }
+      if (paused) return;
+
+      currentChunk = index;
+      updateProgress();
+
+      // null = silent pause
+      if (chunks[index] === null) {
+        pauseTimer = setTimeout(function() {
+          pauseTimer = null;
+          if (!stopped && !paused) playChunk(index + 1);
+        }, PAUSE_MS);
+        return;
+      }
+
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      var sam = new SamJs({
+        speed: parseInt(speedInput.value, 10),
+        pitch: parseInt(pitchInput.value, 10),
+        mouth: parseInt(mouthInput.value, 10),
+        throat: parseInt(throatInput.value, 10)
+      });
+
+      var buf32;
+      try {
+        buf32 = sam.buf32(chunks[index]);
+      } catch(e) {
+        playChunk(index + 1);
+        return;
+      }
+      if (!buf32 || buf32.length === 0) {
+        playChunk(index + 1);
+        return;
+      }
+
+      var audioBuffer = audioCtx.createBuffer(1, buf32.length, 22050);
+      audioBuffer.getChannelData(0).set(buf32);
+
+      var source = audioCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioCtx.destination);
+      currentSource = source;
+
+      source.onended = function() {
+        currentSource = null;
+        if (!stopped && !paused) {
+          playChunk(index + 1);
+        }
+      };
+      source.start();
+    }
+
+    btnPlay.addEventListener('click', function() {
+      if (paused) {
+        paused = false;
+        setButtons('playing');
+        playChunk(currentChunk);
+        return;
+      }
+      var segments = getPostSegments();
+      chunks = buildChunks(segments, 200);
+      if (countSpeakable() === 0) {
+        statusEl.textContent = 'No text found';
+        return;
+      }
+      stopped = false;
+      playing = true;
+      paused = false;
+      currentChunk = 0;
+      setButtons('playing');
+      playChunk(0);
+    });
+
+    btnPause.addEventListener('click', function() {
+      paused = true;
+      stopAudio();
+      setButtons('paused');
+      var total = countSpeakable();
+      var done = countSpoken();
+      statusEl.textContent = 'Paused ' + done + ' / ' + total;
+    });
+
+    btnStop.addEventListener('click', function() {
+      stopped = true;
+      paused = false;
+      playing = false;
+      stopAudio();
+      currentChunk = 0;
+      setButtons('ready');
+      progressBar.style.width = '0%';
+      statusEl.textContent = 'Ready';
+    });
+  }
+})();
+</script>
+
+
     <hr>
-	
+
 </div><!-- col-md-3 -->
 
 		
@@ -328,5 +972,6 @@ var gitalk = new Gitalk(gitalkConfig)
    </script>
 
 
-</body>
+<!-- hexo injector body_end start --><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+<script src="/js/whale-bg.js"></script><!-- hexo injector body_end end --></body>
    </html>
