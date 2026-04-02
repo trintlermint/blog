@@ -80,8 +80,8 @@
 
   // Cached element rects with their colors (viewport coords)
   var colorTargets = [];
-  var BLEND_RADIUS = 180;  // pixels, how close before blending starts
-  var MAX_BLEND = 0.35;    // max blend factor,  keeps text readable
+  var BLEND_RADIUS = 280;  // pixels, how close before blending starts
+  var MAX_BLEND = 0.6;     // max blend factor, stronger camouflage
 
   function updateColorTargets() {
     colorTargets = [];

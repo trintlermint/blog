@@ -476,12 +476,14 @@ var gitalk = new Gitalk(gitalkConfig)
 
 <script>
 (function() {
-  // Pause is represented as a null entry in the chunks array.
-  // playChunk checks for null and inserts silence.
   var PAUSE_MS = 400;
+  var CHUNK_MAX = 200;
+  var CONTENT_SEL = ".mypage";
+  var EXTRA_SKIP = "";
+  var ABBREVIATIONS = {"NL":"Netherlands","DE":"Germany","KIT":"K I T","TUD":"T U D","ICPC":"I C P C","TAPC":"T A P C","BAPC":"B A P C","NWERC":"N W E R C","TCR":"T C R","OSS":"O S S","TUI":"T U I","SSH":"S S H","JOSS":"J O S S","CLI":"C L I","API":"A P I","CSS":"C S S","HTML":"H T M L","FTXUI":"F T X U I","GPU":"G P U","WASM":"web assembly","QWERTY":"KWERTY","QWERTZ":"KWERTZ","LaTeX":"lay-tech","CMake":"see-make","libssh":"lib S S H","yaml-cpp":"yaml cpp","ca.":"circa ","e.g.":"for example","i.e.":"that is"};
 
   var script = document.createElement('script');
-  script.src = '/js/sam.js';
+  script.src = '/js/hexo-sam-reader/sam.js';
   script.async = true;
   script.onload = function() { initSamReader(); };
   script.onerror = function() {
@@ -507,7 +509,7 @@ var gitalk = new Gitalk(gitalkConfig)
     btnPlay.disabled = false;
     statusEl.textContent = 'Ready';
 
-    var chunks = [];    // array of strings (speakable) or null (pause)
+    var chunks = [];
     var currentChunk = 0;
     var playing = false;
     var paused = false;
@@ -516,18 +518,13 @@ var gitalk = new Gitalk(gitalkConfig)
     var currentSource = null;
     var pauseTimer = null;
 
-    // ---- Text cleaning for SAM ----
+    // text regex for sam
     function cleanForSam(text) {
-      // Remove URLs
       text = text.replace(/https?:\/\/[^\s]+/g, '');
-      // Remove protocol-like patterns (van://-, ---://-, 000://0, etc.)
       text = text.replace(/[a-zA-Z0-9_-]*:\/\/[^\s]*/g, '');
-      // Remove email addresses
       text = text.replace(/[\w.-]+@[\w.-]+/g, '');
-      // Remove code-like patterns: arrow functions, braces, brackets
       text = text.replace(/\([^)]*=>\s*\{[^}]*\}[^)]*\)/g, '');
 
-      // Comparison operators (BEFORE stripping angle brackets)
       text = text.replace(/>=/g, ' greater than or equal to ');
       text = text.replace(/<=/g, ' less than or equal to ');
       text = text.replace(/!=/g, ' not equal to ');
@@ -536,59 +533,33 @@ var gitalk = new Gitalk(gitalkConfig)
       text = text.replace(/(?<![<>])>(?![<>])/g, ' greater than ');
       text = text.replace(/(?<![<>])<(?![<>])/g, ' less than ');
 
-      // Slash handling: " / " (spaced) becomes OR, "/" becomes slash
       text = text.replace(/ \/ /g, ' OR ');
       text = text.replace(/\//g, ' slash ');
 
       text = text.replace(/[{}()\[\]<>]/g, ' ');
-      // Remove markdown-like artifacts
       text = text.replace(/[*_~#]+/g, '');
       text = text.replace(new RegExp(String.fromCharCode(96) + '+', 'g'), '');
-      // Remove footnote markers like [^1]
       text = text.replace(/\[\^\w+\]/g, '');
 
-      // Common abbreviations
-      text = text.replace(/\bNL\b/g, 'Netherlands');
-      text = text.replace(/\bKIT\b/g, 'K I T');
-      text = text.replace(/\bTUD\b/g, 'T U D');
-      text = text.replace(/\bICPC\b/g, 'I C P C');
-      text = text.replace(/\bTAPC\b/g, 'T A P C');
-      text = text.replace(/\bBAPC\b/g, 'B A P C');
-      text = text.replace(/\bNWERC\b/g, 'N W E R C');
-      text = text.replace(/\bTCR\b/g, 'T C R');
-      text = text.replace(/\bOSS\b/g, 'O S S');
-      text = text.replace(/\bTUI\b/g, 'T U I');
-      text = text.replace(/\bSSH\b/g, 'S S H');
-      text = text.replace(/\bJOSS\b/g, 'J O S S');
-      text = text.replace(/\bCLI\b/g, 'C L I');
-      text = text.replace(/\bAPI\b/g, 'A P I');
-      text = text.replace(/\bCSS\b/g, 'C S S');
-      text = text.replace(/\bHTML\b/g, 'H T M L');
-      text = text.replace(/\bLaTeX\b/gi, 'lay-tech');
-      text = text.replace(/\bQWERTY\b/g, 'KWERTY');
-      text = text.replace(/\bQWERTZ\b/g, 'KWERTZ');
-      text = text.replace(/\bCMake\b/gi, 'see-make');
-      text = text.replace(/\blibssh\b/g, 'lib S S H');
-      text = text.replace(/\byaml-cpp\b/gi, 'yaml cpp');
-      text = text.replace(/\bFTXUI\b/g, 'F T X U I');
-      text = text.replace(/\bca\./g, 'circa ');
-      text = text.replace(/\be\.g\./g, 'for example');
-      text = text.replace(/\bi\.e\./g, 'that is');
+      // apply abbreviations from config
+      var keys = Object.keys(ABBREVIATIONS);
+      for (var a = 0; a < keys.length; a++) {
+        var k = keys[a];
+        var flags = (k === k.toUpperCase()) ? 'g' : 'gi';
+        text = text.replace(new RegExp('\\b' + k.replace(/[.*+?^\/\\|()[\]{}]/g, '\\$&') + '\\b', flags), ABBREVIATIONS[k]);
+      }
 
-      // Remove special chars SAM can't handle
       text = text.replace(/[\x80-\xFF]/g, ' ');
       text = text.replace(/[\u0100-\uFFFF]/g, ' ');
       text = text.replace(/[\xA0-\xFF]/g, ' ');
       text = text.replace(/[€£¥©®™°±×÷=+|\\^~&]/g, ' ');
-      // Remove remaining non-printable-ASCII
       text = text.replace(/[^\x20-\x7E]/g, ' ');
 
-      // Collapse spaces
       text = text.replace(/\s+/g, ' ');
       return text.trim();
     }
 
-    // ---- Table reading ----
+    // table reading
     function readTable(table) {
       var headers = [];
       var ths = table.querySelectorAll('thead th, thead td, tr:first-child th');
@@ -608,7 +579,7 @@ var gitalk = new Gitalk(gitalkConfig)
       var text = '';
       for (var r = 0; r < rows.length; r++) {
         var cells = rows[r].querySelectorAll('td');
-        if (cells.length === 0) continue; // skip header row
+        if (cells.length === 0) continue;
         var rowParts = [];
         for (var c = 0; c < cells.length; c++) {
           var label = (c < headers.length) ? headers[c] : '';
@@ -626,35 +597,32 @@ var gitalk = new Gitalk(gitalkConfig)
       return text;
     }
 
-    // ---- Text extraction ----
-    // Returns an array of segments: strings (text) and nulls (pauses).
-    // cleanForSam is applied only to text segments, never to pause markers.
+    // text extraction
     function getPostSegments() {
-      var segments = []; // array of string | null
+      var segments = [];
 
-      // Start with the post title
       var postTitle = widget.getAttribute('data-post-title') || '';
       if (postTitle) {
         segments.push(cleanForSam(postTitle) + '.');
-        segments.push(null); // pause after title
+        segments.push(null);
       }
 
-      var el = document.querySelector('.mypage');
+      var el = document.querySelector(CONTENT_SEL);
       if (!el) return segments;
       var clone = el.cloneNode(true);
 
-      // Remove non-readable elements (but NOT tables)
-      var remove = clone.querySelectorAll(
-        'pre, code, script, style, .highlight, img, svg, ' +
+      var baseSel = 'pre, script, style, .highlight, img, svg, ' +
         '.sam-reader-widget, .alert, figure, .article-footer-copyright, ' +
-        'noscript, iframe, video, audio, canvas, .gist'
-      );
+        'noscript, iframe, video, audio, canvas, .gist';
+      var skipSel = EXTRA_SKIP ? (baseSel + ', ' + EXTRA_SKIP) : baseSel;
+
+      var remove = clone.querySelectorAll(skipSel);
       for (var i = 0; i < remove.length; i++) {
         remove[i].parentNode.removeChild(remove[i]);
       }
 
       function walk(node) {
-        if (node.nodeType === 3) { // text node
+        if (node.nodeType === 3) {
           var t = node.textContent;
           if (t && t.trim()) {
             segments.push(cleanForSam(t));
@@ -664,29 +632,25 @@ var gitalk = new Gitalk(gitalkConfig)
         if (node.nodeType !== 1) return;
         var tag = node.tagName;
 
-        // Tables: read row-wise with headers
         if (tag === 'TABLE') {
           var tableText = readTable(node);
           if (tableText) segments.push(cleanForSam(tableText));
           return;
         }
 
-        // Headers: pause, speak heading, pause
         if (/^H[1-6]$/.test(tag)) {
-          segments.push(null); // pause before heading
+          segments.push(null);
           var hText = node.textContent.trim();
           if (hText) segments.push(cleanForSam(hText) + '.');
-          segments.push(null); // pause after heading
+          segments.push(null);
           return;
         }
 
-        // Recurse into children
         var children = node.childNodes;
         for (var c = 0; c < children.length; c++) {
           walk(children[c]);
         }
 
-        // Pause after block elements
         if (/^(P|DIV|BLOCKQUOTE|LI|SECTION|ARTICLE|HR)$/.test(tag)) {
           segments.push(null);
         }
@@ -696,13 +660,11 @@ var gitalk = new Gitalk(gitalkConfig)
       return segments;
     }
 
-    // ---- Chunking ----
-    // Converts segments into final chunks array: strings to speak, nulls for pauses.
+    // chunking
     function buildChunks(segments, maxLen) {
       var result = [];
       for (var s = 0; s < segments.length; s++) {
         if (segments[s] === null) {
-          // Only add pause if last item isn't already a pause
           if (result.length === 0 || result[result.length - 1] !== null) {
             result.push(null);
           }
@@ -711,7 +673,6 @@ var gitalk = new Gitalk(gitalkConfig)
         var text = segments[s];
         if (!text) continue;
 
-        // Split on sentence boundaries
         var parts = text.split(/(?<=[.!?])\s+/);
         var current = '';
         for (var i = 0; i < parts.length; i++) {
@@ -727,7 +688,6 @@ var gitalk = new Gitalk(gitalkConfig)
         if (current.trim()) result.push(current.trim());
       }
 
-      // Split any remaining long chunks on commas
       var final = [];
       for (var j = 0; j < result.length; j++) {
         if (result[j] === null) {
@@ -753,14 +713,13 @@ var gitalk = new Gitalk(gitalkConfig)
         }
       }
 
-      // Strip leading/trailing pauses
       while (final.length > 0 && final[0] === null) final.shift();
       while (final.length > 0 && final[final.length - 1] === null) final.pop();
 
       return final;
     }
 
-    // ---- Progress (only count speakable chunks) ----
+    // progress
     function countSpeakable() {
       var n = 0;
       for (var i = 0; i < chunks.length; i++) {
@@ -816,7 +775,6 @@ var gitalk = new Gitalk(gitalkConfig)
       currentChunk = index;
       updateProgress();
 
-      // null = silent pause
       if (chunks[index] === null) {
         pauseTimer = setTimeout(function() {
           pauseTimer = null;
@@ -871,7 +829,7 @@ var gitalk = new Gitalk(gitalkConfig)
         return;
       }
       var segments = getPostSegments();
-      chunks = buildChunks(segments, 200);
+      chunks = buildChunks(segments, CHUNK_MAX);
       if (countSpeakable() === 0) {
         statusEl.textContent = 'No text found';
         return;
