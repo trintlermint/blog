@@ -63,12 +63,12 @@
   var whaleTrail = [];
   var TRAIL_LEN = 80;
 
-  // ---- Color proximity system ----
+  // Color proximity system
   // Base whale colors: #924a41 and #c08179
   var WHALE_BASE = { r: 146, g: 74, b: 65 };    // #924a41
   var WHALE_HIGH = { r: 192, g: 129, b: 121 };   // #c08179
 
-  // Element color mapping (CSS selector -> RGB)
+  // Element color mapping
   var COLOR_MAP = [
     { sel: 'h1, h3, h4, h5, h6',   rgb: [255, 255, 255] },  // white
     { sel: 'h2',                     rgb: [192, 129, 121] },  // #c08179
@@ -80,8 +80,8 @@
 
   // Cached element rects with their colors (viewport coords)
   var colorTargets = [];
-  var BLEND_RADIUS = 180;  // pixels — how close before blending starts
-  var MAX_BLEND = 0.35;    // max blend factor — keeps text readable
+  var BLEND_RADIUS = 180;  // pixels, how close before blending starts
+  var MAX_BLEND = 0.35;    // max blend factor,  keeps text readable
 
   function updateColorTargets() {
     colorTargets = [];
@@ -150,8 +150,8 @@
       b: baseB + (closestRGB[2] - baseB) * factor
     };
   }
-
-  // Convert grid coords to viewport pixel coords
+  // FUCKKKKKK
+  // convert grid coords to viewport pixel coords
   function gridToViewport(gx, gy) {
     return {
       x: (gx / cols) * window.innerWidth,
