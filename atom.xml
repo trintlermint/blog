@@ -56,10 +56,10 @@
     <link href="http://blog.trintler.me/2026/03/24/JOSS-Reviewed-solve-nivp/"/>
     <published>2026-03-24T18:29:20.000Z</published>
     <summary>
-      <![CDATA[<b>solve_nivp</b> is a Python library for time-stepping nonsmooth ODE and DAE systems. This post explains what that means, why classical solvers fail at discontinuities, and how the library encodes impact laws and complementarity conditions directly into an implicit integrator — reviewed for the <a href="https://doi.org/10.21105/joss.09775">Journal of Open Source Software</a>.]]>
+      <![CDATA[<b>solve_nivp</b> is a Python library for time-stepping nonsmooth ODE and DAE systems. This post explains what that means, why classical solvers fail at discontinuities, and how the library encodes impact laws and complementarity conditions directly into an implicit integrator, reviewed for the <a href="https://doi.org/10.21105/joss.09775">Journal of Open Source Software</a>.]]>
     </summary>
     <title>JOSS: Reviewed solve_nivp</title>
-    <updated>2026-04-04T03:41:26.205Z</updated>
+    <updated>2026-04-04T03:52:59.726Z</updated>
   </entry>
   <entry>
     <author>
