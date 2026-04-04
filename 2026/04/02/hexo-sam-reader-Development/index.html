@@ -17,7 +17,7 @@
   <title>hexo-sam-reader: Building a SAM Text-to-Speech Plugin for Hexo | trintler&#39;s weblog</title>
   <meta name="author" content="Niladri Adhikary">
   
-  <meta name="description" content="hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and turning it into a published npm package.">
+  <meta name="description" content="&lt;b&gt;hexo-sam-reader&lt;/b&gt; is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and publishing on npm.">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -31,7 +31,7 @@
   <meta property="og:title" content="hexo-sam-reader: Building a SAM Text-to-Speech Plugin for Hexo"/>
   <meta property="og:site_name" content="trintler&#39;s weblog"/>
   
-  <meta property="og:description" content="hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and turning it into a published npm package."/>
+  <meta property="og:description" content="hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and publishing on npm."/>
   
   
     <meta property="og:image" content="sam.webp" />
@@ -41,7 +41,7 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="hexo-sam-reader: Building a SAM Text-to-Speech Plugin for Hexo"/>
   
-  <meta name="twitter:description" content="hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and turning it into a published npm package."/>
+  <meta name="twitter:description" content="hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and publishing on npm."/>
   
   
   <meta name="twitter:image" content="sam.webp"/>
@@ -243,14 +243,17 @@
 	<div class="mypage">		
 	  
 		 <div class="alert alert-success description">
-			<i class="fa fa-info-circle"></i> hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and turning it into a published npm package.
+			<i class="fa fa-info-circle"></i> <b>hexo-sam-reader</b> is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and publishing on npm.
 		 </div> <!-- alert -->
 	  		
 
-	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>I wanted a way for readers to listen to these posts rather than read them, something embedded directly into the sidebar, which was not barred, but sensible.</p>
-<p>The answer was <strong>SAM</strong>: the Software Automatic Mouth<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="SAM (Software Automatic Mouth) was created by Mark Barton of Don't Ask Software in 1982, originally for the Commodore 64. It was one of the first commercially available speech synthesisers for home computers.">[1]</span></a></sup>, a speech synthesiser originally written in 1982 by Mark Barton of Don’t Ask Software for the Commodore 64. Christian Schiffler (@discordier) ported SAM to JavaScript as <strong>SamJs</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="SamJs v0.3.0 by Christian Schiffler (discordier). A JavaScript port of SAM that preserves the original phoneme engine. Source: [github.com/discordier/sam](https://github.com/discordier/sam).">[2]</span></a></sup>, preserving the original’s distinctive robotic phoneme engine in a <em>looooong</em> ca. 3000-line browser-compatible library. SAM does not stream audio from a server! It runs entirely in the browser, synthesising speech from raw text via the Web Audio API<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="The Web Audio API provides the `AudioContext`, `AudioBuffer`, and `AudioBufferSourceNode` interfaces used for PCM playback. SAM outputs audio at 22050 Hz, which is passed directly to `AudioContext.createBuffer()`.
-">[3]</span></a></sup>. Therefore there exist no latency beyond local computation. Helpful considering the new state of my internet after moving in! (it is <em>awful</em>)</p>
-<p>The result is <strong>hexo-sam-reader</strong>, a Hexo plugin that adds a SAM-powered TTS reader widget to any blog post. This document traces the full development from a hardcoded prototype to a published npm package. In the future I plan to have a smoother sounding voice, but I would like to talk about SAM first!</p>
+	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>I wanted to use a Text to speech to read these blog posts aloud, the only condition being that, it would have low-latency and locally compute all tokens. The reasoning behind this? because of the fact that I do not own a server! They are extremely expensive.</p>
+<blockquote>
+<p>A very wise person once said, when <em>resources</em> for modern solutions become infeasibly expensive to you, rely on old solutions. Who said that? I did, but that part does not matter.</p>
+</blockquote>
+<p>Thus, <strong>SAM</strong> came to mind: the Software Automatic Mouth<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="SAM (Software Automatic Mouth) was created by Mark Barton of Don't Ask Software in 1982, originally for the Commodore 64. It was one of the first commercially available speech synthesisers for home computers.">[1]</span></a></sup> is a speech synthesiser originally written in 1982 by Mark Barton of Don’t Ask Software for the Commodore 64. Christian Schiffler (@discordier) ported SAM to JavaScript as <strong>SamJs</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="SamJs v0.3.0 by Christian Schiffler (discordier). A JavaScript port of SAM that preserves the original phoneme engine. Source: [github.com/discordier/sam](https://github.com/discordier/sam).">[2]</span></a></sup>, preserving the original’s distinctive robotic phoneme engine in a <em>looooong</em> ca. 3000-line browser-compatible library. SAM does not stream audio from a server! It runs entirely in the browser, synthesising speech from raw text via the Web Audio API<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="The Web Audio API provides the `AudioContext`, `AudioBuffer`, and `AudioBufferSourceNode` interfaces used for PCM playback. SAM outputs audio at 22050 Hz, which is passed directly to `AudioContext.createBuffer()`.
+">[3]</span></a></sup>. Therefore there exist no latency beyond local computation. Helpful considering the new state of my internet after moving in! (It is <em>awful</em>)</p>
+<p>The product is <strong>hexo-sam-reader</strong>, which is a Hexo plugin that adds a SAM-powered TTS reader widget to any blog post, made for Hexo. This document traces the full development from a hardcoded prototype to a published npm package. In the future I plan to have a smoother sounding voice, but I would like to talk about SAM first!</p>
 <span id="more"></span>
 
 <h2 id="Scope-of-This-Document"><a href="#Scope-of-This-Document" class="headerlink" title="Scope of This Document"></a>Scope of This Document</h2><p>This post covers the evolution of hexo-sam-reader across two distinct phases: the <code>sam-v1</code> prototype (a <em>looong</em> Hexo helper script) and the published <code>hexo-sam-reader</code> package (a npm plugin for any hexo user to use). It examines the text processing pipeline, the playback engine, the configuration refactor that removed all hardcoding, and the documentation process.</p>
