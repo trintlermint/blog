@@ -9,6 +9,8 @@
 (function () {
   if (typeof textmode === 'undefined') return;
 
+  var isMobile = window.innerWidth < 768;
+
   var tm = textmode.create({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -274,69 +276,75 @@
       targetsDirty = false;
     }
 
-    // Lissajous curve
-    var sx = Math.sin(time * 0.7) * (cols * 0.38) +
-             Math.sin(time * 1.9 + 1.2) * (cols * 0.12);
-    var sy = Math.cos(time * 0.5) * (rows * 0.35) +
-             Math.cos(time * 1.7 + 0.8) * (rows * 0.1);
+    if (!isMobile) {
+      // Lissajous curve
+      var sx = Math.sin(time * 0.7) * (cols * 0.38) +
+               Math.sin(time * 1.9 + 1.2) * (cols * 0.12);
+      var sy = Math.cos(time * 0.5) * (rows * 0.35) +
+               Math.cos(time * 1.7 + 0.8) * (rows * 0.1);
 
-    var headX = cols / 2 + sx;
-    var headY = rows / 2 + sy;
+      var headX = cols / 2 + sx;
+      var headY = rows / 2 + sy;
 
-    whaleTrail.unshift({ x: headX, y: headY });
-    if (whaleTrail.length > TRAIL_LEN) whaleTrail.length = TRAIL_LEN;
+      whaleTrail.unshift({ x: headX, y: headY });
+      if (whaleTrail.length > TRAIL_LEN) whaleTrail.length = TRAIL_LEN;
 
-    if (tm.frameCount % 2 === 0) drop(headX, headY, 4);
-    if (whaleTrail.length > 10 && tm.frameCount % 4 === 0) {
-      var tail = whaleTrail[Math.min(whaleTrail.length - 1, TAIL_RIPPLE_OFFSET)];
-      drop(tail.x, tail.y, 1.5);
-    }
-
-    // Wave propagation
-    var next = prev;
-    for (var y = 1; y < rows - 1; y++) {
-      var yo = y * cols;
-      for (var x = 1; x < cols - 1; x++) {
-        var i = yo + x;
-        next[i] = ((cur[i - 1] + cur[i + 1] + cur[i - cols] + cur[i + cols]) * 0.5 - prev[i]) * DAMP;
+      if (tm.frameCount % 2 === 0) drop(headX, headY, 4);
+      if (whaleTrail.length > 10 && tm.frameCount % 4 === 0) {
+        var tail = whaleTrail[Math.min(whaleTrail.length - 1, TAIL_RIPPLE_OFFSET)];
+        drop(tail.x, tail.y, 1.5);
       }
-    }
-    for (var yg = rows - 2; yg >= 1; yg--) {
-      var ygo = yg * cols;
-      for (var xg = 1; xg < cols - 1; xg++) {
-        next[ygo + xg] += next[(yg - 1) * cols + xg] * 0.01;
+
+      // Wave propagation
+      var next = prev;
+      for (var y = 1; y < rows - 1; y++) {
+        var yo = y * cols;
+        for (var x = 1; x < cols - 1; x++) {
+          var i = yo + x;
+          next[i] = ((cur[i - 1] + cur[i + 1] + cur[i - cols] + cur[i + cols]) * 0.5 - prev[i]) * DAMP;
+        }
       }
-    }
-    prev = cur;
-    cur = next;
-
-    // Render water (keeps blue-green tint — only the whale camouflages)
-    tm.background(0);
-    var hc = Math.floor(cols / 2);
-    var hr = Math.floor(rows / 2);
-
-    for (var yw = 0; yw < rows; yw++) {
-      var ywo = yw * cols;
-      for (var xw = 0; xw < cols; xw++) {
-        var h = cur[ywo + xw];
-        var a = Math.abs(h);
-        if (a < 0.06) continue;
-
-        var ci = Math.min(Math.floor(a * 2.0), CHARS.length - 1);
-        var bright = Math.min(a * 50, 255);
-        // Water ripples: subtle rust/copper tint to match whale palette
-        var wr = Math.min(bright * 0.5, 130);
-        var wg = Math.min(bright * 0.3 + 15, 100);
-        var wb = Math.min(bright * 0.25 + 10, 80);
-
-        tm.char(CHARS[ci]);
-        tm.charColor(wr, wg, wb);
-        tm.cellColor(Math.min(a * 3, 12), Math.min(a * 2, 8), Math.min(a * 1, 5));
-        tm.push();
-        tm.translate(xw - hc, yw - hr);
-        tm.rect(1, 1);
-        tm.pop();
+      for (var yg = rows - 2; yg >= 1; yg--) {
+        var ygo = yg * cols;
+        for (var xg = 1; xg < cols - 1; xg++) {
+          next[ygo + xg] += next[(yg - 1) * cols + xg] * 0.01;
+        }
       }
+      prev = cur;
+      cur = next;
+
+      // Render water (keeps blue-green tint — only the whale camouflages)
+      tm.background(0);
+      var hc = Math.floor(cols / 2);
+      var hr = Math.floor(rows / 2);
+
+      for (var yw = 0; yw < rows; yw++) {
+        var ywo = yw * cols;
+        for (var xw = 0; xw < cols; xw++) {
+          var h = cur[ywo + xw];
+          var a = Math.abs(h);
+          if (a < 0.06) continue;
+
+          var ci = Math.min(Math.floor(a * 2.0), CHARS.length - 1);
+          var bright = Math.min(a * 50, 255);
+          // Water ripples: subtle rust/copper tint to match whale palette
+          var wr = Math.min(bright * 0.5, 130);
+          var wg = Math.min(bright * 0.3 + 15, 100);
+          var wb = Math.min(bright * 0.25 + 10, 80);
+
+          tm.char(CHARS[ci]);
+          tm.charColor(wr, wg, wb);
+          tm.cellColor(Math.min(a * 3, 12), Math.min(a * 2, 8), Math.min(a * 1, 5));
+          tm.push();
+          tm.translate(xw - hc, yw - hr);
+          tm.rect(1, 1);
+          tm.pop();
+        }
+      }
+    } else {
+      tm.background(0);
+      var hc = Math.floor(cols / 2);
+      var hr = Math.floor(rows / 2);
     }
 
     // Render page separators (before whale — whale overwrites = dissolve-through effect)
@@ -376,44 +384,46 @@
     }
 
     // Render whale with camouflage
-    var artCols = whaleData.cols;
-    var spacing = 1.8;
-    for (var col = 0; col < artCols.length; col++) {
-      var trailPos = Math.floor(col * spacing);
-      if (trailPos >= whaleTrail.length) break;
-      var pos = whaleTrail[trailPos];
-      var fade = 1.0 - (col / artCols.length) * 0.7;
+    if (!isMobile) {
+      var artCols = whaleData.cols;
+      var spacing = 1.8;
+      for (var col = 0; col < artCols.length; col++) {
+        var trailPos = Math.floor(col * spacing);
+        if (trailPos >= whaleTrail.length) break;
+        var pos = whaleTrail[trailPos];
+        var fade = 1.0 - (col / artCols.length) * 0.7;
 
-      // Base brightness ramp from WHALE_HIGH (head) to WHALE_BASE (tail)
-      var headRatio = 1.0 - (col / artCols.length);
-      var bR = WHALE_BASE.r + (WHALE_HIGH.r - WHALE_BASE.r) * headRatio;
-      var bG = WHALE_BASE.g + (WHALE_HIGH.g - WHALE_BASE.g) * headRatio;
-      var bB = WHALE_BASE.b + (WHALE_HIGH.b - WHALE_BASE.b) * headRatio;
+        // Base brightness ramp from WHALE_HIGH (head) to WHALE_BASE (tail)
+        var headRatio = 1.0 - (col / artCols.length);
+        var bR = WHALE_BASE.r + (WHALE_HIGH.r - WHALE_BASE.r) * headRatio;
+        var bG = WHALE_BASE.g + (WHALE_HIGH.g - WHALE_BASE.g) * headRatio;
+        var bB = WHALE_BASE.b + (WHALE_HIGH.b - WHALE_BASE.b) * headRatio;
 
-      // Apply fade
-      bR *= fade;
-      bG *= fade;
-      bB *= fade;
+        // Apply fade
+        bR *= fade;
+        bG *= fade;
+        bB *= fade;
 
-      // Get viewport position for this part of the whale
-      var vp = gridToViewport(pos.x, pos.y);
+        // Get viewport position for this part of the whale
+        var vp = gridToViewport(pos.x, pos.y);
 
-      // Blend toward nearby element colors
-      var blended = getBlendedColor(vp.x, vp.y, bR, bG, bB);
+        // Blend toward nearby element colors
+        var blended = getBlendedColor(vp.x, vp.y, bR, bG, bB);
 
-      for (var p = 0; p < artCols[col].length; p++) {
-        var ch = artCols[col][p].ch;
-        var vert = artCols[col][p].vert;
-        var gx = Math.round(pos.x);
-        var gy = Math.round(pos.y) + vert;
+        for (var p = 0; p < artCols[col].length; p++) {
+          var ch = artCols[col][p].ch;
+          var vert = artCols[col][p].vert;
+          var gx = Math.round(pos.x);
+          var gy = Math.round(pos.y) + vert;
 
-        tm.char(ch);
-        tm.charColor(blended.r, blended.g, blended.b);
-        tm.cellColor(Math.floor(fade * 3), Math.floor(fade * 1), Math.floor(fade * 1));
-        tm.push();
-        tm.translate(gx - hc, gy - hr);
-        tm.rect(1, 1);
-        tm.pop();
+          tm.char(ch);
+          tm.charColor(blended.r, blended.g, blended.b);
+          tm.cellColor(Math.floor(fade * 3), Math.floor(fade * 1), Math.floor(fade * 1));
+          tm.push();
+          tm.translate(gx - hc, gy - hr);
+          tm.rect(1, 1);
+          tm.pop();
+        }
       }
     }
 
@@ -460,6 +470,7 @@
   });
 
   tm.windowResized(function () {
+    isMobile = window.innerWidth < 768;
     tm.resizeCanvas(window.innerWidth, window.innerHeight);
     init();
   });
