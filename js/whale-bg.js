@@ -67,6 +67,10 @@
   // Base whale colors: #924a41 and #c08179
   var WHALE_BASE = { r: 146, g: 74, b: 65 };    // #924a41
   var WHALE_HIGH = { r: 192, g: 129, b: 121 };   // #c08179
+  // Separator color: WHALE_BASE dimmed to 68%
+  var SEP_R = Math.round(WHALE_BASE.r * 0.68);
+  var SEP_G = Math.round(WHALE_BASE.g * 0.68);
+  var SEP_B = Math.round(WHALE_BASE.b * 0.68);
 
   // Element color mapping
   var COLOR_MAP = [
@@ -104,11 +108,73 @@
     }
   }
 
+  // Read-more separator — canvas-rendered "/// :: READ MORE :: ///" bar
+  var RM_TEXT = '/// :: READ MORE :: ///';
+  var RM_DIM  = 0.28;  // brightness of outer fill slashes vs central text
+
+  var readMoreSeps = [];
+  var rmSepsDirty  = true;
+
+  function initReadMoreHandlers() {
+    var els = document.querySelectorAll('.read-more-sep');
+    for (var i = 0; i < els.length; i++) {
+      (function (el) {
+        var href = el.getAttribute('data-href');
+        function go() { window.location.href = href; }
+        el.addEventListener('click', go);
+        el.addEventListener('touchstart', function (e) {
+          e.preventDefault();
+          go();
+        }, { passive: false });
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') go();
+        });
+      })(els[i]);
+    }
+  }
+
+  function updateReadMoreSeps() {
+    readMoreSeps = [];
+    var els = document.querySelectorAll('.read-more-sep');
+    for (var i = 0; i < els.length; i++) {
+      var r = els[i].getBoundingClientRect();
+      readMoreSeps.push({ vpY: r.top + r.height / 2 });
+    }
+    rmSepsDirty = false;
+  }
+
+  // Page separators — horizontal character lines drawn on canvas at each .page-sep element
+  var pageSeps = [];
+  var sepsDirty = true;
+  var sepColStart = 0, sepColEnd = 0;  // shared content bounds for all seps on the page
+
+  function updatePageSeps() {
+    pageSeps = [];
+    var els = document.querySelectorAll('.page-sep');
+    if (!els.length) { sepsDirty = false; return; }
+
+    // Full canvas width — the canvas sits behind all page content so sidebar/TOC
+    // appear on top regardless, no need to clip the separator line.
+    sepColStart = 1;
+    sepColEnd   = cols - 1;
+
+    for (var i = 0; i < els.length; i++) {
+      var r = els[i].getBoundingClientRect();
+      pageSeps.push({
+        chars: els[i].getAttribute('data-chars') || '---://-',
+        vpY:   r.top + r.height / 2
+      });
+    }
+    sepsDirty = false;
+  }
+
   // Throttled scroll/resize update
   var targetsDirty = true;
   var targetsTimer = null;
   function scheduleTargetUpdate() {
     targetsDirty = true;
+    sepsDirty = true;
+    rmSepsDirty = true;
     if (!targetsTimer) {
       targetsTimer = setTimeout(function () {
         targetsTimer = null;
@@ -119,6 +185,10 @@
   }
   window.addEventListener('scroll', scheduleTargetUpdate, { passive: true });
   window.addEventListener('resize', scheduleTargetUpdate, { passive: true });
+
+  // Mouse Y tracking for separator hover magnification
+  var mouseVpY = -9999;
+  document.addEventListener('mousemove', function (e) { mouseVpY = e.clientY; }, { passive: true });
 
   // Find blended color for a given viewport position
   function getBlendedColor(vpx, vpy, baseR, baseG, baseB) {
@@ -166,6 +236,8 @@
     prev = new Float32Array(cols * rows);
     whaleTrail = [];
     updateColorTargets();
+    updatePageSeps();
+    updateReadMoreSeps();
   }
 
   function drop(x, y, force) {
@@ -182,6 +254,7 @@
 
   tm.setup(function () {
     init();
+    initReadMoreHandlers();
     setTimeout(function () {
       var cover = document.getElementById('whale-cover');
       if (cover) {
@@ -266,6 +339,42 @@
       }
     }
 
+    // Render page separators (before whale — whale overwrites = dissolve-through effect)
+    if (sepsDirty) updatePageSeps();
+    var cellH = window.innerHeight / rows;   // pixel height of one grid row
+    for (var si = 0; si < pageSeps.length; si++) {
+      var sep = pageSeps[si];
+      var sepRow = Math.round((sep.vpY / window.innerHeight) * rows);
+      if (sepRow < 1 || sepRow >= rows - 1) continue;
+      var chars = sep.chars, clen = chars.length;
+
+      // Hover detection: mouse within one cell height of separator row
+      var hovering = Math.abs(mouseVpY - sep.vpY) < cellH;
+
+      // Normal: 1 row. Hovered: 3 rows (centre full brightness, outer rows at 40%).
+      // Three rows ≈ +25% apparent height increase as a soft glow effect.
+      var rowOffsets = hovering ? [-1, 0, 1] : [0];
+      var rowDims    = hovering ? [0.4, 1.0, 0.4] : [1.0];
+
+      for (var ri = 0; ri < rowOffsets.length; ri++) {
+        var dr = rowOffsets[ri];
+        var rr = sepRow + dr;
+        if (rr < 1 || rr >= rows - 1) continue;
+        var dim = rowDims[ri];
+        for (var cx = sepColStart; cx < sepColEnd; cx++) {
+          var sch = chars[cx % clen];
+          if (sch === ' ') continue;
+          tm.char(sch);
+          tm.charColor(SEP_R * dim, SEP_G * dim, SEP_B * dim);
+          tm.cellColor(3 * dim, 1 * dim, 1 * dim);
+          tm.push();
+          tm.translate(cx - hc, rr - hr);
+          tm.rect(1, 1);
+          tm.pop();
+        }
+      }
+    }
+
     // Render whale with camouflage
     var artCols = whaleData.cols;
     var spacing = 1.8;
@@ -305,6 +414,47 @@
         tm.translate(gx - hc, gy - hr);
         tm.rect(1, 1);
         tm.pop();
+      }
+    }
+
+    // Render read-more separators AFTER whale so they always paint on top
+    if (rmSepsDirty) updateReadMoreSeps();
+    var rmLen       = RM_TEXT.length;
+    var rmTextStart = hc - Math.floor(rmLen / 2);
+
+    for (var rmi = 0; rmi < readMoreSeps.length; rmi++) {
+      var rm = readMoreSeps[rmi];
+      var rmRow = Math.round((rm.vpY / window.innerHeight) * rows);
+      if (rmRow < 1 || rmRow >= rows - 1) continue;
+
+      var rmHov = Math.abs(mouseVpY - rm.vpY) < cellH;
+      var rmOff = rmHov ? [-1, 0, 1] : [0];
+      var rmDim = rmHov ? [0.4, 1.0, 0.4] : [1.0];
+
+      for (var rri = 0; rri < rmOff.length; rri++) {
+        var rrr = rmRow + rmOff[rri];
+        if (rrr < 1 || rrr >= rows - 1) continue;
+        var rd = rmDim[rri];
+
+        for (var rcx = 1; rcx < cols - 1; rcx++) {
+          var ti = rcx - rmTextStart;
+          var rch, rbright;
+          if (ti >= 0 && ti < rmLen) {
+            rch     = RM_TEXT[ti];
+            rbright = rd;
+          } else {
+            rch     = '/';
+            rbright = rd * RM_DIM;
+          }
+          if (rch === ' ') continue;
+          tm.char(rch);
+          tm.charColor(SEP_R * rbright, SEP_G * rbright, SEP_B * rbright);
+          tm.cellColor(3 * rbright, 1 * rbright, 1 * rbright);
+          tm.push();
+          tm.translate(rcx - hc, rrr - hr);
+          tm.rect(1, 1);
+          tm.pop();
+        }
       }
     }
   });

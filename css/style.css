@@ -321,7 +321,8 @@ video {
     right: 50px;
     text-decoration: none;
     display: none;
-    background-color: #000
+    background-color: #000;
+    z-index: 1031
 }
 
 #gotop span {
@@ -852,3 +853,5 @@ border: 2px solid rgb(255, 255, 255) !important;
 .widget.newsletter .newsletter__msg--success{ color: #fff; }
 .widget.newsletter .newsletter__msg--pending{ color: #867ade; }
 .widget.newsletter .newsletter__msg--error{ color: #b94a48; }
+
+/* .more button replaced by canvas-rendered .read-more-sep */

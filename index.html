@@ -140,8 +140,145 @@
   .toc {
     background: rgba(0, 0, 0, 0.8) !important;
   }
+  /* Page separator markers — invisible in DOM, rendered on canvas by whale-bg.js.
+     Margins must cover the hover-state height (3 canvas rows = 3×16px = 48px)
+     plus a comfortable visual gap. Using em units tied to the page font size. */
+  .page-sep {
+    height: 0;
+    margin: 1.5em 0 3.5em 0;
+    padding: 0;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+  }
+  /* Read-more separator — full-width clickable canvas row, replaces the button */
+  .read-more-sep {
+    height: 3.5em;
+    margin: 1em 0 0.5em 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    z-index: 1;
+    outline: none;
+  }
+  .read-more-sep:focus-visible {
+    box-shadow: 0 0 0 2px #493aa5;
+  }
 </style>
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
  <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -222,7 +359,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/" title="This software is open (in terms of freedom), available for use &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;on Github&lt;/a&gt;">Certamen: the TUI Quizzing App</a>
+			<a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/" title="&lt;b&gt;Certamen&lt;/b&gt; is a Terminal User Interface quiz game engine written in C++, built with FTXUI, yaml-cpp and libssh. This document traces the entire development from CLI alpha called &#34;Quizzer&#34; to a TUI application with SSH multi-player, multi-file quiz sessions, syntax highlighting, and multi-platform CI/CD. Available freely on &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;Github&lt;/a&gt; and &lt;a href=&#34;https://codeberg.org/trintlermint/certamen&#34;&gt;Codeberg&lt;/a&gt;.">Certamen: Building a TUI Quiz Game Engine in C++</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -235,20 +372,21 @@
 			<div class="entry">
   <div class="row">
 	
+           
+  	      <div class="thumbnail"><a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/"><img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/peanuts-quiz.png" alt="Certamen: Building a TUI Quiz Game Engine in C++"  class="nofancybox"></a>
+           
+		</div>
 	
-		<div align="center">
-
-<h3 id="A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer"><a href="#A-Terminal-User-Interface-Quiz-Game-Engine-written-entirely-in-C-the-sequel-of-Quizzer" class="headerlink" title="A Terminal User Interface Quiz Game Engine written entirely in C++. (the sequel of Quizzer)"></a>A <em>Terminal User Interface</em> <strong>Quiz Game Engine</strong> written entirely in C++. (the sequel of Quizzer)</h3><p><img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/serve-3.png" alt="Demo"></p>
-<h2 id="Author-Quizzes-and-seamlessly-“test”-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play"><a href="#Author-Quizzes-and-seamlessly-“test”-yourself-in-a-full-screen-TUI-host-the-game-over-SSH-for-you-and-your-friends-to-play" class="headerlink" title="Author Quizzes and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!"></a>Author <em>Quizzes</em> and seamlessly “test” yourself in a full-screen TUI; host the game over SSH for you and your friends to play!</h2><blockquote>
-<p>This way, you get to make fun of their… incredibly (lacking) <em>haskell</em> knowledge for example!<br>One might ask: I’m passing everything, why do I need this?</p>
-</blockquote>
-<h3 id="Charlie-Brown-aces-his-tests-with-this"><a href="#Charlie-Brown-aces-his-tests-with-this" class="headerlink" title="Charlie Brown aces his tests with this!"></a>Charlie Brown aces his tests with this!</h3><p><img src="/2026/03/28/Certamen-the-TUI-Quizzing-App/peanuts-quiz.png" alt="Charlie brown actively using Certamen pre-dev."><br><br /></p>
-</div>
-
-<h2 id=""><a href="#" class="headerlink" title=""></a>
+	
+		<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>As a university student with examinations around the corner, one grows tired of the same Flashcards and Quizlet decks.For this reason, I wanted something that I could use freely as a Terminal User Interface that paired well with the rest of my dotfiles and respective setup. At a later point, this turned to some rivalry based on points scored on <em>Who knows the most Haskell?</em> (I do!)</p>
+<p>After finding and contributing to FTXUI<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="FTXUI: Functional Terminal (X) User Interface. See [ArthurSonzogni/FTXUI on GitHub](https://github.com/ArthurSonzogni/FTXUI), version 6.1.9 used.">[2]</span></a></sup> on Github, I decided to develop <strong>Certamen</strong> <em>(latin: contest)</em><sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="See the [Wikipedia article on Certamen](https://en.wikipedia.org/wiki/Certamen), Latin for contest or quiz competition.">[1]</span></a></sup>.</p>
 	
 	</div>
-  <a type="button" href="/2026/03/28/Certamen-the-TUI-Quizzing-App/#more" class="btn btn-default more">Read More</a>
+  <div class="read-more-sep"
+       data-href="/2026/03/28/Certamen-the-TUI-Quizzing-App/#more"
+       role="link"
+       tabindex="0"
+       aria-label="Read more"></div>
 </div>
 
 		
@@ -258,35 +396,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2026/03/24/JOSS-Reviewed-solve-nivp/" title="ABSTRACT; This documents my process as reviewer for the &lt;a href=&#34;https://doi.org/10.21105/joss.09775&#34;&gt;solve_nivp&lt;/a&gt; package published in the Journal of Open Source Software.">JOSS: Reviewed solve_nivp</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2026-03-24  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="SOLVE-NIVP"><a href="#SOLVE-NIVP" class="headerlink" title="SOLVE_NIVP"></a>SOLVE_NIVP</h1><p>Recently, I had the pleasure to be able to help peer review the research software package <strong>solve_nivp</strong> released as a print on the <a target="_blank" rel="noopener" href="https://joss.theoj.org">Journal of Open Source Software (JOSS)</a>,<br><a target="_blank" rel="noopener" href="https://doi.org/10.21105/joss.09775"><img src="https://joss.theoj.org/papers/10.21105/joss.09775/status.svg" alt="DOI"></a><a target="_blank" rel="noopener" href="https://doi.org/10.21105/joss.09775"><strong>LINK</strong></a> (need to fix this haha)<br><img src="/2026/03/24/JOSS-Reviewed-solve-nivp/joss-encode.png" alt="JOSS"></p>
-<h2 id="Package-purpose"><a href="#Package-purpose" class="headerlink" title="Package purpose"></a>Package purpose</h2><p>solve_nivp is a Python library for time integration of nonsmooth ODE&#x2F;DAE models: systems with abrupt changes such as impacts, switching, or inequality constraints. Such models are widespread: frictional contact in mechanics, piecewise and switching behaviour in circuits, sliding–mode control, and discontinuous rules in finance and energy markets [@brogliato2016nonsmooth; @acary2008numerical; @bernardo2008piecewise; @ShtesselEdwardsFridmanLevant2014; @Tramontana2010; @gabriel2012complementarity].</p>
-	
-	</div>
-  <a type="button" href="/2026/03/24/JOSS-Reviewed-solve-nivp/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/" title="ABSTRACT; Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;">2025/2026 ICPC Regional Performance</a>
+			<a href="/2026/03/24/JOSS-Reviewed-solve-nivp/" title="&lt;b&gt;solve_nivp&lt;/b&gt; is a Python library for time-stepping nonsmooth ODE and DAE systems. This post explains what that means, why classical solvers fail at discontinuities, and how the library encodes impact laws and complementarity conditions directly into an implicit integrator — reviewed for the &lt;a href=&#34;https://doi.org/10.21105/joss.09775&#34;&gt;Journal of Open Source Software&lt;/a&gt;.">JOSS: Reviewed solve_nivp</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -300,17 +410,61 @@
   <div class="row">
 	
            
-  	      <div class="thumbnail"><a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/"><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/icpc-balloons.png" alt="2025/2026 ICPC Regional Performance"  class="nofancybox"></a>
+  	      <div class="thumbnail"><a href="/2026/03/24/JOSS-Reviewed-solve-nivp/"><img src="/2026/03/24/JOSS-Reviewed-solve-nivp/joss.png" alt="JOSS: Reviewed solve_nivp"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<h1 id="SOLVE-NIVP"><a href="#SOLVE-NIVP" class="headerlink" title="SOLVE_NIVP"></a>SOLVE_NIVP</h1><p>I had the pleasure of peer-reviewing the research software package <strong>solve_nivp</strong>, published in the <a target="_blank" rel="noopener" href="https://joss.theoj.org/">Journal of Open Source Software (JOSS)</a> — <a target="_blank" rel="noopener" href="https://doi.org/10.21105/joss.09775"><strong>DOI: 10.21105/joss.09775</strong></a>, authored by <strong>David Riley</strong> and <strong>Ioannis Stefanou</strong>.</p>
+<p><img src="https://joss.theoj.org/papers/10.21105/joss.09775/status.svg" alt="JOSS DOI badge"></p>
+<p>I was invited as co-reviewer alongside <strong><a target="_blank" rel="noopener" href="https://github.com/ductho-le">Ductho Le</a></strong> and <strong><a target="_blank" rel="noopener" href="https://github.com/wwhenxuan">WhenXuan</a></strong> by <em>Editor</em> <strong><a target="_blank" rel="noopener" href="https://danielskatz.org/">Daniel S. Katz</a></strong>. This post is <strong>not a review log</strong>, it is an explanation of what solve_nivp actually does, since the problem it solves is genuinely interesting and under-discussed.</p>
+	
+	</div>
+  <div class="read-more-sep"
+       data-href="/2026/03/24/JOSS-Reviewed-solve-nivp/#more"
+       role="link"
+       tabindex="0"
+       aria-label="Read more"></div>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/" title="Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;">2025/2026 ICPC Regional Performance</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2026-03-24  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+           
+  	      <div class="thumbnail"><a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/"><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/desk.jpeg" alt="2025/2026 ICPC Regional Performance"  class="nofancybox"></a>
            
 		</div>
 	
 	
 		<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><h2 id="ICPC"><a href="#ICPC" class="headerlink" title="ICPC"></a>ICPC</h2><p>The International Collegiate Programming Contest is an incredibly renowned competitive programming competition with various stages, in this document I walk through my experience this 2026 ICPC in my three regional contests.</p>
+<div class="page-sep" data-chars="van://-" aria-hidden="true"></div>
+
 <h2 id="Team-Found"><a href="#Team-Found" class="headerlink" title="Team Found"></a>Team Found</h2><p><strong>Valyn</strong>, <strong>Anton</strong> and <strong>I</strong> formed the sudden team <strong>“(() &#x3D;&gt; {})();”</strong> – which indeed is meant to represent the no-ops lambda function in javascript or “arrow-function” – thought of by our one and only Valyn on the first day (the initial orchestrator.)</p>
-<p><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/team_encoded.png" alt="TEAM"><br>van:&#x2F;&#x2F;-</p>
+<p><img src="/2026/03/24/2025-2026-ICPC-Regional-Performance/team_encoded.png" alt="TEAM"></p>
 	
 	</div>
-  <a type="button" href="/2026/03/24/2025-2026-ICPC-Regional-Performance/#more" class="btn btn-default more">Read More</a>
+  <div class="read-more-sep"
+       data-href="/2026/03/24/2025-2026-ICPC-Regional-Performance/#more"
+       role="link"
+       tabindex="0"
+       aria-label="Read more"></div>
 </div>
 
 		
@@ -449,15 +603,15 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/"  title="This software is open (in terms of freedom), available for use &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;on Github&lt;/a&gt;" ><i class="fa fa-file-o"></i>Certamen: the TUI Quizzing ...</a>
+        <a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/"  title="&lt;b&gt;Certamen&lt;/b&gt; is a Terminal User Interface quiz game engine written in C++, built with FTXUI, yaml-cpp and libssh. This document traces the entire development from CLI alpha called &#34;Quizzer&#34; to a TUI application with SSH multi-player, multi-file quiz sessions, syntax highlighting, and multi-platform CI/CD. Available freely on &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;Github&lt;/a&gt; and &lt;a href=&#34;https://codeberg.org/trintlermint/certamen&#34;&gt;Codeberg&lt;/a&gt;." ><i class="fa fa-file-o"></i>Certamen: Building a TUI Qu...</a>
       </li>
     
       <li>
-        <a href="/2026/03/24/JOSS-Reviewed-solve-nivp/"  title="ABSTRACT; This documents my process as reviewer for the &lt;a href=&#34;https://doi.org/10.21105/joss.09775&#34;&gt;solve_nivp&lt;/a&gt; package published in the Journal of Open Source Software." ><i class="fa fa-file-o"></i>JOSS: Reviewed solve_nivp</a>
+        <a href="/2026/03/24/JOSS-Reviewed-solve-nivp/"  title="&lt;b&gt;solve_nivp&lt;/b&gt; is a Python library for time-stepping nonsmooth ODE and DAE systems. This post explains what that means, why classical solvers fail at discontinuities, and how the library encodes impact laws and complementarity conditions directly into an implicit integrator — reviewed for the &lt;a href=&#34;https://doi.org/10.21105/joss.09775&#34;&gt;Journal of Open Source Software&lt;/a&gt;." ><i class="fa fa-file-o"></i>JOSS: Reviewed solve_nivp</a>
       </li>
     
       <li>
-        <a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/"  title="ABSTRACT; Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;" ><i class="fa fa-file-o"></i>2025/2026 ICPC Regional Per...</a>
+        <a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/"  title="Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;" ><i class="fa fa-file-o"></i>2025/2026 ICPC Regional Per...</a>
       </li>
     
   </ul>
@@ -471,9 +625,9 @@
 		
 			<li><a href="/categories/Events/">Events<span>1</span></a></li>
 		
-			<li><a href="/categories/Review/">Review<span>1</span></a></li>
+			<li><a href="/categories/Projects/">Projects<span>1</span></a></li>
 		
-			<li><a href="/categories/Software/">Software<span>1</span></a></li>
+			<li><a href="/categories/Review/">Review<span>1</span></a></li>
 		
 		</ul>
 	</div>
@@ -484,27 +638,43 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
-		
-			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
-		
-			<li><a href="/tags/joss/">joss<span>1</span></a></li>
-		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
-		
-			<li><a href="/tags/oss/">oss<span>2</span></a></li>
-		
-			<li><a href="/tags/certamen/">certamen<span>1</span></a></li>
-		
-			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
-		
-			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
-		
-			<li><a href="/tags/review/">review<span>1</span></a></li>
+			<li><a href="/tags/yaml/">yaml<span>1</span></a></li>
 		
 			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
 		
-			<li><a href="/tags/project/">project<span>1</span></a></li>
+			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
+		
+			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
+		
+			<li><a href="/tags/math/">math<span>1</span></a></li>
+		
+			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
+		
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+		
+			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/numerical-methods/">numerical-methods<span>1</span></a></li>
+		
+			<li><a href="/tags/tui/">tui<span>1</span></a></li>
+		
+			<li><a href="/tags/ssh/">ssh<span>1</span></a></li>
+		
+			<li><a href="/tags/c/">c++<span>1</span></a></li>
+		
+			<li><a href="/tags/cmake/">cmake<span>1</span></a></li>
+		
+			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
+		
+			<li><a href="/tags/oss/">oss<span>2</span></a></li>
+		
+			<li><a href="/tags/review/">review<span>1</span></a></li>
+		
+			<li><a href="/tags/packaging/">packaging<span>1</span></a></li>
+		
+			<li><a href="/tags/joss/">joss<span>1</span></a></li>
 		
 		 
 		</ul>
