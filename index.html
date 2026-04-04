@@ -359,6 +359,45 @@ mjx-container[display="true"] + br {
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2026/04/02/hexo-sam-reader-Development/" title="hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and turning it into a published npm package.">hexo-sam-reader: Building a SAM Text-to-Speech Plugin for Hexo</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2026-04-02  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+           
+  	      <div class="thumbnail"><a href="/2026/04/02/hexo-sam-reader-Development/"><img src="/2026/04/02/hexo-sam-reader-Development/sam.webp" alt="hexo-sam-reader: Building a SAM Text-to-Speech Plugin for Hexo"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>I wanted a way for readers to listen to these posts rather than read them, something embedded directly into the sidebar, which was not barred, but sensible.</p>
+<p>The answer was <strong>SAM</strong>: the Software Automatic Mouth<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="SAM (Software Automatic Mouth) was created by Mark Barton of Don't Ask Software in 1982, originally for the Commodore 64. It was one of the first commercially available speech synthesisers for home computers.">[1]</span></a></sup>, a speech synthesiser originally written in 1982 by Mark Barton of Don’t Ask Software for the Commodore 64. Christian Schiffler (@discordier) ported SAM to JavaScript as <strong>SamJs</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="SamJs v0.3.0 by Christian Schiffler (discordier). A JavaScript port of SAM that preserves the original phoneme engine. Source: [github.com/discordier/sam](https://github.com/discordier/sam).">[2]</span></a></sup>, preserving the original’s distinctive robotic phoneme engine in a <em>looooong</em> ca. 3000-line browser-compatible library. SAM does not stream audio from a server! It runs entirely in the browser, synthesising speech from raw text via the Web Audio API<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="The Web Audio API provides the `AudioContext`, `AudioBuffer`, and `AudioBufferSourceNode` interfaces used for PCM playback. SAM outputs audio at 22050 Hz, which is passed directly to `AudioContext.createBuffer()`.
+">[3]</span></a></sup>. Therefore there exist no latency beyond local computation. Helpful considering the new state of my internet after moving in! (it is <em>awful</em>)</p>
+<p>The result is <strong>hexo-sam-reader</strong>, a Hexo plugin that adds a SAM-powered TTS reader widget to any blog post. This document traces the full development from a hardcoded prototype to a published npm package. In the future I plan to have a smoother sounding voice, but I would like to talk about SAM first!</p>
+	
+	</div>
+  <div class="read-more-sep"
+       data-href="/2026/04/02/hexo-sam-reader-Development/#more"
+       role="link"
+       tabindex="0"
+       aria-label="Read more"></div>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/" title="&lt;b&gt;Certamen&lt;/b&gt; is a Terminal User Interface quiz game engine written in C++, built with FTXUI, yaml-cpp and libssh. This document traces the entire development from CLI alpha called &#34;Quizzer&#34; to a TUI application with SSH multi-player, multi-file quiz sessions, syntax highlighting, and multi-platform CI/CD. Available freely on &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;Github&lt;/a&gt; and &lt;a href=&#34;https://codeberg.org/trintlermint/certamen&#34;&gt;Codeberg&lt;/a&gt;.">Certamen: Building a TUI Quiz Game Engine in C++</a>
 		</h3>
 		</div>
@@ -584,13 +623,15 @@ mjx-container[display="true"] + br {
 	<h4>Links</h4>
 	<ul class="blogroll list-unstyled">
 	
+		<li><i class="fa fa-wave"></i><a href="https://trintler.me" title="Look at the Sea of all my creatures" target="_blank"]);">Sea</a></li>
+	
+		<li><i class="fa fa-id-badge"></i><a href="https://orcid.org/0009-0005-1085-9286" title="Niladri Adhikary's ORCID researcher profile." target="_blank"]);">ORCID</a></li>
+	
+		<li><i class="fa fa-git"></i><a href="https://codeberg.org/trintlermint" title="Niladri Adhikary's Codeberg" target="_blank"]);">Codeberg</a></li>
+	
+		<li><i class="fa fa-github"></i><a href="https://github.com/trintlermint" title="Niladri Adhikary's GitHub" target="_blank"]);">GitHub</a></li>
+	
 		<li><i class="fa fa-linkedin"></i><a href="https://www.linkedin.com/in/niladri-adhikary-23b3282a3/" title="My LinkedIn profile." target="_blank"]);">LinkedIn</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/trintlermint" title="My GitHub profile." target="_blank"]);">GitHub</a></li>
-	
-		<li><i class="fa fa-trophy"></i><a href="https://icpc.global/ICPCID/N1XIPN76JDVM" title="My ICPC competitor profile." target="_blank"]);">ICPC Profile</a></li>
-	
-		<li><i class="fa fa-id-badge"></i><a href="https://orcid.org/0009-0005-1085-9286" title="My ORCID researcher profile." target="_blank"]);">ORCID</a></li>
 	
 	</ul>
 </div>
@@ -601,6 +642,10 @@ mjx-container[display="true"] + br {
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2026/04/02/hexo-sam-reader-Development/"  title="hexo-sam-reader is a Hexo plugin that adds a SAM (Software Automatic Mouth) text-to-speech reader widget to blog posts. This document traces the full development of configuring the SAM TTS for my blog posts, and turning it into a published npm package." ><i class="fa fa-file-o"></i>hexo-sam-reader: Building a...</a>
+      </li>
     
       <li>
         <a href="/2026/03/28/Certamen-the-TUI-Quizzing-App/"  title="&lt;b&gt;Certamen&lt;/b&gt; is a Terminal User Interface quiz game engine written in C++, built with FTXUI, yaml-cpp and libssh. This document traces the entire development from CLI alpha called &#34;Quizzer&#34; to a TUI application with SSH multi-player, multi-file quiz sessions, syntax highlighting, and multi-platform CI/CD. Available freely on &lt;a href=&#34;https://github.com/trintlermint/certamen&#34;&gt;Github&lt;/a&gt; and &lt;a href=&#34;https://codeberg.org/trintlermint/certamen&#34;&gt;Codeberg&lt;/a&gt;." ><i class="fa fa-file-o"></i>Certamen: Building a TUI Qu...</a>
@@ -625,7 +670,7 @@ mjx-container[display="true"] + br {
 		
 			<li><a href="/categories/Events/">Events<span>1</span></a></li>
 		
-			<li><a href="/categories/Projects/">Projects<span>1</span></a></li>
+			<li><a href="/categories/Projects/">Projects<span>2</span></a></li>
 		
 			<li><a href="/categories/Review/">Review<span>1</span></a></li>
 		
@@ -638,44 +683,48 @@ mjx-container[display="true"] + br {
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
-		
-			<li><a href="/tags/math/">math<span>1</span></a></li>
-		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
-		
-			<li><a href="/tags/yaml/">yaml<span>1</span></a></li>
-		
-			<li><a href="/tags/cmake/">cmake<span>1</span></a></li>
-		
-			<li><a href="/tags/ssh/">ssh<span>1</span></a></li>
-		
-			<li><a href="/tags/review/">review<span>1</span></a></li>
-		
 			<li><a href="/tags/c/">c++<span>1</span></a></li>
-		
-			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
-		
-			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
-		
-			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
-		
-			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
-		
-			<li><a href="/tags/oss/">oss<span>2</span></a></li>
-		
-			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
 		
 			<li><a href="/tags/python/">python<span>1</span></a></li>
 		
-			<li><a href="/tags/numerical-methods/">numerical-methods<span>1</span></a></li>
+			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
 		
-			<li><a href="/tags/tui/">tui<span>1</span></a></li>
+			<li><a href="/tags/js/">js<span>1</span></a></li>
 		
-			<li><a href="/tags/packaging/">packaging<span>1</span></a></li>
+			<li><a href="/tags/yaml/">yaml<span>1</span></a></li>
+		
+			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
+		
+			<li><a href="/tags/npm/">npm<span>1</span></a></li>
+		
+			<li><a href="/tags/math/">math<span>1</span></a></li>
 		
 			<li><a href="/tags/joss/">joss<span>1</span></a></li>
 		
+			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
+		
+			<li><a href="/tags/cmake/">cmake<span>1</span></a></li>
+		
+			<li><a href="/tags/tts/">tts<span>1</span></a></li>
+		
+			<li><a href="/tags/tui/">tui<span>1</span></a></li>
+		
+			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
+		
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+		
+			<li><a href="/tags/ssh/">ssh<span>1</span></a></li>
+		
+			<li><a href="/tags/packaging/">packaging<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
+		
+			<li><a href="/tags/numerical-methods/">numerical-methods<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>
