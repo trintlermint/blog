@@ -65,90 +65,6 @@
 
   
   <url>
-    <loc>http://blog.trintler.me/tags/icpc/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/nwerc/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/bapc/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/tapc/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/competitive-programming/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/joss/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/review/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/oss/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/open-sci/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/numerical-methods/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/python/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.trintler.me/tags/math/</loc>
-    <lastmod>2026-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.trintler.me/tags/c/</loc>
     <lastmod>2026-04-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -197,10 +113,94 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://blog.trintler.me/tags/oss/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/joss/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/review/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/open-sci/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/numerical-methods/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/python/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/math/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/icpc/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/nwerc/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/bapc/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/tapc/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.trintler.me/tags/competitive-programming/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
-    <loc>http://blog.trintler.me/categories/Events/</loc>
+    <loc>http://blog.trintler.me/categories/Projects/</loc>
     <lastmod>2026-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -214,7 +214,7 @@
   </url>
   
   <url>
-    <loc>http://blog.trintler.me/categories/Projects/</loc>
+    <loc>http://blog.trintler.me/categories/Events/</loc>
     <lastmod>2026-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
