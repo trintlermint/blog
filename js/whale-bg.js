@@ -92,6 +92,7 @@
       PageSepModule.drawPageSeps(tm, state);
       GradientModule.draw(tm, state);
       PageSepModule.drawRmSeps(tm, state);
+      if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);  // 404 page only
       return;
     }
 
@@ -100,6 +101,7 @@
     GradientModule.draw(tm, state);          // desc gradient (before whale)
     WhaleModule.drawWhale(tm, state);        // whale entity
     PageSepModule.drawRmSeps(tm, state);     // read-more seps (always on top)
+    if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);  // 404 page only
   });
 
   tm.windowResized(function () {
