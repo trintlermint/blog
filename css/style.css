@@ -580,6 +580,24 @@ figure {
     background: #352b42 !important
 }
 
+/* Post description box — tag-cloud palette, bolder, with room for canvas gradient */
+.alert-success.description {
+    color: #c08179;
+    border: 2px dashed #924a41;
+    border-radius: 3px;
+    font-weight: bold;
+    margin-bottom: 5em;  /* space below = 5 canvas rows for the ASCII gradient */
+}
+
+.alert-success.description b,
+.alert-success.description strong {
+    color: #fff;
+}
+
+.alert-success.description a {
+    color: #867ade;
+}
+
 .thumbnail {
     border: 0
 }
