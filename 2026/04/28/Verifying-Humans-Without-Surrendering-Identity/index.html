@@ -1,0 +1,951 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-1C9I3Au7T8f4fvDr1OQN4.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+
+
+  <title>Verifying Humans Without Surrendering Identity: A Case Against Government-Issued Online Verification | trintler&#39;s weblog</title>
+  <meta name="author" content="Niladri Adhikary">
+  
+  <meta name="description" content="Although government-issued identity verification addresses the genuine challenge of distinguishing humans from automated systems, its widespread implementation commoditises personal identity data and exposes users to inconsistent privacy protections.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="http://blog.trintler.me/2026/04/28/Verifying-Humans-Without-Surrendering-Identity/" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="http://blog.trintler.me/2026/04/28/Verifying-Humans-Without-Surrendering-Identity/"/>
+  <meta property="og:title" content="Verifying Humans Without Surrendering Identity: A Case Against Government-Issued Online Verification"/>
+  <meta property="og:site_name" content="trintler&#39;s weblog"/>
+  
+  <meta property="og:description" content="Although government-issued identity verification addresses the genuine challenge of distinguishing humans from automated systems, its widespread implementation commoditises personal identity data and exposes users to inconsistent privacy protections."/>
+  
+  
+    <meta property="og:image" content=""/>
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Verifying Humans Without Surrendering Identity: A Case Against Government-Issued Online Verification"/>
+  
+  <meta name="twitter:description" content="Although government-issued identity verification addresses the genuine challenge of distinguishing humans from automated systems, its widespread implementation commoditises personal identity data and exposes users to inconsistent privacy protections."/>
+  
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="trintler&#39;s weblog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<!-- hexo injector head_end start -->
+<style>
+  /* Black overlay covers canvas during textmode.js loading phase */
+  body {
+    background: #000 !important;
+  }
+  #whale-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  #whale-cover.fade-out {
+    opacity: 0;
+  }
+  /* Page content sits above the cover, cover sits above the canvas */
+  #container, #wrap, .container, .container-narrow, footer {
+    position: relative;
+    z-index: 1;
+  }
+  /* Navbar must keep position:fixed from Bootstrap, just raise z-index */
+  .navbar-fixed-top {
+    z-index: 1030 !important;
+  }
+  .content {
+    background: transparent !important;
+  }
+  .container {
+    background: transparent !important;
+  }
+  .container-narrow {
+    background: transparent !important;
+  }
+  .post, .page {
+    background: transparent !important;
+  }
+  .mypage {
+    background: transparent !important;
+  }
+  #post_meta {
+    background: transparent !important;
+  }
+  #sidebar {
+    background: transparent !important;
+  }
+  .meta-widget {
+    background: transparent !important;
+  }
+  .widget {
+    background: transparent !important;
+  }
+  footer {
+    background: transparent !important;
+  }
+  .entry {
+    background: transparent !important;
+  }
+  /* Keep these opaque for readability */
+  .navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+  }
+  /* SAM reader keeps its own background */
+  .sam-reader-widget {
+    background: #000 !important;
+  }
+  .toc {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+  /* Page separator markers — invisible in DOM, rendered on canvas by whale-bg.js.
+     Margins must cover the hover-state height (3 canvas rows = 3×16px = 48px)
+     plus a comfortable visual gap. Using em units tied to the page font size. */
+  .page-sep {
+    height: 0;
+    margin: 1.5em 0 3.5em 0;
+    padding: 0;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+  }
+  /* Read-more separator — full-width clickable canvas row, replaces the button */
+  .read-more-sep {
+    height: 3.5em;
+    margin: 1em 0 0.5em 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    z-index: 1;
+    outline: none;
+  }
+  .read-more-sep:focus-visible {
+    box-shadow: 0 0 0 2px #493aa5;
+  }
+</style>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
+
+ <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">trintler&#39;s weblog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Verifying Humans Without Surrendering Identity: A Case Against Government-Issued Online Verification</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> Although government-issued identity verification addresses the genuine challenge of distinguishing humans from automated systems, its widespread implementation commoditises personal identity data and exposes users to inconsistent privacy protections.
+		 </div> <!-- alert -->
+	  		
+
+	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The rapid proliferation of artificially generated content has fundamentally altered the digital landscape. Recent research demonstrates that large language models can pass the Turing test<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Jones, C. R., & Bergen, B. K. (2025). _https://arxiv.org/abs/2503.23674_ Large language models pass the Turing test</a>. _arXiv_.">[1]</span></a></sup>, that LLM-generated content is now widespread across society<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Liang, W., Zhang, Y., Codreanu, M., Wang, J., Cao, H., & Zou, J. (2025). _arxiv.org/abs/2502.09747_ The widespread adoption of large language model-assisted writing across society. _arXiv_.">[2]</span></a></sup>, and that foundational barriers such as CAPTCHAs can be reliably solved by artificial intelligence<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Plesner, A., Vontobel, T., & Wattenhofer, R. (2024). Breaking reCAPTCHAv2. In _2024 IEEE 48th Annual COMPSAC_ (pp. 1047–1056). IEEE. doi:10.1109/compsac61105.2024.00142">[3]</span></a></sup>. In response, many platforms have turned to government-issued identity verification as a definitive solution. Although government-issued identity verification addresses the genuine challenge of distinguishing humans from automated systems, its widespread implementation commoditises personal identity data and exposes users to inconsistent privacy protections. Privacy-preserving alternatives, particularly open-source methodologies that allow individuals to identify themselves, should therefore be adopted as the primary verification mechanism. This essay first examines the rationale behind identity verification, then analyses the privacy risks inherent in current government-issued approaches, and argues that decentralised alternatives offer a superior balance between platform security and individual privacy.</p>
+<span id="more"></span>
+
+<p>Conventional behavioural verification methods are no longer adequate to distinguish human users from automated systems, because the same AI capabilities that drive the verification problem also defeat its existing solutions. When Jones and Bergen (2025)<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Jones, C. R., & Bergen, B. K. (2025). _https://arxiv.org/abs/2503.23674_ Large language models pass the Turing test</a>. _arXiv_.">[1]</span></a></sup> demonstrate that large language models pass the Turing test, and Plesner et al. (2024)<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Plesner, A., Vontobel, T., & Wattenhofer, R. (2024). Breaking reCAPTCHAv2. In _2024 IEEE 48th Annual COMPSAC_ (pp. 1047–1056). IEEE. doi:10.1109/compsac61105.2024.00142">[3]</span></a></sup> show that AI systems solve reCAPTCHA challenges with high accuracy, any verification method relying purely on behavioural cues becomes increasingly untenable. This obsolescence, compounded by the widespread adoption of LLM-generated content<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Liang, W., Zhang, Y., Codreanu, M., Wang, J., Cao, H., & Zou, J. (2025). _arxiv.org/abs/2502.09747_ The widespread adoption of large language model-assisted writing across society. _arXiv_.">[2]</span></a></sup>, creates a verification vacuum that platforms understandably seek to fill.</p>
+<p>However, government-issued verification is not a proportionate response to this vacuum; rather, it introduces substantial privacy risks through third-party data handling and the commoditisation of personal identity. The inadequacy of passwords and security questions<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Berozashvili, T. (2024). Securing digital identities in the era of remote identity verification. doi:10.13140/RG.2.2.11839.11688">[4]</span></a></sup> has driven platforms toward biometric data and government-issued credentials, yet this escalation reveals a perverse dynamic: the mechanism designed to signal trustworthiness simultaneously normalises the surrender of state-issued documents to commercial entities. Verification badges structurally reward credential exposure, as Xiao et al. (2023)<sup id="fnref:5"><a href="#fn:5" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Xiao, M., Wang, M., Kulshrestha, A., & Mayer, J. (2023). _arxiv.org/abs/2304.14939_ Account verification on social media: User perceptions and paid enrollment. _arXiv_.">[5]</span></a></sup> demonstrate through Twitter and LinkedIn, where users voluntarily trade personal data for perceived credibility; although that evidence is drawn from two platforms, the underlying incentive plausibly recurs wherever verified status confers a comparable advantage. Moreover, government-issued digital credentials operate within complex privacy landscapes where data may traverse multiple jurisdictions with varying regulatory standards<sup id="fnref:6"><a href="#fn:6" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Flanagan, H. (2023). _openid.net/Government-issued-Digital-Credentials-and-the-Privacy-Landscape-Final_ Government-issued digital credentials and the privacy landscape. OpenID Foundation.">[6]</span></a></sup>. Centralised verification thus incentivises data aggregation, because the verifying authority accumulates a dataset whose commercial value frequently exceeds its original verification purpose, producing unequal access and gaps in accountability across jurisdictions<sup id="fnref:7"><a href="#fn:7" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="McGrath, K. (2016). Identity verification and societal challenges: Explaining the gap between service provision and development outcomes. _MIS Quarterly_, 40(2), 485–500. JSTOR">[7]</span></a></sup>. Consequently, when identity verification becomes a prerequisite for full platform participation, identity is transformed from an inherent right into a commoditised asset.</p>
+<p>Although privacy-preserving verification technologies remain at relatively early stages of deployment, their architectural principles demonstrate that security and user privacy need not be mutually exclusive objectives. Satybaldy et al. (2022)<sup id="fnref:8"><a href="#fn:8" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Satybaldy, A., Subedi, A., & Nowostawski, M. (2022). A framework for online document verification using self-sovereign identity technology. _Sensors_, 22(21), 8408. doi: 10.3390/s2221840">[8]</span></a></sup> propose a Self-Sovereign Identity framework that enables document verification without centralised storage of sensitive credentials, allowing individuals to maintain control over their personal data while proving their legitimacy. Building on this principle, Muth et al. (2023)<sup id="fnref:9"><a href="#fn:9" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Muth, R., Galal, T., Heiss, J., & Tschorsch, F. (2023). Towards smart contract-based verification of anonymous credentials. In _Financial Cryptography and Data Security: FC 2022 International Workshops_ (pp. 481–498). Springer.
+">[9]</span></a></sup> research smart contract-based verification of anonymous credentials, enabling platforms to confirm user authenticity through cryptographic proofs rather than direct access to government identification. The architectural distinction is significant, as under SSI, the verifying platform never possesses the credential itself but only a cryptographic proof of its validity, which eliminates the centralised data aggregation problem identified in the preceding analysis. Critics may contend that SSI’s limited adoption renders government-issued verification the only scalable option today; although that concession is genuine in the short term, it does not justify entrenching centralised verification, since each new deployment that moves toward decentralised systems reduces the future cost of migration away from commoditised identity infrastructure. These alternatives demonstrate that platforms could adopt privacy-preserving approaches that address the legitimate need for human verification while structurally preventing the privacy compromises that government-issued identification demands.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>Government-issued identity verification, while addressing a genuine challenge posed by AI-generated content and automated systems, should not become the default mechanism for online platforms. The evidence presented demonstrates that the need for human verification is well established, given the capabilities of modern language models and the obsolescence of traditional barriers. However, current implementations create unacceptable privacy trade-offs by commoditising personal identity data and exposing users to inconsistent jurisdictional protections. Decentralised technologies such as Self-Sovereign Identity and anonymous credential verification offer viable pathways that reconcile platform security with individual privacy. Thus, the distinction is ultimately architectural. Systems that never possess a user’s credentials cannot commoditise them, regardless of jurisdictional pressures.</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Jones, C. R., &amp; Bergen, B. K. (2025). <em>https://arxiv.org/abs/2503.23674</em> Large language models pass the Turing test</a>. <em>arXiv</em>.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Liang, W., Zhang, Y., Codreanu, M., Wang, J., Cao, H., &amp; Zou, J. (2025). <em>arxiv.org/abs/2502.09747</em> The widespread adoption of large language model-assisted writing across society. <em>arXiv</em>.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Plesner, A., Vontobel, T., &amp; Wattenhofer, R. (2024). Breaking reCAPTCHAv2. In <em>2024 IEEE 48th Annual COMPSAC</em> (pp. 1047–1056). IEEE. doi:10.1109/compsac61105.2024.00142<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Berozashvili, T. (2024). Securing digital identities in the era of remote identity verification. doi:10.13140/RG.2.2.11839.11688<a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Xiao, M., Wang, M., Kulshrestha, A., &amp; Mayer, J. (2023). <em>arxiv.org/abs/2304.14939</em> Account verification on social media: User perceptions and paid enrollment. <em>arXiv</em>.<a href="#fnref:5" rev="footnote"> ↩</a></span></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">6.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Flanagan, H. (2023). <em>openid.net/Government-issued-Digital-Credentials-and-the-Privacy-Landscape-Final</em> Government-issued digital credentials and the privacy landscape. OpenID Foundation.<a href="#fnref:6" rev="footnote"> ↩</a></span></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">7.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">McGrath, K. (2016). Identity verification and societal challenges: Explaining the gap between service provision and development outcomes. <em>MIS Quarterly</em>, 40(2), 485–500. JSTOR<a href="#fnref:7" rev="footnote"> ↩</a></span></li><li id="fn:8"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">8.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Satybaldy, A., Subedi, A., &amp; Nowostawski, M. (2022). A framework for online document verification using self-sovereign identity technology. <em>Sensors</em>, 22(21), 8408. doi: 10.3390/s2221840<a href="#fnref:8" rev="footnote"> ↩</a></span></li><li id="fn:9"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">9.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Muth, R., Galal, T., Heiss, J., &amp; Tschorsch, F. (2023). Towards smart contract-based verification of anonymous credentials. In <em>Financial Cryptography and Data Security: FC 2022 International Workshops</em> (pp. 481–498). Springer.<a href="#fnref:9" rev="footnote"> ↩</a></span></li></ol></div></div>
+	  
+<div class="article-footer-copyright">
+    This blog is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)</a>.
+</div>
+
+
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2026/04/02/hexo-sam-reader-Development/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+		<section id="comments" class="comments">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script> 
+<div id="gitalk-container"></div>
+<script>
+var gitalkConfig = {"enable":true,"clientID":"Ov23lipca9qEBRbrfaIM","clientSecret":"d50a5a558037f2ef20eacba3a9986e343d76e9ee","repo":"blog","owner":"trintlermint","admin":["trintlermint"],"id":"location.pathname","distractionFreeMode":true}
+gitalkConfig.id=md5(location.pathname)
+var gitalk = new Gitalk(gitalkConfig)
+  
+  gitalk.render('gitalk-container')
+
+  </script>
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2026-04-28 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Essays/">Essays<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/identity/">identity<span>1</span></a></li> <li><a href="/tags/security/">security<span>1</span></a></li> <li><a href="/tags/privacy/">privacy<span>1</span></a></li> <li><a href="/tags/verification/">verification<span>1</span></a></li> <li><a href="/tags/self-sovereign-identity/">self-sovereign identity<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Introduction"><span class="toc-article-text">Introduction</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Conclusion"><span class="toc-article-text">Conclusion</span></a></li></ol>
+		</div>
+	
+	</div>
+
+	<!-- sam reader (below toc) -->
+	
+<div class="meta-widget sam-reader-widget" id="sam-reader" data-post-title="Verifying Humans Without Surrendering Identity: A Case Against Government-Issued Online Verification">
+  <style>
+    .sam-reader-widget {
+      margin: 10px 0;
+      padding: 10px 8px;
+      background: #000;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+      font-size: .9em;
+    }
+    .sam-reader-widget .sam-title {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-title i {
+      margin-right: 4px;
+    }
+    .sam-reader-widget .sam-controls {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .sam-reader-widget .sam-controls button {
+      flex: 1;
+      padding: 4px 0;
+      font-size: 11px;
+      font-family: inherit;
+      background: #352b42;
+      color: #c08179;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sam-reader-widget .sam-controls button:hover:not(:disabled) {
+      background: #924a41;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-controls button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .sam-reader-widget .sam-controls button.active {
+      background: #493aa5;
+      border-color: #867ade;
+      color: #fff;
+    }
+    .sam-reader-widget .sam-progress-wrap {
+      background: #252525;
+      border-radius: 3px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      border: 1px solid #3a3a3a;
+    }
+    .sam-reader-widget .sam-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #867ade;
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    .sam-reader-widget .sam-status {
+      font-size: 10px;
+      color: #bbb;
+      text-align: center;
+    }
+    .sam-reader-widget .sam-config {
+      margin-top: 8px;
+      border-top: 1px dashed #924a41;
+      padding-top: 8px;
+    }
+    .sam-reader-widget .sam-config summary {
+      font-size: 11px;
+      color: #867ade;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .sam-reader-widget .sam-config label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 4px;
+    }
+    .sam-reader-widget .sam-config input[type=range] {
+      width: 80px;
+      accent-color: #867ade;
+      background: transparent;
+    }
+  </style>
+
+  <div class="sam-title"><i class="fa fa-volume-up"></i> SAM Reader</div>
+  <div class="sam-controls">
+    <button id="sam-play" title="Play" disabled>&#9654; Play</button>
+    <button id="sam-pause" title="Pause" disabled>&#10074;&#10074;</button>
+    <button id="sam-stop" title="Stop" disabled>&#9632;</button>
+  </div>
+  <div class="sam-progress-wrap">
+    <div class="sam-progress-bar" id="sam-progress"></div>
+  </div>
+  <div class="sam-status" id="sam-status">Loading SAM...</div>
+
+  <div class="sam-config">
+    <details>
+      <summary>Voice settings</summary>
+      <label>Speed <input type="range" id="sam-speed" min="20" max="200" value="72"></label>
+      <label>Pitch <input type="range" id="sam-pitch" min="0" max="255" value="64"></label>
+      <label>Mouth <input type="range" id="sam-mouth" min="0" max="255" value="128"></label>
+      <label>Throat <input type="range" id="sam-throat" min="0" max="255" value="128"></label>
+    </details>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PAUSE_MS = 400;
+  var CHUNK_MAX = 200;
+  var CONTENT_SEL = ".mypage";
+  var EXTRA_SKIP = "";
+  var ABBREVIATIONS = {"NL":"Netherlands","DE":"Germany","KIT":"K I T","TUD":"T U D","ICPC":"I C P C","TAPC":"T A P C","BAPC":"B A P C","NWERC":"N W E R C","TCR":"T C R","OSS":"O S S","TUI":"T U I","SSH":"S S H","JOSS":"J O S S","CLI":"C L I","API":"A P I","CSS":"C S S","HTML":"H T M L","FTXUI":"F T X U I","GPU":"G P U","WASM":"web assembly","QWERTY":"KWERTY","QWERTZ":"KWERTZ","LaTeX":"lay-tech","CMake":"see-make","libssh":"lib S S H","yaml-cpp":"yaml cpp","ca.":"circa ","e.g.":"for example","i.e.":"that is"};
+
+  var script = document.createElement('script');
+  script.src = '/js/hexo-sam-reader/sam.js';
+  script.async = true;
+  script.onload = function() { initSamReader(); };
+  script.onerror = function() {
+    var s = document.getElementById('sam-status');
+    if (s) s.textContent = 'Failed to load SAM';
+  };
+  document.head.appendChild(script);
+
+  function initSamReader() {
+    if (typeof SamJs === 'undefined') return;
+
+    var btnPlay = document.getElementById('sam-play');
+    var btnPause = document.getElementById('sam-pause');
+    var btnStop = document.getElementById('sam-stop');
+    var progressBar = document.getElementById('sam-progress');
+    var statusEl = document.getElementById('sam-status');
+    var speedInput = document.getElementById('sam-speed');
+    var pitchInput = document.getElementById('sam-pitch');
+    var mouthInput = document.getElementById('sam-mouth');
+    var throatInput = document.getElementById('sam-throat');
+    var widget = document.getElementById('sam-reader');
+
+    btnPlay.disabled = false;
+    statusEl.textContent = 'Ready';
+
+    var chunks = [];
+    var currentChunk = 0;
+    var playing = false;
+    var paused = false;
+    var stopped = false;
+    var audioCtx = null;
+    var currentSource = null;
+    var pauseTimer = null;
+
+    // text regex for sam
+    function cleanForSam(text) {
+      text = text.replace(/https?:\/\/[^\s]+/g, '');
+      text = text.replace(/[a-zA-Z0-9_-]*:\/\/[^\s]*/g, '');
+      text = text.replace(/[\w.-]+@[\w.-]+/g, '');
+      text = text.replace(/\([^)]*=>\s*\{[^}]*\}[^)]*\)/g, '');
+
+      text = text.replace(/>=/g, ' greater than or equal to ');
+      text = text.replace(/<=/g, ' less than or equal to ');
+      text = text.replace(/!=/g, ' not equal to ');
+      text = text.replace(/===/g, ' strictly equals ');
+      text = text.replace(/==/g, ' equals ');
+      text = text.replace(/(?<![<>])>(?![<>])/g, ' greater than ');
+      text = text.replace(/(?<![<>])<(?![<>])/g, ' less than ');
+
+      text = text.replace(/ \/ /g, ' OR ');
+      text = text.replace(/\//g, ' slash ');
+
+      text = text.replace(/[{}()\[\]<>]/g, ' ');
+      text = text.replace(/[*_~#]+/g, '');
+      text = text.replace(new RegExp(String.fromCharCode(96) + '+', 'g'), '');
+      text = text.replace(/\[\^\w+\]/g, '');
+
+      // apply abbreviations from config
+      var keys = Object.keys(ABBREVIATIONS);
+      for (var a = 0; a < keys.length; a++) {
+        var k = keys[a];
+        var flags = (k === k.toUpperCase()) ? 'g' : 'gi';
+        text = text.replace(new RegExp('\\b' + k.replace(/[.*+?^\/\\|()[\]{}]/g, '\\$&') + '\\b', flags), ABBREVIATIONS[k]);
+      }
+
+      text = text.replace(/[\x80-\xFF]/g, ' ');
+      text = text.replace(/[\u0100-\uFFFF]/g, ' ');
+      text = text.replace(/[\xA0-\xFF]/g, ' ');
+      text = text.replace(/[€£¥©®™°±×÷=+|\\^~&]/g, ' ');
+      text = text.replace(/[^\x20-\x7E]/g, ' ');
+
+      text = text.replace(/\s+/g, ' ');
+      return text.trim();
+    }
+
+    // table reading
+    function readTable(table) {
+      var headers = [];
+      var ths = table.querySelectorAll('thead th, thead td, tr:first-child th');
+      for (var i = 0; i < ths.length; i++) {
+        headers.push(ths[i].textContent.trim());
+      }
+      if (headers.length === 0) {
+        var firstRow = table.querySelector('tr');
+        if (firstRow) {
+          var cells = firstRow.querySelectorAll('th, td');
+          for (var j = 0; j < cells.length; j++) {
+            headers.push(cells[j].textContent.trim());
+          }
+        }
+      }
+      var rows = table.querySelectorAll('tbody tr, tr');
+      var text = '';
+      for (var r = 0; r < rows.length; r++) {
+        var cells = rows[r].querySelectorAll('td');
+        if (cells.length === 0) continue;
+        var rowParts = [];
+        for (var c = 0; c < cells.length; c++) {
+          var label = (c < headers.length) ? headers[c] : '';
+          var val = cells[c].textContent.trim();
+          if (label && val) {
+            rowParts.push(label + ' ' + val);
+          } else if (val) {
+            rowParts.push(val);
+          }
+        }
+        if (rowParts.length > 0) {
+          text += rowParts.join(', ') + '. ';
+        }
+      }
+      return text;
+    }
+
+    // text extraction
+    function getPostSegments() {
+      var segments = [];
+
+      var postTitle = widget.getAttribute('data-post-title') || '';
+      if (postTitle) {
+        segments.push(cleanForSam(postTitle) + '.');
+        segments.push(null);
+      }
+
+      var el = document.querySelector(CONTENT_SEL);
+      if (!el) return segments;
+      var clone = el.cloneNode(true);
+
+      var baseSel = 'pre, script, style, .highlight, img, svg, ' +
+        '.sam-reader-widget, .alert, figure, .article-footer-copyright, ' +
+        'noscript, iframe, video, audio, canvas, .gist';
+      var skipSel = EXTRA_SKIP ? (baseSel + ', ' + EXTRA_SKIP) : baseSel;
+
+      var remove = clone.querySelectorAll(skipSel);
+      for (var i = 0; i < remove.length; i++) {
+        remove[i].parentNode.removeChild(remove[i]);
+      }
+
+      function walk(node) {
+        if (node.nodeType === 3) {
+          var t = node.textContent;
+          if (t && t.trim()) {
+            segments.push(cleanForSam(t));
+          }
+          return;
+        }
+        if (node.nodeType !== 1) return;
+        var tag = node.tagName;
+
+        if (tag === 'TABLE') {
+          var tableText = readTable(node);
+          if (tableText) segments.push(cleanForSam(tableText));
+          return;
+        }
+
+        if (/^H[1-6]$/.test(tag)) {
+          segments.push(null);
+          var hText = node.textContent.trim();
+          if (hText) segments.push(cleanForSam(hText) + '.');
+          segments.push(null);
+          return;
+        }
+
+        var children = node.childNodes;
+        for (var c = 0; c < children.length; c++) {
+          walk(children[c]);
+        }
+
+        if (/^(P|DIV|BLOCKQUOTE|LI|SECTION|ARTICLE|HR)$/.test(tag)) {
+          segments.push(null);
+        }
+      }
+
+      walk(clone);
+      return segments;
+    }
+
+    // chunking
+    function buildChunks(segments, maxLen) {
+      var result = [];
+      for (var s = 0; s < segments.length; s++) {
+        if (segments[s] === null) {
+          if (result.length === 0 || result[result.length - 1] !== null) {
+            result.push(null);
+          }
+          continue;
+        }
+        var text = segments[s];
+        if (!text) continue;
+
+        var parts = text.split(/(?<=[.!?])\s+/);
+        var current = '';
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i].trim();
+          if (!p) continue;
+          if (current.length + p.length + 1 > maxLen && current.length > 0) {
+            result.push(current.trim());
+            current = p;
+          } else {
+            current += (current ? ' ' : '') + p;
+          }
+        }
+        if (current.trim()) result.push(current.trim());
+      }
+
+      var final = [];
+      for (var j = 0; j < result.length; j++) {
+        if (result[j] === null) {
+          if (final.length === 0 || final[final.length - 1] !== null) {
+            final.push(null);
+          }
+          continue;
+        }
+        if (result[j].length <= maxLen) {
+          final.push(result[j]);
+        } else {
+          var subparts = result[j].split(/,\s*/);
+          var sub = '';
+          for (var k = 0; k < subparts.length; k++) {
+            if (sub.length + subparts[k].length + 2 > maxLen && sub.length > 0) {
+              final.push(sub.trim());
+              sub = subparts[k];
+            } else {
+              sub += (sub ? ', ' : '') + subparts[k];
+            }
+          }
+          if (sub.trim()) final.push(sub.trim());
+        }
+      }
+
+      while (final.length > 0 && final[0] === null) final.shift();
+      while (final.length > 0 && final[final.length - 1] === null) final.pop();
+
+      return final;
+    }
+
+    // progress
+    function countSpeakable() {
+      var n = 0;
+      for (var i = 0; i < chunks.length; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+    function countSpoken() {
+      var n = 0;
+      for (var i = 0; i < currentChunk; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+
+    function updateProgress() {
+      var total = countSpeakable();
+      var done = countSpoken();
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      statusEl.textContent = done + ' / ' + total;
+    }
+
+    function setButtons(state) {
+      btnPlay.disabled = (state === 'playing');
+      btnPause.disabled = (state !== 'playing');
+      btnStop.disabled = (state === 'ready');
+      btnPlay.classList.toggle('active', state === 'playing');
+      btnPause.classList.toggle('active', state === 'paused');
+    }
+
+    function stopAudio() {
+      if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; }
+      if (currentSource) {
+        try { currentSource.stop(); } catch(e) {}
+        currentSource = null;
+      }
+    }
+
+    function playChunk(index) {
+      if (stopped || index >= chunks.length) {
+        progressBar.style.width = stopped ? '0%' : '100%';
+        statusEl.textContent = stopped ? 'Stopped' : 'Done!';
+        setButtons('ready');
+        playing = false;
+        paused = false;
+        stopped = false;
+        currentChunk = 0;
+        return;
+      }
+      if (paused) return;
+
+      currentChunk = index;
+      updateProgress();
+
+      if (chunks[index] === null) {
+        pauseTimer = setTimeout(function() {
+          pauseTimer = null;
+          if (!stopped && !paused) playChunk(index + 1);
+        }, PAUSE_MS);
+        return;
+      }
+
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      var sam = new SamJs({
+        speed: parseInt(speedInput.value, 10),
+        pitch: parseInt(pitchInput.value, 10),
+        mouth: parseInt(mouthInput.value, 10),
+        throat: parseInt(throatInput.value, 10)
+      });
+
+      var buf32;
+      try {
+        buf32 = sam.buf32(chunks[index]);
+      } catch(e) {
+        playChunk(index + 1);
+        return;
+      }
+      if (!buf32 || buf32.length === 0) {
+        playChunk(index + 1);
+        return;
+      }
+
+      var audioBuffer = audioCtx.createBuffer(1, buf32.length, 22050);
+      audioBuffer.getChannelData(0).set(buf32);
+
+      var source = audioCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioCtx.destination);
+      currentSource = source;
+
+      source.onended = function() {
+        currentSource = null;
+        if (!stopped && !paused) {
+          playChunk(index + 1);
+        }
+      };
+      source.start();
+    }
+
+    btnPlay.addEventListener('click', function() {
+      if (paused) {
+        paused = false;
+        setButtons('playing');
+        playChunk(currentChunk);
+        return;
+      }
+      var segments = getPostSegments();
+      chunks = buildChunks(segments, CHUNK_MAX);
+      if (countSpeakable() === 0) {
+        statusEl.textContent = 'No text found';
+        return;
+      }
+      stopped = false;
+      playing = true;
+      paused = false;
+      currentChunk = 0;
+      setButtons('playing');
+      playChunk(0);
+    });
+
+    btnPause.addEventListener('click', function() {
+      paused = true;
+      stopAudio();
+      setButtons('paused');
+      var total = countSpeakable();
+      var done = countSpoken();
+      statusEl.textContent = 'Paused ' + done + ' / ' + total;
+    });
+
+    btnStop.addEventListener('click', function() {
+      stopped = true;
+      paused = false;
+      playing = false;
+      stopAudio();
+      currentChunk = 0;
+      setButtons('ready');
+      progressBar.style.width = '0%';
+      statusEl.textContent = 'Ready';
+    });
+  }
+})();
+</script>
+
+
+    <hr>
+
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> 
+<p>
+  
+  &copy; 2026 Niladri Adhikary's Blog
+  
+    | Content Licensed <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY 4.0</a>.
+</p>
+
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+<!-- hexo injector body_end start --><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+<script src="/js/whale.js"></script>
+<script src="/js/page-sep.js"></script>
+<script src="/js/gradient.js"></script>
+<script src="/js/whale-bg.js"></script><!-- hexo injector body_end end --></body>
+   </html>
