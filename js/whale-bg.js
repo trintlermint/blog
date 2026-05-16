@@ -62,6 +62,7 @@
     WhaleModule.markDirty();
     PageSepModule.markDirty();
     GradientModule.markDirty();
+    if (typeof TikzSimModule !== 'undefined') TikzSimModule.markDirty();
   }
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', scheduleUpdate, { passive: true });
@@ -72,8 +73,8 @@
     WhaleModule.init(tm, state);
     PageSepModule.init(tm, state);
     GradientModule.init(tm, state);
+    if (typeof TikzSimModule !== 'undefined') TikzSimModule.init(tm, state);
 
-    // Fade out the loading cover after the first second
     setTimeout(function () {
       var cover = document.getElementById('whale-cover');
       if (cover) {
@@ -91,15 +92,16 @@
       tm.background(0);
       PageSepModule.drawPageSeps(tm, state);
       GradientModule.draw(tm, state);
+      if (typeof TikzSimModule !== 'undefined') TikzSimModule.draw(tm, state);
       PageSepModule.drawRmSeps(tm, state);
       if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);  // 404 page only
       return;
     }
 
-    WhaleModule.drawBackground(tm, state);   // wave + water (clears canvas)
+    tm.background(0);                         // clear canvas (whale disabled)
     PageSepModule.drawPageSeps(tm, state);   // page seps   (before whale)
     GradientModule.draw(tm, state);          // desc gradient (before whale)
-    WhaleModule.drawWhale(tm, state);        // whale entity
+    if (typeof TikzSimModule !== 'undefined') TikzSimModule.draw(tm, state);
     PageSepModule.drawRmSeps(tm, state);     // read-more seps (always on top)
     if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);  // 404 page only
   });
@@ -109,5 +111,6 @@
     WhaleModule.init(tm, state);
     PageSepModule.init(tm, state);
     GradientModule.init(tm, state);
+    if (typeof TikzSimModule !== 'undefined') TikzSimModule.init(tm, state);
   });
 })();

@@ -166,7 +166,49 @@
     box-shadow: 0 0 0 2px #493aa5;
   }
 </style>
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js" defer></script>
+<style>.tikz-container {
+  margin: 1.5em 0;
+  border: 1px dashed #924a41;
+  border-radius: 3px;
+  background: transparent;
+  overflow: hidden;
+}
+.tikz-container.tikz-svg {
+  background: rgba(53, 43, 66, 0.85);
+}
+.tikz-title {
+  padding: 6px 12px;
+  font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 0.85em;
+  color: #c08179;
+  border-bottom: 1px dashed #924a41;
+  background: rgba(0, 0, 0, 0.3);
+}
+.tikz-ascii .tikz-title {
+  display: none;
+}
+.tikz-body {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  position: relative;
+}
+.tikz-body svg { max-width: 100%; height: auto; }
+.tikz-sim-placeholder {
+  font-family: DOS, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  color: #867ade;
+  font-size: 0.8em;
+}
+.tikz-ascii .tikz-body { background: transparent; min-height: 200px; }
+@media (max-width: 767px) {
+  .tikz-body { padding: 8px; }
+  .tikz-container { margin: 1em 0; }
+}</style>
+</head>
 
  <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -375,6 +417,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2026/05/16/tikzjax-demo/"  title="Demonstrating TikZJax SVG diagrams and textmode.js ASCII physics simulations." ><i class="fa fa-file-o"></i>TikZJax Demo: Physics Simul...</a>
+      </li>
+    
+      <li>
         <a href="/2026/04/28/Verifying-Humans-Without-Surrendering-Identity/"  title="Although government-issued identity verification addresses the genuine challenge of distinguishing humans from automated systems, its widespread implementation commoditises personal identity data and exposes users to inconsistent privacy protections." ><i class="fa fa-file-o"></i>Verifying Humans Without Su...</a>
       </li>
     
@@ -388,10 +434,6 @@
     
       <li>
         <a href="/2026/03/24/JOSS-Reviewed-solve-nivp/"  title="&lt;b&gt;solve_nivp&lt;/b&gt; is a Python library for time-stepping nonsmooth ODE and DAE systems. This post explains what that means, why classical solvers fail at discontinuities, and how the library encodes impact laws and conditions directly into an implicit integrator, reviewed for the &lt;a href=&#34;https://doi.org/10.21105/joss.09775&#34;&gt;Journal of Open Source Software&lt;/a&gt;." ><i class="fa fa-file-o"></i>JOSS: Reviewed solve_nivp</a>
-      </li>
-    
-      <li>
-        <a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/"  title="Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;" ><i class="fa fa-file-o"></i>2025/2026 ICPC Regional Per...</a>
       </li>
     
   </ul>
@@ -420,48 +462,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/joss/">joss<span>1</span></a></li>
-		
-			<li><a href="/tags/identity/">identity<span>1</span></a></li>
-		
 			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
 		
-			<li><a href="/tags/numerical-methods/">numerical-methods<span>1</span></a></li>
-		
-			<li><a href="/tags/privacy/">privacy<span>1</span></a></li>
-		
-			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
-		
-			<li><a href="/tags/tui/">tui<span>1</span></a></li>
-		
-			<li><a href="/tags/cmake/">cmake<span>1</span></a></li>
-		
-			<li><a href="/tags/oss/">oss<span>3</span></a></li>
-		
-			<li><a href="/tags/math/">math<span>1</span></a></li>
-		
-			<li><a href="/tags/js/">js<span>1</span></a></li>
-		
-			<li><a href="/tags/security/">security<span>1</span></a></li>
-		
-			<li><a href="/tags/review/">review<span>1</span></a></li>
-		
-			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
-		
-			<li><a href="/tags/packaging/">packaging<span>1</span></a></li>
-		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/yaml/">yaml<span>1</span></a></li>
-		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
+			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
 		
 			<li><a href="/tags/c/">c++<span>1</span></a></li>
 		
+			<li><a href="/tags/joss/">joss<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+			<li><a href="/tags/self-sovereign-identity/">self-sovereign identity<span>1</span></a></li>
+		
+			<li><a href="/tags/npm/">npm<span>1</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/oss/">oss<span>3</span></a></li>
+		
+			<li><a href="/tags/packaging/">packaging<span>1</span></a></li>
+		
+			<li><a href="/tags/tikz/">tikz<span>1</span></a></li>
+		
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+		
+			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
+		
+			<li><a href="/tags/ssh/">ssh<span>1</span></a></li>
+		
+			<li><a href="/tags/tui/">tui<span>1</span></a></li>
+		
+			<li><a href="/tags/identity/">identity<span>1</span></a></li>
+		
+			<li><a href="/tags/numerical-methods/">numerical-methods<span>1</span></a></li>
+		
+			<li><a href="/tags/security/">security<span>1</span></a></li>
+		
+			<li><a href="/tags/tts/">tts<span>1</span></a></li>
+		
+			<li><a href="/tags/cmake/">cmake<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>31</span></a></li>
 		 
 		</ul>
 	</div>
@@ -522,7 +564,7 @@
    </script>
 
 
-<!-- hexo injector body_end start --><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+<!-- hexo injector body_end start --><script src="/js/hexo-tikzjax/tikzsim-module.js"></script><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
 <script src="/js/whale.js"></script>
 <script src="/js/page-sep.js"></script>
 <script src="/js/gradient.js"></script>

@@ -278,7 +278,49 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js" defer></script>
+<style>.tikz-container {
+  margin: 1.5em 0;
+  border: 1px dashed #924a41;
+  border-radius: 3px;
+  background: transparent;
+  overflow: hidden;
+}
+.tikz-container.tikz-svg {
+  background: rgba(53, 43, 66, 0.85);
+}
+.tikz-title {
+  padding: 6px 12px;
+  font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 0.85em;
+  color: #c08179;
+  border-bottom: 1px dashed #924a41;
+  background: rgba(0, 0, 0, 0.3);
+}
+.tikz-ascii .tikz-title {
+  display: none;
+}
+.tikz-body {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  position: relative;
+}
+.tikz-body svg { max-width: 100%; height: auto; }
+.tikz-sim-placeholder {
+  font-family: DOS, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  color: #867ade;
+  font-size: 0.8em;
+}
+.tikz-ascii .tikz-body { background: transparent; min-height: 200px; }
+@media (max-width: 767px) {
+  .tikz-body { padding: 8px; }
+  .tikz-container { margin: 1em 0; }
+}</style>
+</head>
 
  <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -352,6 +394,61 @@ mjx-container[display="true"] + br {
 		<div class="mypage">
 		
 		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2026/05/16/tikzjax-demo/" title="Demonstrating TikZJax SVG diagrams and textmode.js ASCII physics simulations.">TikZJax Demo: Physics Simulations</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2026-05-16  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>A quick demo of the <code>hexo-tikzjax</code> plugin — vector diagrams via TikZJax and ASCII physics via textmode.js.</p>
+<h2 id="TikZ-Diagrams"><a href="#TikZ-Diagrams" class="headerlink" title="TikZ Diagrams"></a>TikZ Diagrams</h2><h3 id="Bouncing-Ball-Free-Body-Diagram"><a href="#Bouncing-Ball-Free-Body-Diagram" class="headerlink" title="Bouncing Ball Free-Body Diagram"></a>Bouncing Ball Free-Body Diagram</h3><div class="tikz-container tikz-svg" data-tikz-mode="svg"><div class="tikz-title">Free-Body Diagram</div><div class="tikz-body"><script type="text/tikz">\begin{tikzpicture}[scale=1.5]
+\draw[thick] (-2,0) -- (2,0);
+\fill[pattern=north east lines] (-2,-0.3) rectangle (2,0);
+\shade[ball color=blue!40] (0,1.5) circle (0.4);
+\draw[->, very thick, red] (0,1.5) -- (0,0.5) node[midway, right] {$mg$};
+\draw[->, very thick, green!60!black] (0,0.4) -- (0,1.2) node[midway, left] {$N$};
+\draw[dashed, gray] (0,1.5) -- (1.5,1.5) node[right] {$y$};
+\draw[dashed, gray] (0,1.5) -- (0,3) node[above] {$\dot{y}$};
+\end{tikzpicture}</script></div></div>
+
+<p>The normal force <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 888 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"/></g></g></g></svg></mjx-container> activates only when <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="5.257ex" height="1.971ex" role="img" focusable="false" viewBox="0 -666 2323.6 871"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(767.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g><g data-mml-node="mn" transform="translate(1823.6,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/></g></g></g></svg></mjx-container> and <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="5.257ex" height="2.199ex" role="img" focusable="false" viewBox="0 -767 2323.6 972"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(300.6,-2) translate(-250 0)"><path data-c="2D9" d="M190 609Q190 637 208 653T252 669Q275 667 292 652T309 609Q309 579 292 564T250 549Q225 549 208 564T190 609Z"/></g></g></g><g data-mml-node="mo" transform="translate(767.8,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"/></g><g data-mml-node="mn" transform="translate(1823.6,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/></g></g></g></svg></mjx-container> — a unilateral constraint with complementarity condition:</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.464ex;" xmlns="http://www.w3.org/2000/svg" width="14.431ex" height="2.009ex" role="img" focusable="false" viewBox="0 -683 6378.7 888"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/></g><g data-mml-node="mo" transform="translate(777.8,0)"><path data-c="2264" d="M674 636Q682 636 688 630T694 615T687 601Q686 600 417 472L151 346L399 228Q687 92 691 87Q694 81 694 76Q694 58 676 56H670L382 192Q92 329 90 331Q83 336 83 348Q84 359 96 365Q104 369 382 500T665 634Q669 636 674 636ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"/></g><g data-mml-node="mi" transform="translate(1833.6,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(2601.3,0)"><path data-c="22A5" d="M369 652Q369 653 370 655T372 658T375 662T379 665T384 667T391 668Q402 666 409 653V40H708Q723 32 723 20T708 0H71Q70 0 67 2T59 9T55 20T59 31T66 38T71 40H369V652Z"/></g><g data-mml-node="mi" transform="translate(3657.1,0)"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"/></g><g data-mml-node="mo" transform="translate(4822.9,0)"><path data-c="2265" d="M83 616Q83 624 89 630T99 636Q107 636 253 568T543 431T687 361Q694 356 694 346T687 331Q685 329 395 192L107 56H101Q83 58 83 76Q83 77 83 79Q82 86 98 95Q117 105 248 167Q326 204 378 228L626 346L360 472Q291 505 200 548Q112 589 98 597T83 616ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"/></g><g data-mml-node="mn" transform="translate(5878.7,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/></g></g></g></svg></mjx-container></p>
+<h3 id="Pendulum-Geometry"><a href="#Pendulum-Geometry" class="headerlink" title="Pendulum Geometry"></a>Pendulum Geometry</h3><div class="tikz-container tikz-svg" data-tikz-mode="svg"><div class="tikz-title">Simple Pendulum</div><div class="tikz-body"><script type="text/tikz">\begin{tikzpicture}[scale=1.2]
+\fill[gray!30] (-1.5,3.2) rectangle (1.5,3);
+\draw[thick] (-1.5,3) -- (1.5,3);
+\draw[thick] (0,3) -- (1.5,1.2);
+\shade[ball color=red!50] (1.5,1.2) circle (0.25);
+\draw[dashed] (0,3) -- (0,1);
+\draw[->] (0,2) arc (270:300:1) node[midway, below] {$\theta$};
+\draw[->, blue, thick] (1.5,1.2) -- (1.5,0.4) node[right] {$mg$};
+\node[above] at (0.75,2.2) {$\ell$};
+\end{tikzpicture}</script></div></div>
+
+<h2 id="ASCII-Simulations"><a href="#ASCII-Simulations" class="headerlink" title="ASCII Simulations"></a>ASCII Simulations</h2>
+	
+	</div>
+  <div class="read-more-sep"
+       data-href="/2026/05/16/tikzjax-demo/#more"
+       role="link"
+       tabindex="0"
+       aria-label="Read more"></div>
+</div>
+
 		
 			
 	
@@ -678,6 +775,10 @@ mjx-container[display="true"] + br {
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2026/05/16/tikzjax-demo/"  title="Demonstrating TikZJax SVG diagrams and textmode.js ASCII physics simulations." ><i class="fa fa-file-o"></i>TikZJax Demo: Physics Simul...</a>
+      </li>
+    
+      <li>
         <a href="/2026/04/28/Verifying-Humans-Without-Surrendering-Identity/"  title="Although government-issued identity verification addresses the genuine challenge of distinguishing humans from automated systems, its widespread implementation commoditises personal identity data and exposes users to inconsistent privacy protections." ><i class="fa fa-file-o"></i>Verifying Humans Without Su...</a>
       </li>
     
@@ -691,10 +792,6 @@ mjx-container[display="true"] + br {
     
       <li>
         <a href="/2026/03/24/JOSS-Reviewed-solve-nivp/"  title="&lt;b&gt;solve_nivp&lt;/b&gt; is a Python library for time-stepping nonsmooth ODE and DAE systems. This post explains what that means, why classical solvers fail at discontinuities, and how the library encodes impact laws and conditions directly into an implicit integrator, reviewed for the &lt;a href=&#34;https://doi.org/10.21105/joss.09775&#34;&gt;Journal of Open Source Software&lt;/a&gt;." ><i class="fa fa-file-o"></i>JOSS: Reviewed solve_nivp</a>
-      </li>
-    
-      <li>
-        <a href="/2026/03/24/2025-2026-ICPC-Regional-Performance/"  title="Having participated in the International Collegiate Programming Contest (ICPC) Regionals, I have gained a deep newfound passion for &#34;Competitive Programming.&#34;" ><i class="fa fa-file-o"></i>2025/2026 ICPC Regional Per...</a>
       </li>
     
   </ul>
@@ -723,48 +820,48 @@ mjx-container[display="true"] + br {
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/numerical-methods/">numerical-methods<span>1</span></a></li>
-		
-			<li><a href="/tags/npm/">npm<span>1</span></a></li>
-		
-			<li><a href="/tags/identity/">identity<span>1</span></a></li>
-		
-			<li><a href="/tags/tui/">tui<span>1</span></a></li>
-		
-			<li><a href="/tags/privacy/">privacy<span>1</span></a></li>
-		
-			<li><a href="/tags/review/">review<span>1</span></a></li>
-		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
-		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
-		
-			<li><a href="/tags/c/">c++<span>1</span></a></li>
-		
-			<li><a href="/tags/joss/">joss<span>1</span></a></li>
-		
-			<li><a href="/tags/ssh/">ssh<span>1</span></a></li>
-		
-			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
-		
-			<li><a href="/tags/nwerc/">nwerc<span>1</span></a></li>
-		
-			<li><a href="/tags/security/">security<span>1</span></a></li>
-		
-			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
-		
-			<li><a href="/tags/math/">math<span>1</span></a></li>
-		
-			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
-		
-			<li><a href="/tags/js/">js<span>1</span></a></li>
-		
-			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
+			<li><a href="/tags/oss/">oss<span>3</span></a></li>
 		
 			<li><a href="/tags/cmake/">cmake<span>1</span></a></li>
 		
+			<li><a href="/tags/review/">review<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+			<li><a href="/tags/tts/">tts<span>1</span></a></li>
+		
+			<li><a href="/tags/demo/">demo<span>1</span></a></li>
+		
+			<li><a href="/tags/npm/">npm<span>1</span></a></li>
+		
+			<li><a href="/tags/verification/">verification<span>1</span></a></li>
+		
+			<li><a href="/tags/c/">c++<span>1</span></a></li>
+		
+			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
+		
+			<li><a href="/tags/privacy/">privacy<span>1</span></a></li>
+		
+			<li><a href="/tags/tikz/">tikz<span>1</span></a></li>
+		
+			<li><a href="/tags/js/">js<span>1</span></a></li>
+		
+			<li><a href="/tags/security/">security<span>1</span></a></li>
+		
+			<li><a href="/tags/identity/">identity<span>1</span></a></li>
+		
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
+		
+			<li><a href="/tags/joss/">joss<span>1</span></a></li>
+		
+			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>31</span></a></li>
 		 
 		</ul>
 	</div>
@@ -826,7 +923,7 @@ mjx-container[display="true"] + br {
    </script>
 
 
-<!-- hexo injector body_end start --><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+<!-- hexo injector body_end start --><script src="/js/hexo-tikzjax/tikzsim-module.js"></script><script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
 <script src="/js/whale.js"></script>
 <script src="/js/page-sep.js"></script>
 <script src="/js/gradient.js"></script>
