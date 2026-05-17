@@ -106,11 +106,16 @@
     if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);  // 404 page only
   });
 
+  var resizeTimer = null;
   tm.windowResized(function () {
-    tm.resizeCanvas(window.innerWidth, window.innerHeight);
-    WhaleModule.init(tm, state);
-    PageSepModule.init(tm, state);
-    GradientModule.init(tm, state);
-    if (typeof TikzSimModule !== 'undefined') TikzSimModule.init(tm, state);
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      resizeTimer = null;
+      tm.resizeCanvas(window.innerWidth, window.innerHeight);
+      WhaleModule.init(tm, state);
+      PageSepModule.init(tm, state);
+      GradientModule.init(tm, state);
+      if (typeof TikzSimModule !== 'undefined') TikzSimModule.init(tm, state);
+    }, 150);
   });
 })();

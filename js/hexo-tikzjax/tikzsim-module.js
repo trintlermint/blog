@@ -825,32 +825,40 @@ var TikzSimModule = (function () {
   // ---- Module API ----
 
   function queryElements() {
-    sims = [];
     var els = document.querySelectorAll('.tikz-ascii');
+    var newSims = [];
     for (var i = 0; i < els.length; i++) {
       var raw = els[i].getAttribute('data-tikzsim');
       if (!raw) continue;
-      try {
-        var cfg = JSON.parse(raw);
-        var Ctor = TYPES[cfg.type];
-        if (!Ctor) continue;
-        var sim = new Ctor(cfg);
-        sims.push({ el: els[i], sim: sim, ready: false });
-
-        var loading = els[i].querySelector('.tikz-sim-loading');
-        if (loading) loading.remove();
-      } catch (e) {
-        // skip malformed configs
+      var existing = null;
+      for (var j = 0; j < sims.length; j++) {
+        if (sims[j].el === els[i]) { existing = sims[j]; break; }
+      }
+      if (existing) {
+        newSims.push(existing);
+      } else {
+        try {
+          var cfg = JSON.parse(raw);
+          var Ctor = TYPES[cfg.type];
+          if (!Ctor) continue;
+          var sim = new Ctor(cfg);
+          newSims.push({ el: els[i], sim: sim, ready: false });
+          var loading = els[i].querySelector('.tikz-sim-loading');
+          if (loading) loading.remove();
+        } catch (e) {}
       }
     }
+    sims = newSims;
     dirty = false;
   }
 
   return {
     init: function (tm, state) {
       if (sims.length === 0) queryElements();
-      for (var i = 0; i < sims.length; i++) {
+      for (var i = sims.length - 1; i >= 0; i--) {
+        if (!sims[i].el.isConnected) { sims.splice(i, 1); continue; }
         var r = sims[i].el.getBoundingClientRect();
+        if (r.width === 0 || r.height === 0) continue;
         var simCols = Math.max(Math.round((r.width / window.innerWidth) * state.cols), 4);
         var simRows = Math.max(Math.round((r.height / window.innerHeight) * state.rows), 4);
         sims[i].sim.resize(simCols, simRows);
@@ -859,15 +867,17 @@ var TikzSimModule = (function () {
     },
 
     markDirty: function () {
+      dirty = true;
     },
 
     draw: function (tm, state) {
       if (dirty) queryElements();
 
-      for (var i = 0; i < sims.length; i++) {
+      for (var i = sims.length - 1; i >= 0; i--) {
         var entry = sims[i];
+        if (!entry.el.isConnected) { sims.splice(i, 1); continue; }
         var r = entry.el.getBoundingClientRect();
-
+        if (r.width === 0 || r.height === 0) continue;
         if (r.bottom < 0 || r.top > window.innerHeight) continue;
 
         var simCols = Math.max(Math.round((r.width / window.innerWidth) * state.cols), 4);
