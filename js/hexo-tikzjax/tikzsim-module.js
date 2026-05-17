@@ -17,7 +17,6 @@ var TikzSimModule = (function () {
   var DEFAULT_CHARS = " .'`~:;-=+*#%&@";
   var DEFAULT_COLOR = [192, 129, 121];
 
-  // ---- Simulation types -------------------------------------------------------
 
   function WaveSim(cfg) {
     var params = cfg.params || {};
@@ -104,7 +103,6 @@ var TikzSimModule = (function () {
     }
   };
 
-  // ---- Bounce simulation ----
 
   function BounceSim(cfg) {
     var params = cfg.params || {};
@@ -207,7 +205,6 @@ var TikzSimModule = (function () {
     }
   };
 
-  // ---- Pendulum simulation ----
 
   function PendulumSim(cfg) {
     var params = cfg.params || {};
@@ -312,7 +309,6 @@ var TikzSimModule = (function () {
     tm.pop();
   };
 
-  // ---- Spring simulation ----
 
   function SpringSim(cfg) {
     var params = cfg.params || {};
@@ -395,7 +391,6 @@ var TikzSimModule = (function () {
     }
   };
 
-  // ---- Collision simulation ----
 
   function CollisionSim(cfg) {
     var params = cfg.params || {};
@@ -501,7 +496,6 @@ var TikzSimModule = (function () {
     }
   };
 
-  // ---- Chatter simulation ----
 
   function ChatterSim(cfg) {
     var params = cfg.params || {};
@@ -586,7 +580,6 @@ var TikzSimModule = (function () {
     }
   };
 
-  // ---- Complementarity simulation ----
 
   function ComplementaritySim(cfg) {
     var params = cfg.params || {};
@@ -719,7 +712,6 @@ var TikzSimModule = (function () {
     tm.pop();
   };
 
-  // ---- Relay simulation ----
 
   function RelaySim(cfg) {
     var params = cfg.params || {};
@@ -809,7 +801,6 @@ var TikzSimModule = (function () {
     }
   };
 
-  // ---- Type registry ----
 
   var TYPES = {
     wave: WaveSim,
@@ -822,7 +813,6 @@ var TikzSimModule = (function () {
     relay: RelaySim
   };
 
-  // ---- Module API ----
 
   function queryElements() {
     var els = document.querySelectorAll('.tikz-ascii');

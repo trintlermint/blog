@@ -47,8 +47,6 @@ var WhaleModule = (function () {
   var dirty        = true;
   var timer        = null;
 
-  // ---- helpers ----------------------------------------------------------------
-
   function precomputeCols(art) {
     var h    = art.length;
     var w    = Math.max.apply(null, art.map(function (l) { return l.length; }));
@@ -113,8 +111,6 @@ var WhaleModule = (function () {
     if (y < rows-2)  state.cur[i + cols] += force * 0.35;
   }
 
-  // ---- public API -------------------------------------------------------------
-
   return {
     init: function (tm, state) {
       state.cols = tm.grid.cols;
@@ -138,7 +134,6 @@ var WhaleModule = (function () {
       }
     },
 
-    // Wave propagation + water background render. Must be called first each frame.
     drawBackground: function (tm, state) {
       if (!state.cur) return;
 
@@ -148,7 +143,6 @@ var WhaleModule = (function () {
 
       if (tm.frameCount % 60 === 0 && dirty) updateColorTargets();
 
-      // Lissajous curve position
       var sx    = Math.sin(time * 0.7)  * (cols * 0.38) + Math.sin(time * 1.9 + 1.2) * (cols * 0.12);
       var sy    = Math.cos(time * 0.5)  * (rows * 0.35) + Math.cos(time * 1.7 + 0.8) * (rows * 0.10);
       var headX = cols / 2 + sx;
@@ -163,7 +157,6 @@ var WhaleModule = (function () {
         drop(state, tail.x, tail.y, 1.5);
       }
 
-      // Wave propagation
       var cur = state.cur, prev = state.prev, next = prev;
       for (var y = 1; y < rows - 1; y++) {
         var yo = y * cols;
@@ -181,7 +174,6 @@ var WhaleModule = (function () {
       state.prev = state.cur;
       state.cur  = next;
 
-      // Render water (rust/copper tint matching whale palette)
       tm.background(0);
       for (var yw = 0; yw < rows; yw++) {
         var ywo = yw * cols;
@@ -205,7 +197,6 @@ var WhaleModule = (function () {
       }
     },
 
-    // Whale entity — call after drawBackground and any pre-whale layers.
     drawWhale: function (tm, state) {
       if (!state.cur || !whaleData) return;
 

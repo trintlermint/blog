@@ -10,15 +10,13 @@
 var PageSepModule = (function () {
   'use strict';
 
-  // Separator colour: #924a41 dimmed to 68%
-  var SEP_R = Math.round(146 * 0.68);  // 99
-  var SEP_G = Math.round(74  * 0.68);  // 50
-  var SEP_B = Math.round(65  * 0.68);  // 44
+  var SEP_R = Math.round(146 * 0.68);
+  var SEP_G = Math.round(74  * 0.68);
+  var SEP_B = Math.round(65  * 0.68);
 
   var RM_TEXT = '/// :: READ MORE :: ///';
-  var RM_DIM  = 0.55;  // fill-slash brightness relative to RM_R/G/B
+  var RM_DIM  = 0.55;
 
-  // Read-more separator uses a brighter base (#c08179) than the page-sep dimmed colour
   var RM_R = 192, RM_G = 129, RM_B = 121;
 
   var pageSeps    = [];
@@ -26,8 +24,6 @@ var PageSepModule = (function () {
   var sepColStart = 0, sepColEnd = 0;
   var pageDirty   = true;
   var rmDirty     = true;
-
-  // ---- helpers ----------------------------------------------------------------
 
   function updatePageSeps(state) {
     pageSeps = [];
@@ -56,13 +52,10 @@ var PageSepModule = (function () {
     rmDirty = false;
   }
 
-  // ---- public API -------------------------------------------------------------
-
   return {
     init: function (tm, state) {
       sepColEnd = state.cols - 1;
 
-      // Wire click / touch / keyboard handlers onto read-more elements
       var els = document.querySelectorAll('.read-more-sep');
       for (var i = 0; i < els.length; i++) {
         (function (el) {
@@ -87,7 +80,6 @@ var PageSepModule = (function () {
       rmDirty   = true;
     },
 
-    // Page separators — call BEFORE whale draw.
     drawPageSeps: function (tm, state) {
       if (pageDirty) updatePageSeps(state);
 
@@ -125,7 +117,6 @@ var PageSepModule = (function () {
       }
     },
 
-    // Read-more separators — call AFTER whale draw so they always render on top.
     drawRmSeps: function (tm, state) {
       if (rmDirty) updateReadMoreSeps(state);
 

@@ -30,7 +30,6 @@
     frameRate: 60,
   });
 
-  // Fix canvas as background behind all page content
   (function () {
     var canvases = document.querySelectorAll('canvas');
     for (var i = canvases.length - 1; i >= 0; i--) {
@@ -44,7 +43,6 @@
     }
   })();
 
-  // Shared state — grid dimensions and wave arrays (owned by WhaleModule.init)
   var state = {
     cols: 0, rows: 0,
     hc:   0, hr:   0,
@@ -52,12 +50,10 @@
     mouseVpY: -9999,
   };
 
-  // Mouse Y for separator hover detection
   document.addEventListener('mousemove', function (e) {
     state.mouseVpY = e.clientY;
   }, { passive: true });
 
-  // Scroll / resize: notify all modules to refresh element positions
   function scheduleUpdate() {
     WhaleModule.markDirty();
     PageSepModule.markDirty();
@@ -66,8 +62,6 @@
   }
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', scheduleUpdate, { passive: true });
-
-  // ---- lifecycle --------------------------------------------------------------
 
   tm.setup(function () {
     WhaleModule.init(tm, state);
@@ -84,26 +78,25 @@
     }, 1000);
   });
 
-  var MOBILE_BREAKPOINT = 768;  // px — matches Bootstrap sm breakpoint
+  var MOBILE_BREAKPOINT = 768;
 
   tm.draw(function () {
     if (window.innerWidth < MOBILE_BREAKPOINT) {
-      // Mobile: skip wave physics and whale entirely, just clear the canvas
       tm.background(0);
       PageSepModule.drawPageSeps(tm, state);
       GradientModule.draw(tm, state);
       if (typeof TikzSimModule !== 'undefined') TikzSimModule.draw(tm, state);
       PageSepModule.drawRmSeps(tm, state);
-      if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);  // 404 page only
+      if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);
       return;
     }
 
-    tm.background(0);                         // clear canvas (whale disabled)
-    PageSepModule.drawPageSeps(tm, state);   // page seps   (before whale)
-    GradientModule.draw(tm, state);          // desc gradient (before whale)
+    tm.background(0);
+    PageSepModule.drawPageSeps(tm, state);
+    GradientModule.draw(tm, state);
     if (typeof TikzSimModule !== 'undefined') TikzSimModule.draw(tm, state);
-    PageSepModule.drawRmSeps(tm, state);     // read-more seps (always on top)
-    if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);  // 404 page only
+    PageSepModule.drawRmSeps(tm, state);
+    if (typeof NotFoundModule !== 'undefined') NotFoundModule.draw(tm, state);
   });
 
   var resizeTimer = null;

@@ -69,7 +69,6 @@
 
 <!-- hexo injector head_end start -->
 <style>
-  /* Black overlay covers canvas during textmode.js loading phase */
   body {
     background: #000 !important;
   }
@@ -87,12 +86,10 @@
   #whale-cover.fade-out {
     opacity: 0;
   }
-  /* Page content sits above the cover, cover sits above the canvas */
   #container, #wrap, .container, .container-narrow, footer {
     position: relative;
     z-index: 1;
   }
-  /* Navbar must keep position:fixed from Bootstrap, just raise z-index */
   .navbar-fixed-top {
     z-index: 1030 !important;
   }
@@ -129,20 +126,16 @@
   .entry {
     background: transparent !important;
   }
-  /* Keep these opaque for readability */
   .navbar-inverse {
     background-color: rgba(0, 0, 0, 0.85) !important;
   }
-  /* SAM reader keeps its own background */
   .sam-reader-widget {
     background: #000 !important;
   }
   .toc {
     background: rgba(0, 0, 0, 0.8) !important;
   }
-  /* Page separator markers — invisible in DOM, rendered on canvas by whale-bg.js.
-     Margins must cover the hover-state height (3 canvas rows = 3×16px = 48px)
-     plus a comfortable visual gap. Using em units tied to the page font size. */
+  /* Margins sized to cover hover-state height (3 rows × 16px = 48px) */
   .page-sep {
     height: 0;
     margin: 1.5em 0 3.5em 0;
@@ -151,7 +144,6 @@
     line-height: 0;
     font-size: 0;
   }
-  /* Read-more separator — full-width clickable canvas row, replaces the button */
   .read-more-sep {
     height: 3.5em;
     margin: 1em 0 0.5em 0;
@@ -456,45 +448,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/security/">security<span>1</span></a></li>
-		
-			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
-		
-			<li><a href="/tags/tts/">tts<span>1</span></a></li>
-		
-			<li><a href="/tags/privacy/">privacy<span>1</span></a></li>
-		
-			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
-		
-			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
-		
 			<li><a href="/tags/math/">math<span>1</span></a></li>
 		
-			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
-		
-			<li><a href="/tags/review/">review<span>1</span></a></li>
-		
-			<li><a href="/tags/tui/">tui<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+			<li><a href="/tags/js/">js<span>1</span></a></li>
 		
 			<li><a href="/tags/verification/">verification<span>1</span></a></li>
 		
+			<li><a href="/tags/tapc/">tapc<span>1</span></a></li>
+		
+			<li><a href="/tags/ssh/">ssh<span>1</span></a></li>
+		
+			<li><a href="/tags/bapc/">bapc<span>1</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
 			<li><a href="/tags/c/">c++<span>1</span></a></li>
 		
-			<li><a href="/tags/self-sovereign-identity/">self-sovereign identity<span>1</span></a></li>
+			<li><a href="/tags/ftxui/">ftxui<span>1</span></a></li>
+		
+			<li><a href="/tags/security/">security<span>1</span></a></li>
 		
 			<li><a href="/tags/cmake/">cmake<span>1</span></a></li>
 		
-			<li><a href="/tags/yaml/">yaml<span>1</span></a></li>
+			<li><a href="/tags/npm/">npm<span>1</span></a></li>
 		
-			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
+			<li><a href="/tags/privacy/">privacy<span>1</span></a></li>
 		
 			<li><a href="/tags/packaging/">packaging<span>1</span></a></li>
 		
-			<li><a href="/tags/npm/">npm<span>1</span></a></li>
+			<li><a href="/tags/identity/">identity<span>1</span></a></li>
 		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
+			<li><a href="/tags/open-sci/">open-sci<span>1</span></a></li>
+		
+			<li><a href="/tags/competitive-programming/">competitive programming<span>1</span></a></li>
+		
+			<li><a href="/tags/icpc/">icpc<span>1</span></a></li>
+		
+			<li><a href="/tags/joss/">joss<span>1</span></a></li>
+		
+			<li><a href="/tags/self-sovereign-identity/">self-sovereign identity<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>28</span></a></li>
