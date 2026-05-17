@@ -30,18 +30,34 @@
     frameRate: 60,
   });
 
+  var canvas = null;
   (function () {
     var canvases = document.querySelectorAll('canvas');
     for (var i = canvases.length - 1; i >= 0; i--) {
-      var c = canvases[i];
-      c.style.position      = 'fixed';
-      c.style.top           = '0';
-      c.style.left          = '0';
-      c.style.zIndex        = '-1';
-      c.style.pointerEvents = 'none';
+      canvas = canvases[i];
+      canvas.style.position      = 'fixed';
+      canvas.style.top           = '0';
+      canvas.style.left          = '0';
+      canvas.style.zIndex        = '-1';
+      canvas.style.pointerEvents = 'none';
       break;
     }
   })();
+
+  var contextLost = false;
+  if (canvas) {
+    canvas.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault();
+      contextLost = true;
+    });
+    canvas.addEventListener('webglcontextrestored', function () {
+      contextLost = false;
+      WhaleModule.init(tm, state);
+      PageSepModule.init(tm, state);
+      GradientModule.init(tm, state);
+      if (typeof TikzSimModule !== 'undefined') TikzSimModule.init(tm, state);
+    });
+  }
 
   var state = {
     cols: 0, rows: 0,
@@ -79,9 +95,14 @@
   });
 
   var MOBILE_BREAKPOINT = 768;
+  var isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+  var frameCount = 0;
 
   tm.draw(function () {
-    if (window.innerWidth < MOBILE_BREAKPOINT) {
+    if (contextLost) return;
+    if (isMobile && (++frameCount & 1)) return;
+
+    if (isMobile) {
       tm.background(0);
       PageSepModule.drawPageSeps(tm, state);
       GradientModule.draw(tm, state);
