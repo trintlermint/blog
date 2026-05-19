@@ -101,7 +101,7 @@
       <![CDATA[<b>solve_nivp</b> is a Python library for time-stepping nonsmooth ODE and DAE systems. This post explains what that means, why classical solvers fail at discontinuities, and how the library encodes impact laws and conditions directly into an implicit integrator, reviewed for the <a href="https://doi.org/10.21105/joss.09775">Journal of Open Source Software</a>.]]>
     </summary>
     <title>JOSS: Reviewed solve_nivp</title>
-    <updated>2026-05-17T15:00:11.995Z</updated>
+    <updated>2026-05-18T23:09:57.186Z</updated>
   </entry>
   <entry>
     <author>
