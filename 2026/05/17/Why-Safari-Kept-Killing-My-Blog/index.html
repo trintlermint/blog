@@ -1,0 +1,1108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-BMn6E4h7yMaPdYDV7eSJj.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+
+
+
+  <title>Why Safari Kept Killing My Blog | trintler&#39;s weblog</title>
+  <meta name="author" content="Niladri Adhikary">
+  
+  <meta name="description" content="My blog&#39;s JOSS review post crashed on every iOS Safari visit. The page would load, freeze for a few seconds, then the tab would die and reload in a loop. This post traces the root cause through WebGL memory limits, WASM compilation pressure, and 60fps draw loops that Safari handles differently from Chrome.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="http://blog.trintler.me/2026/05/17/Why-Safari-Kept-Killing-My-Blog/" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="http://blog.trintler.me/2026/05/17/Why-Safari-Kept-Killing-My-Blog/"/>
+  <meta property="og:title" content="Why Safari Kept Killing My Blog"/>
+  <meta property="og:site_name" content="trintler&#39;s weblog"/>
+  
+  <meta property="og:description" content="My blog&#39;s JOSS review post crashed on every iOS Safari visit. The page would load, freeze for a few seconds, then the tab would die and reload in a loop. This post traces the root cause through WebGL memory limits, WASM compilation pressure, and 60fps draw loops that Safari handles differently from Chrome."/>
+  
+  
+    <meta property="og:image" content=""/>
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Why Safari Kept Killing My Blog"/>
+  
+  <meta name="twitter:description" content="My blog&#39;s JOSS review post crashed on every iOS Safari visit. The page would load, freeze for a few seconds, then the tab would die and reload in a loop. This post traces the root cause through WebGL memory limits, WASM compilation pressure, and 60fps draw loops that Safari handles differently from Chrome."/>
+  
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="trintler&#39;s weblog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+<!-- hexo injector head_end start -->
+<style>
+  body {
+    background: #000 !important;
+  }
+  #whale-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  #whale-cover.fade-out {
+    opacity: 0;
+  }
+  #container, #wrap, .container, .container-narrow, footer {
+    position: relative;
+    z-index: 1;
+  }
+  .navbar-fixed-top {
+    z-index: 1030 !important;
+  }
+  .content {
+    background: transparent !important;
+  }
+  .container {
+    background: transparent !important;
+  }
+  .container-narrow {
+    background: transparent !important;
+  }
+  .post, .page {
+    background: transparent !important;
+  }
+  .mypage {
+    background: transparent !important;
+  }
+  #post_meta {
+    background: transparent !important;
+  }
+  #sidebar {
+    background: transparent !important;
+  }
+  .meta-widget {
+    background: transparent !important;
+  }
+  .widget {
+    background: transparent !important;
+  }
+  footer {
+    background: transparent !important;
+  }
+  .entry {
+    background: transparent !important;
+  }
+  .navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+  }
+  .sam-reader-widget {
+    background: #000 !important;
+  }
+  .toc {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+  /* Margins sized to cover hover-state height (3 rows × 16px = 48px) */
+  .page-sep {
+    height: 0;
+    margin: 1.5em 0 3.5em 0;
+    padding: 0;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+  }
+  .read-more-sep {
+    height: 3.5em;
+    margin: 1em 0 0.5em 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    z-index: 1;
+    outline: none;
+  }
+  .read-more-sep:focus-visible {
+    box-shadow: 0 0 0 2px #493aa5;
+  }
+</style>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js" defer></script>
+<style>.tikz-container {
+  margin: 1.5em 0;
+  border: 1px dashed #924a41;
+  border-radius: 3px;
+  background: transparent;
+  overflow: hidden;
+}
+.tikz-container.tikz-svg {
+  background: rgba(53, 43, 66, 0.85);
+}
+.tikz-title {
+  padding: 6px 12px;
+  font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 0.85em;
+  color: #c08179;
+  border-bottom: 1px dashed #924a41;
+  background: rgba(0, 0, 0, 0.3);
+}
+.tikz-ascii .tikz-title {
+  display: none;
+}
+.tikz-body {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  position: relative;
+}
+.tikz-body svg { max-width: 100%; height: auto; }
+.tikz-sim-placeholder {
+  font-family: DOS, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  color: #867ade;
+  font-size: 0.8em;
+}
+.tikz-ascii .tikz-body { background: transparent; min-height: 200px; }
+@media (max-width: 767px) {
+  .tikz-body { padding: 8px; }
+  .tikz-container { margin: 1em 0; }
+}</style>
+</head>
+
+ <body><!-- hexo injector body_begin start --><div id="whale-cover"></div><!-- hexo injector body_begin end -->  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">trintler&#39;s weblog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Why Safari Kept Killing My Blog</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> My blog's JOSS review post crashed on every iOS Safari visit. The page would load, freeze for a few seconds, then the tab would die and reload in a loop. This post traces the root cause through WebGL memory limits, WASM compilation pressure, and 60fps draw loops that Safari handles differently from Chrome.
+		 </div> <!-- alert -->
+	  		
+
+	  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="The-Symptom"><a href="#The-Symptom" class="headerlink" title="The Symptom"></a>The Symptom</h1><p>A friend texted me a screenshot: my blog post on <a href="/2026/03/24/JOSS-Reviewed-solve-nivp/">solve_nivp</a> was killing their iPhone. The page would start loading, the textmode.js ASCII background would flicker on for about two seconds, then Safari would nuke the tab. Reload. Flicker. Die. Reload. An infinite loop of a browser giving up.</p>
+<p>On desktop Chrome? Worked fine. On desktop Firefox? Fine. On my own Android phone in Chrome? Fine. Only Safari, and only on iOS.</p>
+<span id="more"></span>
+
+<hr>
+<p>:&#x2F;&#x2F;-</p>
+<h1 id="I-The-Architecture"><a href="#I-The-Architecture" class="headerlink" title="I: The Architecture"></a>I: The Architecture</h1><h2 id="What-This-Blog-Runs"><a href="#What-This-Blog-Runs" class="headerlink" title="What This Blog Runs"></a>What This Blog Runs</h2><p>This site uses three render systems simultaneously on every page:</p>
+<ol>
+<li><p><strong>textmode.js</strong><sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[textmode.js](https://github.com/humanbydefinition/textmode.js) — WebGL2 text-mode rendering library by humanbydefinition. Version 0.13.0.">[1]</span></a></sup> — A WebGL2-based ASCII art renderer. It creates a full-viewport <code>&lt;canvas&gt;</code>, draws character glyphs into a texture atlas, and composites them at 60fps using custom GLSL shaders. This powers the whale animation background, gradient effects, page separators, and physics simulations.</p>
+</li>
+<li><p><strong>tikzjax</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[tikzjax](https://tikzjax.com/) — Client-side LaTeX to SVG rendering via WebAssembly. Runs a full TeX engine in the browser.">[2]</span></a></sup> — A WebAssembly port of the TeX typesetting engine. It finds <code>&lt;script type=&quot;text/tikz&quot;&gt;</code> tags in the DOM, compiles LaTeX to DVI via WASM, then converts DVI to SVG client-side. Each compilation loads a ~5MB WASM binary plus a core memory dump.</p>
+</li>
+<li><p><strong>tikzsim</strong> — My custom module that renders interactive ASCII physics simulations (bouncing balls, wave interference, chattering systems) into textmode.js’s canvas. Four of these run on the JOSS post.</p>
+</li>
+</ol>
+<p>On the JOSS review page specifically, the browser loads at once:</p>
+<ul>
+<li>1 WebGL2 canvas running at 60fps</li>
+<li>4 tikz SVG diagrams compiled from LaTeX via WASM</li>
+<li>4 tikzsim ASCII simulations</li>
+<li>The full whale background with wave physics</li>
+</ul>
+<div class="tikz-container tikz-svg" data-tikz-mode="svg"><div class="tikz-title">Memory Timeline — What Loads on the JOSS Page</div><div class="tikz-body"><script type="text/tikz">\begin{tikzpicture}[scale=0.85, every node/.style={font=\footnotesize}]
+\draw[->, white] (0,0) -- (12,0) node[right] {time (s)};
+\draw[->, white] (0,0) -- (0,5) node[above] {MB};
+
+% iOS Safari limit
+\draw[red!60!white, dashed, thick] (0,4.2) -- (12,4.2);
+\node[red!60!white, right] at (8.5,4.5) {iOS Safari tab limit ($\sim$300MB)};
+
+% textmode.js WebGL
+\fill[blue!40!white, opacity=0.6] (0,0) rectangle (12,1.2);
+\node[blue!60!white] at (6,0.6) {textmode.js WebGL buffers + readPixels};
+
+% tikzjax WASM compilation phases
+\fill[orange!50!white, opacity=0.7] (1,1.2) rectangle (3,3.2);
+\fill[orange!50!white, opacity=0.7] (3.2,1.2) rectangle (5.2,3.2);
+\fill[orange!50!white, opacity=0.7] (5.4,1.2) rectangle (7.4,3.2);
+\fill[orange!50!white, opacity=0.7] (7.6,1.2) rectangle (9.6,3.2);
+\node[orange!60!white] at (5.3,2.2) {tikzjax WASM (4 diagrams)};
+
+% Combined peak
+\draw[red!80!white, thick] (1,0) -- (1,1.2) -- (1,3.2)
+-- (3,3.2) -- (3,3.4) -- (5.2,3.4) -- (5.2,3.6)
+-- (7.4,3.6) -- (7.4,4.0) -- (9.6,4.0) -- (9.6,4.3);
+\shade[ball color=red!70!white] (9.6,4.3) circle (0.12);
+\node[red!80!white, above right] at (9.7,4.3) {OOM};
+
+% Frame allocations
+\foreach \x in {0.5,1.5,...,11.5} {
+\draw[green!30!white, opacity=0.3] (\x,0) -- (\x,0.3);
+}
+\node[green!40!white, below] at (6,-0.4) {readPixels: 1.3MB alloc per frame $\times$ 60fps};
+\end{tikzpicture}</script></div></div>
+
+<h2 id="The-Draw-Loop"><a href="#The-Draw-Loop" class="headerlink" title="The Draw Loop"></a>The Draw Loop</h2><p>Every frame, textmode.js runs this cycle internally:</p>
+<ol>
+<li>Clear the WebGL framebuffer</li>
+<li>For each cell in the grid: write glyph index, foreground colour, background colour into instanced buffers</li>
+<li>Issue a single draw call (instanced rendering)</li>
+<li>Call <code>gl.readPixels()</code> on the framebuffer to read back pixel data</li>
+</ol>
+<p>Step 4 is the expensive one. It forces a GPU→CPU synchronous readback, stalling the pipeline until the GPU finishes rendering. On desktop GPUs this stall is measured in microseconds. On mobile GPUs sharing memory with the CPU, it blocks the main thread for milliseconds per frame.</p>
+<div class="page-sep" data-chars="---://-" aria-hidden="true"></div>
+
+<h1 id="II-Why-Safari-Specifically"><a href="#II-Why-Safari-Specifically" class="headerlink" title="II: Why Safari Specifically"></a>II: Why Safari Specifically</h1><h2 id="iOS-Memory-Model"><a href="#iOS-Memory-Model" class="headerlink" title="iOS Memory Model"></a>iOS Memory Model</h2><p>Every browser on iOS uses WebKit under the hood<sup id="fnref:3"><a href="#fn:3" rel="footnote">&lt;span class&#x3D;”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label&#x3D;”Apple’s App Store Review Guidelines, section 2.5.6: “Apps that browse the web must use the appropriate WebKit framework and WebKit JavaScript.”<br>“&gt;[3]</span></a></sup>. Apple enforces this via App Store policy; Chrome on iOS is just a skin over WebKit’s rendering engine. So “Safari crashes” really means “WebKit on iOS crashes,” and there is no escaping it by switching browsers on that platform.</p>
+<p>WebKit on iOS enforces a per-tab memory ceiling around 300MB (varies by device generation, but iPhone 12 and below sit in this range). When a tab exceeds this, WebKit’s <code>jetsam</code> mechanism terminates the web process. The tab reloads automatically. If the page immediately re-triggers the same memory pressure on reload, you get the death loop.</p>
+<h2 id="The-Three-Killers"><a href="#The-Three-Killers" class="headerlink" title="The Three Killers"></a>The Three Killers</h2><h3 id="1-readPixels-Allocation-Pressure"><a href="#1-readPixels-Allocation-Pressure" class="headerlink" title="1. readPixels Allocation Pressure"></a>1. readPixels Allocation Pressure</h3><p>textmode.js calls <code>gl.readPixels()</code> every frame. This allocates a fresh <code>Uint8Array(width * height * 4)</code> each time. On an iPhone 12 viewport (390×844 pixels):</p>
+<p>$$390 \times 844 \times 4 &#x3D; 1{,}316{,}640 \text{ bytes} \approx 1.3\text{MB per frame}$$</p>
+<p>At 60fps, that is 78MB&#x2F;s of short-lived typed array allocations. Chrome’s V8 handles this with generational GC that quickly reclaims young-generation buffers. Safari’s JavaScriptCore uses a different GC strategy for large typed arrays; it defers collection longer, allowing heap to grow before sweeping. Under memory pressure, JSC triggers a full GC pass which pauses the main thread for 50-200ms, causing visible frame drops and compounding the stall from <code>readPixels</code> itself.</p>
+<h3 id="2-WebGL-Context-Loss-Without-Recovery"><a href="#2-WebGL-Context-Loss-Without-Recovery" class="headerlink" title="2. WebGL Context Loss Without Recovery"></a>2. WebGL Context Loss Without Recovery</h3><p>When memory pressure exceeds thresholds, WebKit reclaims WebGL contexts. The browser fires a <code>webglcontextlost</code> event on the canvas, after which every WebGL call becomes a no-op or throws. textmode.js (v0.13.0) has zero handlers for this event. The draw loop continues calling <code>tm.rect()</code>, <code>tm.char()</code>, <code>tm.push()</code>, <code>tm.pop()</code> into a dead context 60 times per second. Depending on the internal error handling path, this either:</p>
+<ul>
+<li>Accumulates error objects until memory runs out further, or</li>
+<li>Triggers an unhandled exception that propagates up to a framework error boundary, or</li>
+<li>Causes WebKit to flag the tab as unresponsive and terminate it</li>
+</ul>
+<p>None of these paths lead anywhere good.</p>
+<h3 id="3-WASM-WebGL-Memory-Competition"><a href="#3-WASM-WebGL-Memory-Competition" class="headerlink" title="3. WASM + WebGL Memory Competition"></a>3. WASM + WebGL Memory Competition</h3><p>tikzjax loads a 5MB WASM binary, decompresses a core memory dump, and instantiates a TeX engine in linear memory. Each of the 4 tikz diagrams compiles sequentially, peaking at 40-60MB per compilation. WebKit’s WASM implementation on iOS has a fixed 32-bit address space with stricter guard pages than Chrome’s implementation. The peak WASM memory plus the WebGL framebuffer (<code>preserveDrawingBuffer: true</code> means the GPU keeps the full framebuffer between frames) plus the per-frame readPixels allocations:</p>
+<p>$$\underbrace{80\text{MB}}<em>{\text{WebGL buffers}} + \underbrace{60\text{MB}}</em>{\text{WASM peak}} + \underbrace{78\text{MB&#x2F;s}}<em>{\text{readPixels GC backlog}} + \underbrace{40\text{MB}}</em>{\text{DOM + JS heap}} &gt; 300\text{MB}$$</p>
+<p>The page was doomed from the moment it started loading.</p>
+<h3 id="4-The-Mobile-Resize-Loop-bonus"><a href="#4-The-Mobile-Resize-Loop-bonus" class="headerlink" title="4. The Mobile Resize Loop (bonus)"></a>4. The Mobile Resize Loop (bonus)</h3><p>iOS Safari hides and shows the address bar as you scroll. Each hide&#x2F;show fires a <code>resize</code> event because <code>window.innerHeight</code> changes. If <code>resize</code> triggers a full canvas teardown and rebuild (as textmode.js’s <code>windowResized</code> callback did), each scroll gesture causes:</p>
+<ul>
+<li>Canvas resize → new WebGL buffers allocated → old buffers GC’d → memory spike</li>
+<li>All modules reinitialised → allocations spike</li>
+<li>If this overlaps with tikzjax WASM compilation → OOM</li>
+</ul>
+<p>This alone could trigger the crash independent of the other issues, since scrolling is the first thing a mobile user does.</p>
+<div class="page-sep" data-chars="---://-" aria-hidden="true"></div>
+
+<h1 id="III-The-Fixes"><a href="#III-The-Fixes" class="headerlink" title="III: The Fixes"></a>III: The Fixes</h1><p>Seven fixes applied in total, addressing each vector:</p>
+<h2 id="Fix-A-Debounced-Resize-Handler"><a href="#Fix-A-Debounced-Resize-Handler" class="headerlink" title="Fix A: Debounced Resize Handler"></a>Fix A: Debounced Resize Handler</h2><p>The <code>windowResized</code> callback now debounces with a 150ms timer. Multiple rapid resize events (from iOS address bar animation) collapse into a single reinitialisation:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> resizeTimer = <span class="literal">null</span>;</span><br><span class="line">tm.<span class="title function_">windowResized</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (resizeTimer) <span class="built_in">clearTimeout</span>(resizeTimer);</span><br><span class="line">  resizeTimer = <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    resizeTimer = <span class="literal">null</span>;</span><br><span class="line">    tm.<span class="title function_">resizeCanvas</span>(<span class="variable language_">window</span>.<span class="property">innerWidth</span>, <span class="variable language_">window</span>.<span class="property">innerHeight</span>);</span><br><span class="line">    <span class="title class_">WhaleModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">    <span class="title class_">PageSepModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">    <span class="title class_">GradientModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">TikzSimModule</span> !== <span class="string">&quot;undefined&quot;</span>) <span class="title class_">TikzSimModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">  &#125;, <span class="number">150</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>150ms is chosen because iOS address bar animations complete in ~300ms; the debounce fires once after the animation settles rather than dozens of times during it.</p>
+<h2 id="Fix-B-Incremental-Element-Tracking"><a href="#Fix-B-Incremental-Element-Tracking" class="headerlink" title="Fix B: Incremental Element Tracking"></a>Fix B: Incremental Element Tracking</h2><p>The tikzsim module previously destroyed all simulation state on every <code>markDirty()</code> call and rebuilt from scratch. On scroll (which fires <code>markDirty</code>), this meant:</p>
+<ul>
+<li>Query all <code>.tikz-ascii</code> elements</li>
+<li>Parse all JSON configs fresh</li>
+<li>Reconstruct all physics simulations from initial conditions</li>
+</ul>
+<p>Now <code>queryElements()</code> does incremental matching: existing simulations whose DOM element is still present are preserved. Only new elements get initialised, detached ones get removed:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">queryElements</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> els = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.tikz-ascii&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> newSims = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; els.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> existing = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; sims.<span class="property">length</span>; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (sims[j].<span class="property">el</span> === els[i]) &#123;</span><br><span class="line">        existing = sims[j];</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (existing) &#123;</span><br><span class="line">      newSims.<span class="title function_">push</span>(existing);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// ... initialise new sim ...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  sims = newSims;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Fix-C-Consolidated-Script-Load-Order"><a href="#Fix-C-Consolidated-Script-Load-Order" class="headerlink" title="Fix C: Consolidated Script Load Order"></a>Fix C: Consolidated Script Load Order</h2><p>Previously, tikzsim-module.js was injected separately by the hexo-tikzjax plugin. The whale-bg.js coordinator would sometimes execute before tikzsim loaded, causing <code>TikzSimModule</code> to be undefined during init. Now all scripts load in a guaranteed sequence from a single injector:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/textmode.js@0.13.0/dist/textmode.umd.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/whale.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/page-sep.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/gradient.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/hexo-tikzjax/tikzsim-module.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/whale-bg.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>whale-bg.js runs last, guaranteed that all modules are defined.</p>
+<h2 id="Fix-D-Pinned-textmode-js-Version"><a href="#Fix-D-Pinned-textmode-js-Version" class="headerlink" title="Fix D: Pinned textmode.js Version"></a>Fix D: Pinned textmode.js Version</h2><p>The CDN import was <code>textmode.js@latest</code>, which meant any upstream breaking change would silently propagate. This is now pinned to <code>@0.13.0</code>. I wasted two hours debugging a “regression” that turned out to be an upstream alpha release of 0.14.0 changing the shader compilation path.</p>
+<h2 id="Fix-E-WebGL-Context-Loss-Handler"><a href="#Fix-E-WebGL-Context-Loss-Handler" class="headerlink" title="Fix E: WebGL Context Loss Handler"></a>Fix E: WebGL Context Loss Handler</h2><p>The canvas now listens for context loss and suppresses the draw loop until recovery:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> contextLost = <span class="literal">false</span>;</span><br><span class="line">canvas.<span class="title function_">addEventListener</span>(<span class="string">&quot;webglcontextlost&quot;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  e.<span class="title function_">preventDefault</span>();</span><br><span class="line">  contextLost = <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line">canvas.<span class="title function_">addEventListener</span>(<span class="string">&quot;webglcontextrestored&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  contextLost = <span class="literal">false</span>;</span><br><span class="line">  <span class="title class_">WhaleModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">  <span class="title class_">PageSepModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">  <span class="title class_">GradientModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">TikzSimModule</span> !== <span class="string">&quot;undefined&quot;</span>) <span class="title class_">TikzSimModule</span>.<span class="title function_">init</span>(tm, state);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>The <code>e.preventDefault()</code> is required; without it, WebKit will not attempt to restore the context. The draw loop checks <code>contextLost</code> before doing any work:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tm.<span class="title function_">draw</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (contextLost) <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// ... rest of draw ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>When the context is lost, the page still functions (text is readable, links work), you just lose the ASCII background animation until Safari decides to restore the context. Much better than a tab crash.</p>
+<h2 id="Fix-F-Mobile-Frame-Skip-30fps"><a href="#Fix-F-Mobile-Frame-Skip-30fps" class="headerlink" title="Fix F: Mobile Frame Skip (30fps)"></a>Fix F: Mobile Frame Skip (30fps)</h2><p>On viewports below 768px, the draw loop now skips every other frame. This halves the <code>readPixels</code> allocation rate from 78MB&#x2F;s to 39MB&#x2F;s, giving the GC breathing room:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isMobile = <span class="variable language_">window</span>.<span class="property">innerWidth</span> &lt; <span class="variable constant_">MOBILE_BREAKPOINT</span>;</span><br><span class="line"><span class="keyword">var</span> frameCount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">tm.<span class="title function_">draw</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (contextLost) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span> (isMobile &amp;&amp; ++frameCount &amp; <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// ... draw ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>The ASCII animations are not fast enough to notice the difference at 30fps vs 60fps. The characters update slowly by design; halving the render rate saves half the GPU stalls and GC pressure with no visible quality loss.</p>
+<h2 id="Fix-G-Lazy-Load-tikzjax-via-IntersectionObserver"><a href="#Fix-G-Lazy-Load-tikzjax-via-IntersectionObserver" class="headerlink" title="Fix G: Lazy-Load tikzjax via IntersectionObserver"></a>Fix G: Lazy-Load tikzjax via IntersectionObserver</h2><p>The most impactful fix. tikzjax.js previously loaded with <code>defer</code>, meaning it would start compiling WASM the moment the DOM was ready, racing with textmode.js for memory during the most allocation-intensive phase (initial canvas setup, texture atlas generation, first frame). Now it loads only when a tikz container scrolls within 300px of the viewport:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;DOMContentLoaded&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> scripts = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;script[type=&quot;text/tikz&quot;]&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!scripts.<span class="property">length</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">var</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(</span><br><span class="line">    <span class="keyword">function</span> (<span class="params">entries, obs</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; entries.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (entries[i].<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">          <span class="keyword">var</span> s = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;script&quot;</span>);</span><br><span class="line">          s.<span class="property">src</span> = <span class="string">&quot;https://tikzjax.com/v1/tikzjax.js&quot;</span>;</span><br><span class="line">          <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(s);</span><br><span class="line">          obs.<span class="title function_">disconnect</span>();</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; <span class="attr">rootMargin</span>: <span class="string">&quot;300px&quot;</span> &#125;,</span><br><span class="line">  );</span><br><span class="line">  scripts.<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">el</span>) &#123;</span><br><span class="line">    observer.<span class="title function_">observe</span>(el.<span class="property">parentElement</span> || el);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>On the JOSS post, the tikz diagrams are below the fold. The user sees the page load, the whale animation start, reads the introduction, and only when they scroll toward the first diagram does tikzjax begin downloading and compiling. By then, textmode.js has already finished its heavy initialisation phase and settled into a steady-state memory usage. The two systems never compete for memory simultaneously.</p>
+<p>The <code>DOMContentLoaded</code> wrapper is necessary because the loader script lives in <code>&lt;head&gt;</code>, which executes before any <code>&lt;script type=&quot;text/tikz&quot;&gt;</code> elements exist in the body. Without it, <code>querySelectorAll</code> finds nothing and the observer is never created.</p>
+<div class="page-sep" data-chars="---://-" aria-hidden="true"></div>
+
+<h1 id="What-I-Learned"><a href="#What-I-Learned" class="headerlink" title="What I Learned"></a>What I Learned</h1><p>Safari is not broken; it is opinionated. WebKit on iOS enforces strict memory budgets because iPhones cannot swap to disk, there is no virtual memory paging, so the OS <em>must</em> kill processes that consume too much physical RAM. Chrome on desktop operates in an environment with 16GB+ of RAM and swap files. Chromium on Android has similar constraints to iOS but with larger per-process budgets and a more forgiving OOM killer.</p>
+<p>The fixes boil down to one principle: <strong>spread memory usage over time instead of concentrating it at page load</strong>. Debounce resize so allocations don’t spike. Skip frames so GC can reclaim. Lazy-load WASM so it doesn’t compete with WebGL init. Handle context loss so the page degrades gracefully instead of dying.</p>
+<p>If you are building anything with WebGL + WASM on the same page, test on an actual iPhone. Chromium with a mobile viewport and CPU throttling will catch performance issues but not memory limits. The iOS per-tab memory ceiling is a hard wall that no amount of optimisation can exceed; you have to restructure <em>when</em> things load relative to each other.</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://github.com/humanbydefinition/textmode.js">textmode.js</a> — WebGL2 text-mode rendering library by humanbydefinition. Version 0.13.0.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://tikzjax.com/">tikzjax</a> — Client-side LaTeX to SVG rendering via WebAssembly. Runs a full TeX engine in the browser.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Apple's App Store Review Guidelines, section 2.5.6: &quot;Apps that browse the web must use the appropriate WebKit framework and WebKit JavaScript.&quot;<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
+	  
+<div class="article-footer-copyright">
+    This blog is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)</a>.
+</div>
+
+
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2026/04/28/Verifying-Humans-Without-Surrendering-Identity/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+		<section id="comments" class="comments">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script> 
+<div id="gitalk-container"></div>
+<script>
+var gitalkConfig = {"enable":true,"clientID":"Ov23lipca9qEBRbrfaIM","clientSecret":"d50a5a558037f2ef20eacba3a9986e343d76e9ee","repo":"blog","owner":"trintlermint","admin":["trintlermint"],"id":"location.pathname","distractionFreeMode":true}
+gitalkConfig.id=md5(location.pathname)
+var gitalk = new Gitalk(gitalkConfig)
+  
+  gitalk.render('gitalk-container')
+
+  </script>
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2026-05-17 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Projects/">Projects<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/js/">js<span>2</span></a></li> <li><a href="/tags/webgl/">webgl<span>1</span></a></li> <li><a href="/tags/safari/">safari<span>1</span></a></li> <li><a href="/tags/performance/">performance<span>1</span></a></li> <li><a href="/tags/hexo/">hexo<span>2</span></a></li> <li><a href="/tags/debugging/">debugging<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#The-Symptom"><span class="toc-article-text">The Symptom</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#I-The-Architecture"><span class="toc-article-text">I: The Architecture</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#What-This-Blog-Runs"><span class="toc-article-text">What This Blog Runs</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#The-Draw-Loop"><span class="toc-article-text">The Draw Loop</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#II-Why-Safari-Specifically"><span class="toc-article-text">II: Why Safari Specifically</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#iOS-Memory-Model"><span class="toc-article-text">iOS Memory Model</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#The-Three-Killers"><span class="toc-article-text">The Three Killers</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#1-readPixels-Allocation-Pressure"><span class="toc-article-text">1. readPixels Allocation Pressure</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#2-WebGL-Context-Loss-Without-Recovery"><span class="toc-article-text">2. WebGL Context Loss Without Recovery</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#3-WASM-WebGL-Memory-Competition"><span class="toc-article-text">3. WASM + WebGL Memory Competition</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#4-The-Mobile-Resize-Loop-bonus"><span class="toc-article-text">4. The Mobile Resize Loop (bonus)</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#III-The-Fixes"><span class="toc-article-text">III: The Fixes</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fix-A-Debounced-Resize-Handler"><span class="toc-article-text">Fix A: Debounced Resize Handler</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fix-B-Incremental-Element-Tracking"><span class="toc-article-text">Fix B: Incremental Element Tracking</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fix-C-Consolidated-Script-Load-Order"><span class="toc-article-text">Fix C: Consolidated Script Load Order</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fix-D-Pinned-textmode-js-Version"><span class="toc-article-text">Fix D: Pinned textmode.js Version</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fix-E-WebGL-Context-Loss-Handler"><span class="toc-article-text">Fix E: WebGL Context Loss Handler</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fix-F-Mobile-Frame-Skip-30fps"><span class="toc-article-text">Fix F: Mobile Frame Skip (30fps)</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fix-G-Lazy-Load-tikzjax-via-IntersectionObserver"><span class="toc-article-text">Fix G: Lazy-Load tikzjax via IntersectionObserver</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#What-I-Learned"><span class="toc-article-text">What I Learned</span></a></li></ol>
+		</div>
+	
+	</div>
+
+	<!-- sam reader (below toc) -->
+	
+<div class="meta-widget sam-reader-widget" id="sam-reader" data-post-title="Why Safari Kept Killing My Blog">
+  <style>
+    .sam-reader-widget {
+      margin: 10px 0;
+      padding: 10px 8px;
+      background: #000;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      font-family: DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
+      font-size: .9em;
+    }
+    .sam-reader-widget .sam-title {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-title i {
+      margin-right: 4px;
+    }
+    .sam-reader-widget .sam-controls {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .sam-reader-widget .sam-controls button {
+      flex: 1;
+      padding: 4px 0;
+      font-size: 11px;
+      font-family: inherit;
+      background: #352b42;
+      color: #c08179;
+      border: 1px dashed #924a41;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sam-reader-widget .sam-controls button:hover:not(:disabled) {
+      background: #924a41;
+      color: #c08179;
+    }
+    .sam-reader-widget .sam-controls button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .sam-reader-widget .sam-controls button.active {
+      background: #493aa5;
+      border-color: #867ade;
+      color: #fff;
+    }
+    .sam-reader-widget .sam-progress-wrap {
+      background: #252525;
+      border-radius: 3px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      border: 1px solid #3a3a3a;
+    }
+    .sam-reader-widget .sam-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #867ade;
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    .sam-reader-widget .sam-status {
+      font-size: 10px;
+      color: #bbb;
+      text-align: center;
+    }
+    .sam-reader-widget .sam-config {
+      margin-top: 8px;
+      border-top: 1px dashed #924a41;
+      padding-top: 8px;
+    }
+    .sam-reader-widget .sam-config summary {
+      font-size: 11px;
+      color: #867ade;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .sam-reader-widget .sam-config label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 4px;
+    }
+    .sam-reader-widget .sam-config input[type=range] {
+      width: 80px;
+      accent-color: #867ade;
+      background: transparent;
+    }
+  </style>
+
+  <div class="sam-title"><i class="fa fa-volume-up"></i> SAM Reader</div>
+  <div class="sam-controls">
+    <button id="sam-play" title="Play" disabled>&#9654; Play</button>
+    <button id="sam-pause" title="Pause" disabled>&#10074;&#10074;</button>
+    <button id="sam-stop" title="Stop" disabled>&#9632;</button>
+  </div>
+  <div class="sam-progress-wrap">
+    <div class="sam-progress-bar" id="sam-progress"></div>
+  </div>
+  <div class="sam-status" id="sam-status">Loading SAM...</div>
+
+  <div class="sam-config">
+    <details>
+      <summary>Voice settings</summary>
+      <label>Speed <input type="range" id="sam-speed" min="20" max="200" value="72"></label>
+      <label>Pitch <input type="range" id="sam-pitch" min="0" max="255" value="64"></label>
+      <label>Mouth <input type="range" id="sam-mouth" min="0" max="255" value="128"></label>
+      <label>Throat <input type="range" id="sam-throat" min="0" max="255" value="128"></label>
+    </details>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PAUSE_MS = 400;
+  var CHUNK_MAX = 200;
+  var CONTENT_SEL = ".mypage";
+  var EXTRA_SKIP = "";
+  var ABBREVIATIONS = {"NL":"Netherlands","DE":"Germany","KIT":"K I T","TUD":"T U D","ICPC":"I C P C","TAPC":"T A P C","BAPC":"B A P C","NWERC":"N W E R C","TCR":"T C R","OSS":"O S S","TUI":"T U I","SSH":"S S H","JOSS":"J O S S","CLI":"C L I","API":"A P I","CSS":"C S S","HTML":"H T M L","FTXUI":"F T X U I","GPU":"G P U","WASM":"web assembly","QWERTY":"KWERTY","QWERTZ":"KWERTZ","LaTeX":"lay-tech","CMake":"see-make","libssh":"lib S S H","yaml-cpp":"yaml cpp","ca.":"circa ","e.g.":"for example","i.e.":"that is"};
+
+  var script = document.createElement('script');
+  script.src = '/js/hexo-sam-reader/sam.js';
+  script.async = true;
+  script.onload = function() { initSamReader(); };
+  script.onerror = function() {
+    var s = document.getElementById('sam-status');
+    if (s) s.textContent = 'Failed to load SAM';
+  };
+  document.head.appendChild(script);
+
+  function initSamReader() {
+    if (typeof SamJs === 'undefined') return;
+
+    var btnPlay = document.getElementById('sam-play');
+    var btnPause = document.getElementById('sam-pause');
+    var btnStop = document.getElementById('sam-stop');
+    var progressBar = document.getElementById('sam-progress');
+    var statusEl = document.getElementById('sam-status');
+    var speedInput = document.getElementById('sam-speed');
+    var pitchInput = document.getElementById('sam-pitch');
+    var mouthInput = document.getElementById('sam-mouth');
+    var throatInput = document.getElementById('sam-throat');
+    var widget = document.getElementById('sam-reader');
+
+    btnPlay.disabled = false;
+    statusEl.textContent = 'Ready';
+
+    var chunks = [];
+    var currentChunk = 0;
+    var playing = false;
+    var paused = false;
+    var stopped = false;
+    var audioCtx = null;
+    var currentSource = null;
+    var pauseTimer = null;
+
+    // text regex for sam
+    function cleanForSam(text) {
+      text = text.replace(/https?:\/\/[^\s]+/g, '');
+      text = text.replace(/[a-zA-Z0-9_-]*:\/\/[^\s]*/g, '');
+      text = text.replace(/[\w.-]+@[\w.-]+/g, '');
+      text = text.replace(/\([^)]*=>\s*\{[^}]*\}[^)]*\)/g, '');
+
+      text = text.replace(/>=/g, ' greater than or equal to ');
+      text = text.replace(/<=/g, ' less than or equal to ');
+      text = text.replace(/!=/g, ' not equal to ');
+      text = text.replace(/===/g, ' strictly equals ');
+      text = text.replace(/==/g, ' equals ');
+      text = text.replace(/(?<![<>])>(?![<>])/g, ' greater than ');
+      text = text.replace(/(?<![<>])<(?![<>])/g, ' less than ');
+
+      text = text.replace(/ \/ /g, ' OR ');
+      text = text.replace(/\//g, ' slash ');
+
+      text = text.replace(/[{}()\[\]<>]/g, ' ');
+      text = text.replace(/[*_~#]+/g, '');
+      text = text.replace(new RegExp(String.fromCharCode(96) + '+', 'g'), '');
+      text = text.replace(/\[\^\w+\]/g, '');
+
+      // apply abbreviations from config
+      var keys = Object.keys(ABBREVIATIONS);
+      for (var a = 0; a < keys.length; a++) {
+        var k = keys[a];
+        var flags = (k === k.toUpperCase()) ? 'g' : 'gi';
+        text = text.replace(new RegExp('\\b' + k.replace(/[.*+?^\/\\|()[\]{}]/g, '\\$&') + '\\b', flags), ABBREVIATIONS[k]);
+      }
+
+      text = text.replace(/[\x80-\xFF]/g, ' ');
+      text = text.replace(/[\u0100-\uFFFF]/g, ' ');
+      text = text.replace(/[\xA0-\xFF]/g, ' ');
+      text = text.replace(/[€£¥©®™°±×÷=+|\\^~&]/g, ' ');
+      text = text.replace(/[^\x20-\x7E]/g, ' ');
+
+      text = text.replace(/\s+/g, ' ');
+      return text.trim();
+    }
+
+    // table reading
+    function readTable(table) {
+      var headers = [];
+      var ths = table.querySelectorAll('thead th, thead td, tr:first-child th');
+      for (var i = 0; i < ths.length; i++) {
+        headers.push(ths[i].textContent.trim());
+      }
+      if (headers.length === 0) {
+        var firstRow = table.querySelector('tr');
+        if (firstRow) {
+          var cells = firstRow.querySelectorAll('th, td');
+          for (var j = 0; j < cells.length; j++) {
+            headers.push(cells[j].textContent.trim());
+          }
+        }
+      }
+      var rows = table.querySelectorAll('tbody tr, tr');
+      var text = '';
+      for (var r = 0; r < rows.length; r++) {
+        var cells = rows[r].querySelectorAll('td');
+        if (cells.length === 0) continue;
+        var rowParts = [];
+        for (var c = 0; c < cells.length; c++) {
+          var label = (c < headers.length) ? headers[c] : '';
+          var val = cells[c].textContent.trim();
+          if (label && val) {
+            rowParts.push(label + ' ' + val);
+          } else if (val) {
+            rowParts.push(val);
+          }
+        }
+        if (rowParts.length > 0) {
+          text += rowParts.join(', ') + '. ';
+        }
+      }
+      return text;
+    }
+
+    // text extraction
+    function getPostSegments() {
+      var segments = [];
+
+      var postTitle = widget.getAttribute('data-post-title') || '';
+      if (postTitle) {
+        segments.push(cleanForSam(postTitle) + '.');
+        segments.push(null);
+      }
+
+      var el = document.querySelector(CONTENT_SEL);
+      if (!el) return segments;
+      var clone = el.cloneNode(true);
+
+      var baseSel = 'pre, script, style, .highlight, img, svg, ' +
+        '.sam-reader-widget, .alert, figure, .article-footer-copyright, ' +
+        'noscript, iframe, video, audio, canvas, .gist';
+      var skipSel = EXTRA_SKIP ? (baseSel + ', ' + EXTRA_SKIP) : baseSel;
+
+      var remove = clone.querySelectorAll(skipSel);
+      for (var i = 0; i < remove.length; i++) {
+        remove[i].parentNode.removeChild(remove[i]);
+      }
+
+      function walk(node) {
+        if (node.nodeType === 3) {
+          var t = node.textContent;
+          if (t && t.trim()) {
+            segments.push(cleanForSam(t));
+          }
+          return;
+        }
+        if (node.nodeType !== 1) return;
+        var tag = node.tagName;
+
+        if (tag === 'TABLE') {
+          var tableText = readTable(node);
+          if (tableText) segments.push(cleanForSam(tableText));
+          return;
+        }
+
+        if (/^H[1-6]$/.test(tag)) {
+          segments.push(null);
+          var hText = node.textContent.trim();
+          if (hText) segments.push(cleanForSam(hText) + '.');
+          segments.push(null);
+          return;
+        }
+
+        var children = node.childNodes;
+        for (var c = 0; c < children.length; c++) {
+          walk(children[c]);
+        }
+
+        if (/^(P|DIV|BLOCKQUOTE|LI|SECTION|ARTICLE|HR)$/.test(tag)) {
+          segments.push(null);
+        }
+      }
+
+      walk(clone);
+      return segments;
+    }
+
+    // chunking
+    function buildChunks(segments, maxLen) {
+      var result = [];
+      for (var s = 0; s < segments.length; s++) {
+        if (segments[s] === null) {
+          if (result.length === 0 || result[result.length - 1] !== null) {
+            result.push(null);
+          }
+          continue;
+        }
+        var text = segments[s];
+        if (!text) continue;
+
+        var parts = text.split(/(?<=[.!?])\s+/);
+        var current = '';
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i].trim();
+          if (!p) continue;
+          if (current.length + p.length + 1 > maxLen && current.length > 0) {
+            result.push(current.trim());
+            current = p;
+          } else {
+            current += (current ? ' ' : '') + p;
+          }
+        }
+        if (current.trim()) result.push(current.trim());
+      }
+
+      var final = [];
+      for (var j = 0; j < result.length; j++) {
+        if (result[j] === null) {
+          if (final.length === 0 || final[final.length - 1] !== null) {
+            final.push(null);
+          }
+          continue;
+        }
+        if (result[j].length <= maxLen) {
+          final.push(result[j]);
+        } else {
+          var subparts = result[j].split(/,\s*/);
+          var sub = '';
+          for (var k = 0; k < subparts.length; k++) {
+            if (sub.length + subparts[k].length + 2 > maxLen && sub.length > 0) {
+              final.push(sub.trim());
+              sub = subparts[k];
+            } else {
+              sub += (sub ? ', ' : '') + subparts[k];
+            }
+          }
+          if (sub.trim()) final.push(sub.trim());
+        }
+      }
+
+      while (final.length > 0 && final[0] === null) final.shift();
+      while (final.length > 0 && final[final.length - 1] === null) final.pop();
+
+      return final;
+    }
+
+    // progress
+    function countSpeakable() {
+      var n = 0;
+      for (var i = 0; i < chunks.length; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+    function countSpoken() {
+      var n = 0;
+      for (var i = 0; i < currentChunk; i++) {
+        if (chunks[i] !== null) n++;
+      }
+      return n;
+    }
+
+    function updateProgress() {
+      var total = countSpeakable();
+      var done = countSpoken();
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      statusEl.textContent = done + ' / ' + total;
+    }
+
+    function setButtons(state) {
+      btnPlay.disabled = (state === 'playing');
+      btnPause.disabled = (state !== 'playing');
+      btnStop.disabled = (state === 'ready');
+      btnPlay.classList.toggle('active', state === 'playing');
+      btnPause.classList.toggle('active', state === 'paused');
+    }
+
+    function stopAudio() {
+      if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; }
+      if (currentSource) {
+        try { currentSource.stop(); } catch(e) {}
+        currentSource = null;
+      }
+    }
+
+    function playChunk(index) {
+      if (stopped || index >= chunks.length) {
+        progressBar.style.width = stopped ? '0%' : '100%';
+        statusEl.textContent = stopped ? 'Stopped' : 'Done!';
+        setButtons('ready');
+        playing = false;
+        paused = false;
+        stopped = false;
+        currentChunk = 0;
+        return;
+      }
+      if (paused) return;
+
+      currentChunk = index;
+      updateProgress();
+
+      if (chunks[index] === null) {
+        pauseTimer = setTimeout(function() {
+          pauseTimer = null;
+          if (!stopped && !paused) playChunk(index + 1);
+        }, PAUSE_MS);
+        return;
+      }
+
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      var sam = new SamJs({
+        speed: parseInt(speedInput.value, 10),
+        pitch: parseInt(pitchInput.value, 10),
+        mouth: parseInt(mouthInput.value, 10),
+        throat: parseInt(throatInput.value, 10)
+      });
+
+      var buf32;
+      try {
+        buf32 = sam.buf32(chunks[index]);
+      } catch(e) {
+        playChunk(index + 1);
+        return;
+      }
+      if (!buf32 || buf32.length === 0) {
+        playChunk(index + 1);
+        return;
+      }
+
+      var audioBuffer = audioCtx.createBuffer(1, buf32.length, 22050);
+      audioBuffer.getChannelData(0).set(buf32);
+
+      var source = audioCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioCtx.destination);
+      currentSource = source;
+
+      source.onended = function() {
+        currentSource = null;
+        if (!stopped && !paused) {
+          playChunk(index + 1);
+        }
+      };
+      source.start();
+    }
+
+    btnPlay.addEventListener('click', function() {
+      if (paused) {
+        paused = false;
+        setButtons('playing');
+        playChunk(currentChunk);
+        return;
+      }
+      var segments = getPostSegments();
+      chunks = buildChunks(segments, CHUNK_MAX);
+      if (countSpeakable() === 0) {
+        statusEl.textContent = 'No text found';
+        return;
+      }
+      stopped = false;
+      playing = true;
+      paused = false;
+      currentChunk = 0;
+      setButtons('playing');
+      playChunk(0);
+    });
+
+    btnPause.addEventListener('click', function() {
+      paused = true;
+      stopAudio();
+      setButtons('paused');
+      var total = countSpeakable();
+      var done = countSpoken();
+      statusEl.textContent = 'Paused ' + done + ' / ' + total;
+    });
+
+    btnStop.addEventListener('click', function() {
+      stopped = true;
+      paused = false;
+      playing = false;
+      stopAudio();
+      currentChunk = 0;
+      setButtons('ready');
+      progressBar.style.width = '0%';
+      statusEl.textContent = 'Ready';
+    });
+  }
+})();
+</script>
+
+
+    <hr>
+
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> 
+<p>
+  
+  &copy; 2026 Niladri Adhikary's Blog
+  
+    | Content Licensed <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY 4.0</a>.
+</p>
+
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+<!-- hexo injector body_end start --><script src="https://unpkg.com/textmode.js@0.13.0/dist/textmode.umd.js"></script>
+<script src="/js/whale.js"></script>
+<script src="/js/page-sep.js"></script>
+<script src="/js/gradient.js"></script>
+<script src="/js/hexo-tikzjax/tikzsim-module.js"></script>
+<script src="/js/whale-bg.js"></script><!-- hexo injector body_end end --></body>
+   </html>
