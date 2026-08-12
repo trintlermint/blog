@@ -313,20 +313,12 @@ video {
     background: none
 }
 
-/* friends marquee sits above the title; its left edge lands on the favicon's
-   right edge (favicon background-size is 9em) so a badge exits on contact with
-   the png rather than scrolling under it. Negative bottom margin counters the
-   h1's 1.4em top padding to sit closer to the title. */
 .badges-friends {
     padding-left: 8em;
     padding-top: 0.3em;
     margin-bottom: -0.8em
 }
 
-/* brightshard.dev is served as a foreignObject SVG (a whole HTML page), which
-   only renders in a frame, not <img>. Render it at 880x310 (88:31 ratio) and
-   scale it down by 0.1 into an 88x31 thumbnail that scrolls in the marquee and
-   links to the site. */
 .svg-badge {
     display: inline-block;
     width: 88px;

@@ -86,8 +86,6 @@
       
         <tags>
             
-            <tag> oss </tag>
-            
             <tag> c++ </tag>
             
             <tag> tui </tag>
@@ -101,6 +99,8 @@
             <tag> cmake </tag>
             
             <tag> packaging </tag>
+            
+            <tag> oss </tag>
             
         </tags>
       
@@ -125,11 +125,11 @@
       
         <tags>
             
+            <tag> oss </tag>
+            
             <tag> joss </tag>
             
             <tag> review </tag>
-            
-            <tag> oss </tag>
             
             <tag> open-sci </tag>
             
