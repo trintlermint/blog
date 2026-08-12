@@ -291,6 +291,61 @@ video {
     margin-bottom: 1.2em
 }
 
+.badges {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 1.2em
+}
+
+.badges img {
+    display: inline-block;
+    width: 88px;
+    height: 31px;
+    max-width: none;
+    margin: 0 8px;
+    vertical-align: middle
+}
+
+.badges a,
+.badges a:hover,
+.badges a:focus,
+.badges a:active {
+    background: none
+}
+
+/* friends marquee sits above the title; its left edge lands on the favicon's
+   right edge (favicon background-size is 9em) so a badge exits on contact with
+   the png rather than scrolling under it. Negative bottom margin counters the
+   h1's 1.4em top padding to sit closer to the title. */
+.badges-friends {
+    padding-left: 8em;
+    padding-top: 0.3em;
+    margin-bottom: -0.8em
+}
+
+/* brightshard.dev is served as a foreignObject SVG (a whole HTML page), which
+   only renders in a frame, not <img>. Render it at 880x310 (88:31 ratio) and
+   scale it down by 0.1 into an 88x31 thumbnail that scrolls in the marquee and
+   links to the site. */
+.svg-badge {
+    display: inline-block;
+    width: 88px;
+    height: 31px;
+    overflow: hidden;
+    margin: 0 8px;
+    vertical-align: middle;
+    background: none
+}
+
+.svg-badge iframe {
+    width: 880px;
+    height: 310px;
+    border: 0;
+    display: block;
+    transform: scale(0.1);
+    transform-origin: 0 0
+}
+
 .blink-fast {
     animation-duration: .5s;
     animation-name: blink;
@@ -547,8 +602,8 @@ hr {
 
 .logo {
     background: url("../favicon.gif") no-repeat left top;
-    background-size: 9em; /* 1. INCREASE THIS: Make the image bigger (was 5em) */
-    min-height: 7.5em;    /* 2. ADD THIS: Prevents the bottom of the bigger image from being cut off */
+    background-size: 147px 158px; /* fixed favicon print size */
+    min-height: 158px;            /* fit the full favicon height */
 }
 
 .logo > h1 {
